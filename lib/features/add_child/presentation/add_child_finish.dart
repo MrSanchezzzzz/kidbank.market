@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/core/widgets/mascot_info.dart';
+import 'package:kidbank/core/widgets/step_progressbar.dart';
 
 import '../../../core/widgets/main_back_button.dart';
+import '../utils/step_labels.dart';
 
 class AddChildFinishScreen extends StatelessWidget {
-  const AddChildFinishScreen({super.key});
+  const AddChildFinishScreen({super.key,required this.count});
+  final int count;
 
   @override
   Widget build(BuildContext context) {
@@ -26,14 +28,14 @@ class AddChildFinishScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const Column(
+            Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 8,
                 ),
-                MascotInfo(
-                  text: 'We\'ve finished setting up!',
-                )
+                StepProgressbar(stepCount: count+1, stepLabels: generateStepsLabels(count),currentStep: count,),
+                const SizedBox(height: 24,),
+                const Text('We\'ve finished setting up!')
               ],
             ),
            MainButton(text: 'Finish!',onTap: (){/*TODO*/},)
