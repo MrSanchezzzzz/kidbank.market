@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:kidbank/core/widgets/progress_indicators.dart';
 
 class StepProgressbar extends StatelessWidget {

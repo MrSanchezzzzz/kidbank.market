@@ -11,7 +11,7 @@ class MascotInfo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(height: 16,),
+        const SizedBox(height: 16,),
         MascotImage(image: image,),
         const SizedBox(height: 16,),
         Text(text??'',style: CupertinoTheme.of(context).textTheme.textStyle,textAlign: TextAlign.center,)

@@ -7,8 +7,8 @@ abstract class ProgressIndicators{
       height: 20,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(64),
-        border: Border.all(color: Color(0xFF612FB1), width: 1),
-        color: Color(0xFF451690),
+        border: Border.all(color: const Color(0xFF612FB1), width: 1),
+        color: const Color(0xFF451690),
       ),
     );
   }
@@ -18,7 +18,7 @@ abstract class ProgressIndicators{
       height: 20,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(64),
-        border: Border.all(color: Color(0xFF9E9E9E)),
+        border: Border.all(color: const Color(0xFF9E9E9E)),
         color: CupertinoTheme.of(context).scaffoldBackgroundColor,
       ),
     );
@@ -30,7 +30,7 @@ abstract class ProgressIndicators{
       height: 20,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(64),
-        border: Border.all(color: Color(0xFF612FB1), width: 1),
+        border: Border.all(color: const Color(0xFF612FB1), width: 1),
         color: CupertinoTheme.of(context).scaffoldBackgroundColor,
       ),
       child: Center(
@@ -39,7 +39,7 @@ abstract class ProgressIndicators{
           height: 4,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(64),
-            color: Color(0xFF451690),
+            color: const Color(0xFF451690),
           ),
         ),
       ),
