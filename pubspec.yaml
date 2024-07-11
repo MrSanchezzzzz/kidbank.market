@@ -13,6 +13,7 @@ dependencies:
 
   cupertino_icons: ^1.0.6
   go_router: ^14.2.0
+  adaptive_dialog: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -23,6 +24,9 @@ flutter:
 
   assets:
     - path: lib/assets/images/back.png
+    - path: lib/assets/images/mascot.png
+    - path: lib/assets/images/teddybear.png
+    - path: lib/assets/images/checkmark.png
 
   fonts:
     - family: Lato

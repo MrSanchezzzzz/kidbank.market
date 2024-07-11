@@ -6,9 +6,16 @@ abstract class StepIndicators{
       width: 20,
       height: 20,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(64),
+        //borderRadius: BorderRadius.circular(64),
+        shape: BoxShape.circle,
         border: Border.all(color: const Color(0xFF612FB1), width: 1),
         color: const Color(0xFF451690),
+      ),
+      child: Center(
+        child: Transform.scale(
+          scale: 0.5,
+            child: Image.asset('lib/assets/images/checkmark.png',fit:BoxFit.fill,)
+        ),
       ),
     );
   }
