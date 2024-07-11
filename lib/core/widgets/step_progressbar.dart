@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/widgets/progress_indicators.dart';
+import 'package:kidbank/core/widgets/step_indicators.dart';
 
 class StepProgressbar extends StatelessWidget {
   const StepProgressbar({
@@ -62,11 +62,11 @@ class StepProgressbar extends StatelessWidget {
 
   Widget _buildStepCircle(BuildContext context, int index) {
     if (index < currentStep) {
-      return ProgressIndicators.completed();
+      return StepIndicators.completed();
     } else if (index > currentStep) {
-      return ProgressIndicators.inProgress(context);
+      return StepIndicators.inProgress(context);
     } else {
-      return ProgressIndicators.next(context);
+      return StepIndicators.next(context);
     }
   }
 }
