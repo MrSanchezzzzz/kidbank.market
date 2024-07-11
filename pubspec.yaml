@@ -23,6 +23,9 @@ flutter:
 
   assets:
     - path: lib/assets/images/back.png
+    - path: lib/assets/images/mascot.png
+    - path: lib/assets/images/teddybear.png
+    - path: lib/assets/images/checkmark.png
 
   fonts:
     - family: Lato
