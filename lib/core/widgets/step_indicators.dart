@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-abstract class ProgressIndicators{
+abstract class StepIndicators{
   static Widget completed(){
     return Container(
       width: 20,
