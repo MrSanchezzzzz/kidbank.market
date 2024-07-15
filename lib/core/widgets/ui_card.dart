@@ -3,30 +3,31 @@ import 'package:flutter/cupertino.dart';
 import '../colors.dart';
 
 class UiCard extends StatefulWidget {
-  const UiCard({super.key,this.image,this.label});
+  const UiCard({super.key,this.image,this.label,this.onChanged,this.checked=false});
   final Image? image;
   final String? label;
+  final bool checked;
+  final Function()? onChanged;
   @override
   State<UiCard> createState() => _UiCardState();
 }
 
 class _UiCardState extends State<UiCard> {
-  bool checked=false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: (){
-        setState(() {
-          checked=!checked;
-        });
+        if(widget.onChanged!=null){
+          widget.onChanged!();
+        }
       },
       child: Container(
         width: 171,
         height: 108,
         decoration: BoxDecoration(
-          color: checked?Colors.purple200:Colors.white100,
+          color: widget.checked?Colors.purple200:Colors.white100,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: checked?Colors.purple400:Colors.grey100)
+          border: Border.all(color: widget.checked?Colors.purple400:Colors.grey100)
         ),
         child: Stack(
           alignment: Alignment.center,
@@ -49,11 +50,11 @@ class _UiCardState extends State<UiCard> {
                 top: 0,
                 //TODO Custom checkbox
                 child: CupertinoCheckbox(
-                  value: checked,
+                  value: widget.checked,
                   onChanged: (bool? value) {
-                    setState(() {
-                      checked=!checked;
-                    });
+                    if(widget.onChanged!=null){
+                      widget.onChanged!();
+                    }
                   },
                 ))
           ],
