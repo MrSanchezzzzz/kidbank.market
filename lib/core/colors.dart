@@ -16,6 +16,7 @@ abstract class Colors{
   static Color purple300=const Color(0xFFD1B7FB);
   static Color purple200=const Color(0xFFDFCBFF);
   static Color purple100=const Color(0xFFF3EDFF);
+  static Color purple50=const Color(0xFFF4F0FC);
 
   //Grey
   static Color grey500=const Color(0xFF212121);
