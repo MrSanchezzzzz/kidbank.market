@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/core/widgets/custom_check_box.dart';
 
 import '../colors.dart';
 
@@ -49,14 +50,15 @@ class _UiCardState extends State<UiCard> {
                 left: 0,
                 top: 0,
                 //TODO Custom checkbox
-                child: CupertinoCheckbox(
+                child: CustomCheckBox(
                   value: widget.checked,
-                  onChanged: (bool? value) {
+                  onChanged: (_){
                     if(widget.onChanged!=null){
                       widget.onChanged!();
                     }
                   },
-                ))
+                )
+            )
           ],
         ),
       ),
