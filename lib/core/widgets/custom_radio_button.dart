@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 
-class MainRadioButton<T> extends StatelessWidget {
-  const MainRadioButton({super.key,required this.value,required this.groupValue,this.onChanged,this.enabled=true,this.toggleable=false});
+class CustomRadioButton<T> extends StatelessWidget {
+  const CustomRadioButton({super.key,required this.value,required this.groupValue,this.onChanged,this.enabled=true,this.toggleable=false});
   final T value;
   final T groupValue;
   final Function(T)? onChanged;
@@ -16,7 +16,7 @@ class MainRadioButton<T> extends StatelessWidget {
         value: value,
         fillColor: const Color(0xFFFFFFFF),
         groupValue: groupValue,
-        onChanged: enabled?(v){onChanged!(v as T);}:null,
+        onChanged: enabled?(v){if(onChanged!=null){onChanged!(v as T);}}:null,
         toggleable: toggleable,
     );
   }
