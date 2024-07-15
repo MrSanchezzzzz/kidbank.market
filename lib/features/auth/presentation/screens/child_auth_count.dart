@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/widgets/main_back_button.dart';
-import '../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/main_back_button.dart';
+import '../../../../core/widgets/main_button.dart';
 
 class ChildAuthCountScreen extends StatefulWidget {
   const ChildAuthCountScreen({super.key});
