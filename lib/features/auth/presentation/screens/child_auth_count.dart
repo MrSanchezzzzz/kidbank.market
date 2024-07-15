@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kidbank/core/widgets/custom_radio_button.dart';
 
 import '../../../../core/widgets/main_back_button.dart';
 import '../../../../core/widgets/main_button.dart';
@@ -67,12 +68,7 @@ class _ChildAuthCountScreenState extends State<ChildAuthCountScreen> {
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                                 child: Row(
                                   children: [
-                                    CupertinoRadio<int>(
-                                      value: 1,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                      },
-                                    ),
+                                    CustomRadioButton<int?>(value: 1, groupValue: _selectedValue),
                                     const SizedBox(width: radioHorizontalGap), // Adjust spacing as needed
                                     const Text('1'),
                                   ],
@@ -89,12 +85,7 @@ class _ChildAuthCountScreenState extends State<ChildAuthCountScreen> {
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                                 child: Row(
                                   children: [
-                                    CupertinoRadio<int>(
-                                      value: 2,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                      },
-                                    ),
+                                    CustomRadioButton<int?>(value: 2, groupValue: _selectedValue),
                                     const SizedBox(width: radioHorizontalGap), // Adjust spacing as needed
                                     const Text('2'),
                                   ],
@@ -111,12 +102,7 @@ class _ChildAuthCountScreenState extends State<ChildAuthCountScreen> {
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                                 child: Row(
                                   children: [
-                                    CupertinoRadio<int>(
-                                      value: 3,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                      },
-                                    ),
+                                    CustomRadioButton<int?>(value: 3, groupValue: _selectedValue),
                                     const SizedBox(width: radioHorizontalGap), // Adjust spacing as needed
                                     const Text('3'),
                                   ],
@@ -133,12 +119,7 @@ class _ChildAuthCountScreenState extends State<ChildAuthCountScreen> {
                                 padding: const EdgeInsets.symmetric(vertical: 12),
                                 child: Row(
                                   children: [
-                                    CupertinoRadio<int>(
-                                      value: 4,
-                                      groupValue: _selectedValue,
-                                      onChanged: (int? value) {
-                                      },
-                                    ),
+                                    CustomRadioButton<int?>(value: 4, groupValue: _selectedValue),
                                     const SizedBox(width: radioHorizontalGap), // Adjust spacing as needed
                                     const Text('4'),
                                   ],
