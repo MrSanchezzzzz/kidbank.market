@@ -27,6 +27,11 @@ flutter:
     - path: assets/images/mascot.png
     - path: assets/images/teddybear.png
     - path: assets/images/checkmark.png
+    - path: assets/images/logo_shadow.png
+    - path: assets/images/google.png
+    - path: assets/images/apple.png
+    - path: assets/images/mascot_adult.png
+    - path: assets/images/mascot_kid.png
 
   fonts:
     - family: Lato
