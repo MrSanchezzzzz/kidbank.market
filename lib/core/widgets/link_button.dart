@@ -11,11 +11,12 @@ class LinkButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
+        onPressed: enabled?onPressed:null,
+      padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Text(text,style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
           color: enabled?fontColor??Colors.purple600:Colors.grey200,
           decoration: TextDecoration.underline
         ),),
-        onPressed: enabled?onPressed:null
     );
   }
 }

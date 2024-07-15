@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:kidbank/core/colors.dart' as ProjectColors;
+import 'package:kidbank/core/colors.dart' as project_colors;
 class ProgressIndicator extends StatelessWidget {
   const ProgressIndicator({super.key,this.value});
   final double? value;
@@ -8,8 +8,8 @@ class ProgressIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircularProgressIndicator(
       value: value,
-      backgroundColor: ProjectColors.Colors.purple200,
-      color: ProjectColors.Colors.purple600,
+      backgroundColor: project_colors.Colors.purple200,
+      color: project_colors.Colors.purple600,
     );
   }
 }

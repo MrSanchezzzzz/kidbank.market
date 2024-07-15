@@ -13,6 +13,13 @@ class OnboardingCurrencyScreen extends StatelessWidget {
     return OnboardingScaffold(
       title: 'Virtual Currency',
       currentStep: 3,
+      onBack: () {
+        context.pop();
+      },
+      onNext: () {
+        //TODO
+      },
+      finish: true,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -26,13 +33,6 @@ class OnboardingCurrencyScreen extends StatelessWidget {
           const ImageContainer(height: 360,),
         ],
       ),
-      onBack: () {
-        context.pop();
-      },
-      onNext: () {
-        //TODO
-      },
-      finish: true,
     );
   }
 }
