@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 
 import '../colors.dart';
 
-class MainCheckBox extends StatelessWidget {
-  const MainCheckBox({super.key,required this.value, this.onChanged,this.enabled=true});
+class CustomCheckBox extends StatelessWidget {
+  const CustomCheckBox({super.key,required this.value, this.onChanged,this.enabled=true});
   final bool value;
   final Function(bool?)? onChanged;
   final bool enabled;
