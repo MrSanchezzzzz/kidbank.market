@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
-import 'package:kidbank/features/auth/presentation/child_auth.dart';
-import 'package:kidbank/features/auth/presentation/child_auth_count.dart';
+import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
+import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
-import 'package:kidbank/main.dart';
+import 'package:kidbank/features/registration/presentation/screens/auth.dart';
 
 import '../features/add_child/presentation/add_child_finish.dart';
+import '../features/chose_role/presentation/screens/role_selection.dart';
 import '../features/onboarding/presentation/onboarding_currency.dart';
 import '../features/onboarding/presentation/onboarding_explore.dart';
 import '../features/onboarding/presentation/onboarding_start.dart';
@@ -17,9 +19,25 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       //TODO home page
-      builder: (context, state) => const MyHomePage(),
+      builder: (context, state) => const RoleSelectionScreen(),
       routes: <RouteBase>[
-        //Chuld auth
+        GoRoute(
+            path: 'role',
+            name: 'role',
+            builder: (context,state)=>const RoleSelectionScreen()
+        ),
+        GoRoute(
+            path: 'auth',
+            name: 'auth',
+            builder: (context,state)=>const AuthScreen(),
+            routes: <RouteBase>[
+              GoRoute(
+                  path: "sign_in",
+                builder:(context,state)=> const Placeholder()
+              )
+            ]
+        ),
+        //Child auth
         GoRoute(
           path: 'auth_child',
           name: 'auth_child',
@@ -37,7 +55,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'add_child',
           //TODO base add_child page
-          builder: (context, state) => const MyHomePage(),
+          builder: (context, state) => const CupertinoPageScaffold(child: Placeholder()),
           routes: <RouteBase>[
             GoRoute(
               path: 'code',
