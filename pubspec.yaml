@@ -23,16 +23,16 @@ flutter:
   uses-material-design: true
 
   assets:
-    - path: lib/assets/images/back.png
-    - path: lib/assets/images/mascot.png
-    - path: lib/assets/images/teddybear.png
-    - path: lib/assets/images/checkmark.png
+    - path: assets/images/back.png
+    - path: assets/images/mascot.png
+    - path: assets/images/teddybear.png
+    - path: assets/images/checkmark.png
 
   fonts:
     - family: Lato
       fonts:
-        - asset: lib/assets/fonts/Lato/Lato-Regular.ttf
-        - asset: lib/assets/fonts/Lato/Lato-Bold.ttf
+        - asset: assets/fonts/Lato/Lato-Regular.ttf
+        - asset: assets/fonts/Lato/Lato-Bold.ttf
           weight: 700
   # fonts:
   #   - family: Schyler

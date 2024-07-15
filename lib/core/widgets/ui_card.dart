@@ -35,7 +35,7 @@ class _UiCardState extends State<UiCard> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 widget.image??Image.asset(
-                  'lib/assets/images/teddybear.png',
+                  'assets/images/teddybear.png',
                   width: 44,
                   height: 44,
                 ),

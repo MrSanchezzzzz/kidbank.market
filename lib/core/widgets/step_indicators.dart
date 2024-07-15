@@ -14,7 +14,7 @@ abstract class StepIndicators{
       child: Center(
         child: Transform.scale(
           scale: 0.5,
-            child: Image.asset('lib/assets/images/checkmark.png',fit:BoxFit.fill,)
+            child: Image.asset('assets/images/checkmark.png',fit:BoxFit.fill,)
         ),
       ),
     );

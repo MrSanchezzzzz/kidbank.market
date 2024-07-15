@@ -26,7 +26,7 @@ class OnboardingStartScreen extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
                 Image.asset(
-                  'lib/assets/images/mascot.png',
+                  'assets/images/mascot.png',
                   height: 256,
                   fit: BoxFit.fitHeight,
                 )

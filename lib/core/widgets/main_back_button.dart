@@ -11,7 +11,7 @@ class MainBackButton extends StatelessWidget {
       onTap: onTap??(){context.pop();},
       child: Row(
         children: [
-          Image.asset('lib/assets/images/back.png',height: 16,width: 8,),
+          Image.asset('assets/images/back.png',height: 16,width: 8,),
           const SizedBox(width: 8,),
           label!=null?Text(label!,style: CupertinoTheme.of(context).textTheme.navActionTextStyle,):Container(),
         ],
