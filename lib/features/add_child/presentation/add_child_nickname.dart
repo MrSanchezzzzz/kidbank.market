@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/mascot_info.dart';
 import 'package:kidbank/core/widgets/step_progressbar.dart';
 
@@ -37,7 +38,7 @@ class AddChildNicknameScreen extends StatelessWidget {
                 StepProgressbar(stepCount: count+1, stepLabels: generateStepsLabels(count),currentStep: currentIndex,),
                 const MascotInfo(text: 'The account\'s linked. Enter your child\'s nickname.',),
                 const SizedBox(height: 24,),
-                const CupertinoTextField(),
+                const CustomTextField(label: 'Nickname',required: true,placeholder: 'Roblox Guru',)
                 ],
               ),
               Row(
