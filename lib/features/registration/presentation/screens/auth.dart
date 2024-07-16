@@ -14,7 +14,7 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   bool emailValid = false, passwordValid = false;
-
+  bool showPassword=false;
   void login() {}
 
   String? validateEmail(String? value) {
@@ -97,8 +97,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     placeholder: 'user.mail@gmail.com',
                     required: true,
                   ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
+                  CustomTextField.password(
                     label: 'Password',
                     validator: validatePassword,
                     placeholder: 'Enter password',
