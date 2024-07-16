@@ -5,38 +5,78 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final String? helpText;
   final bool required;
-  final List<Widget>? trailing;
   final String? Function(String?)? validator;
   final bool enabled;
   final String? placeholder;
-  final Widget Function(BuildContext context,bool isError)? suffixBuilder;
+  final Widget Function(BuildContext context, CustomTextFieldState state, bool isError)? suffixBuilder;
+  final bool obscureText;
+
   const CustomTextField({
     super.key,
     required this.label,
     this.helpText,
     this.required = false,
-    this.trailing,
     this.validator,
     this.enabled = true,
     this.placeholder,
-    this.suffixBuilder
+    this.suffixBuilder,
+    this.obscureText = false,
   });
 
+  factory CustomTextField.password({
+    required String label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    String? placeholder,
+  }) {
+    return CustomTextField(
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      placeholder: placeholder,
+      obscureText: true,
+      suffixBuilder: (context, state, isError) {
+        return GestureDetector(
+            onTap: () {
+              state.toggleObscure();
+            },
+            child: Image.asset(
+              state.obscure ? 'assets/images/eye_slash.png' : 'assets/images/eye.png',
+              width: 24,
+              height: 24,
+              color: isError ? Color(0xFFFF0000) : Colors.grey300,
+            ));
+      },
+    );
+  }
+
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomTextField> createState() => CustomTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class CustomTextFieldState extends State<CustomTextField> {
   bool _error = false;
   String _errorText = '';
+  late bool obscure;
   late FocusNode _focusNode;
 
   @override
   void initState() {
-    super.initState();
     _focusNode = FocusNode();
     _focusNode.addListener(() {
       setState(() {});
+    });
+    obscure = widget.obscureText;
+    super.initState();
+  }
+
+  void toggleObscure() {
+    setState(() {
+      obscure = !obscure;
     });
   }
 
@@ -83,18 +123,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
             Text(
               widget.label,
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                fontSize: 13,
-                color: Colors.grey300,
-              ),
+                    fontSize: 13,
+                    color: Colors.grey300,
+                  ),
               textAlign: TextAlign.left,
             ),
             if (widget.required)
               Text(
                 ' *',
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  fontSize: 13,
-                  color: const Color(0xFFFF0000),
-                ),
+                      fontSize: 13,
+                      color: const Color(0xFFFF0000),
+                    ),
               ),
           ],
         ),
@@ -107,21 +147,26 @@ class _CustomTextFieldState extends State<CustomTextField> {
             border: Border.all(color: getBorderColor()),
           ),
           onChanged: _handleTextChanged,
+          obscureText: obscure,
           placeholder: widget.placeholder,
           placeholderStyle: TextStyle(
             color: _error ? const Color(0xFFFF0000) : Colors.grey200,
           ),
-          suffix: widget.suffixBuilder!=null?widget.suffixBuilder!(context,_error):null,
+          suffix: widget.suffixBuilder != null
+              ? Padding(
+                  padding: const EdgeInsets.only(right: 16),
+                  child: widget.suffixBuilder!(context, this, _error),
+                )
+              : null,
         ),
-        if (widget.helpText != null || _errorText.isNotEmpty)
-          Text(
-            _error ? _errorText : widget.helpText!,
-            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-              fontSize: 13,
-              color: _error ? const Color(0xFFFF0000) : Colors.grey300,
-            ),
-            textAlign: TextAlign.right,
-          ),
+        Text(
+          _error ? _errorText : widget.helpText??'',
+          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                fontSize: 13,
+                color: _error ? const Color(0xFFFF0000) : Colors.grey300,
+              ),
+          textAlign: TextAlign.right,
+        ),
       ],
     );
   }
