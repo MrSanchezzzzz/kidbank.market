@@ -32,6 +32,8 @@ flutter:
     - path: assets/images/apple.png
     - path: assets/images/mascot_adult.png
     - path: assets/images/mascot_kid.png
+    - path: assets/images/eye.png
+    - path: assets/images/eye_slash.png
 
   fonts:
     - family: Lato
