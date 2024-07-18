@@ -14,7 +14,7 @@ class CatalogueItemsView extends ConsumerWidget {
         childAspectRatio: 0.75,
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
-        children: [
+        children: const [
           GridItem(),
           GridItem(),
           GridItem(),

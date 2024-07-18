@@ -80,7 +80,7 @@ class NavigationBarButton extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: [
             image,
-            SizedBox(height: 2,),
+            const SizedBox(height: 2,),
             Text(label,style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
               fontWeight: FontWeight.w700,
               fontSize: 12,

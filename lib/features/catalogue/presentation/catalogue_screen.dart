@@ -53,7 +53,7 @@ class CatalogueScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  BottomNavigationBar(),
+                  const BottomNavigationBar(),
                 ],
               ),
           ),
