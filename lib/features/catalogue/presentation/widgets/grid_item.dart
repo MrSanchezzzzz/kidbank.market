@@ -21,8 +21,8 @@ class GridItem extends StatelessWidget {
               color: Colors.grey100,
               borderRadius: BorderRadius.circular(16)
             ),
-            padding: EdgeInsets.all(16),
-            child: ToyImage(),
+            padding: const EdgeInsets.all(16),
+            child: const ToyImage(),
           ),
           Text('Name',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontWeight: FontWeight.w700

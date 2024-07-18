@@ -52,7 +52,7 @@ class CustomTextField extends StatefulWidget {
               state.obscure ? 'assets/images/eye_slash.png' : 'assets/images/eye.png',
               width: 24,
               height: 24,
-              color: isError ? Color(0xFFFF0000) : Colors.grey300,
+              color: isError ? const Color(0xFFFF0000) : Colors.grey300,
             ));
       },
     );

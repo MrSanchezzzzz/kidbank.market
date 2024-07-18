@@ -6,6 +6,6 @@ class ToyImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(aspectRatio: 1,
-    child:image??Placeholder(),);
+    child:image??const Placeholder(),);
   }
 }
