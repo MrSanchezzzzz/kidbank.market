@@ -4,6 +4,7 @@ import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
+import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
 import 'package:kidbank/features/registration/presentation/screens/auth.dart';
 
@@ -19,7 +20,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       //TODO home page
-      builder: (context, state) => const RoleSelectionScreen(),
+      builder: (context, state) => const CatalogueScreen(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
