@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../../core/colors.dart';
+
 class ToyImage extends StatelessWidget {
   const ToyImage({super.key,this.image});
   final Image? image;
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(aspectRatio: 1,
-    child:image??const Placeholder(),);
+    return Container(
+        decoration: BoxDecoration(
+        color: Colors.grey100,
+        borderRadius: BorderRadius.circular(16)
+    ),
+    padding: const EdgeInsets.all(16),
+      child: AspectRatio(aspectRatio: 1,
+      child:image??const Placeholder(),),
+    );
   }
 }
