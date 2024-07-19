@@ -16,14 +16,7 @@ class GridItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey100,
-              borderRadius: BorderRadius.circular(16)
-            ),
-            padding: const EdgeInsets.all(16),
-            child: const ToyImage(),
-          ),
+          const ToyImage(),
           Text('Name',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontWeight: FontWeight.w700
           ),),
