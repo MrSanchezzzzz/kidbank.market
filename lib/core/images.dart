@@ -1,0 +1,9 @@
+import 'package:flutter/cupertino.dart';
+
+Image apple = Image.asset('assets/images/apple.png');
+Image logo_shadow = Image.asset('assets/images/logo_shadow.png');
+Image logo_shadow_black = Image.asset('assets/images/logo_shadow_black.png');
+Image account_photo = Image.asset('assets/images/account_photo.png');
+Image right_icon = Image.asset('assets/images/right_icon.png');
+Image full_star = Image.asset('assets/images/star.png', width: 16, height: 16,);
+Image star = Image.asset('assets/images/white_star.png');
