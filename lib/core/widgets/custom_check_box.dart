@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-
 import '../colors.dart';
 
 class CustomCheckBox extends StatelessWidget {

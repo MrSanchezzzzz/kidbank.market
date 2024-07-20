@@ -34,6 +34,12 @@ flutter:
     - path: assets/images/mascot_kid.png
     - path: assets/images/eye.png
     - path: assets/images/eye_slash.png
+    - path: assets/images/logo_shadow_black.png
+    - path: assets/images/account_photo.png
+    - path: assets/images/right_icon.png
+    - path: assets/images/star.png
+    - path: assets/images/white_star.png
+
 
   fonts:
     - family: Lato
