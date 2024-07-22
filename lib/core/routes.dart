@@ -1,7 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:kidbank/app/main_menu.dart';
+import 'package:kidbank/core/widgets/bottom_navigation_bar/riverpod/bottom_navbar_riverpod.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
+import 'package:kidbank/features/add_toy/presentation/screens/add_toy_age.dart';
+import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.dart';
+import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
 import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
@@ -20,7 +26,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       //TODO home page
-      builder: (context, state) => const CatalogueScreen(),
+      builder: (context, state) =>  MainMenu(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
@@ -101,6 +107,18 @@ final GoRouter router = GoRouter(
             GoRoute(path: 'explore',builder: (context,state)=>const OnboardingExploreScreen()),
             GoRoute(path: 'currency',builder: (context,state)=>const OnboardingCurrencyScreen()),
           ]
+        ),
+
+        //Add toy
+        GoRoute(
+            path: 'add_toy',
+          name: 'add_toy',
+          builder: (context,state)=>const AddToyCategoryScreen(),
+          routes: <RouteBase>[
+            GoRoute(path: 'age',name: 'age',builder: (context,state)=>const AddToyAgeScreen()),
+            GoRoute(path: 'fill_details',name: 'fill_details',builder: (context,state)=> const AddToyFillDetailsScreen()),
+          ],
+
         )
       ],
     ),
