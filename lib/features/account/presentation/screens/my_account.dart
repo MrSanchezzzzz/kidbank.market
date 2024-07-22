@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/features/account/components/account_appbar.dart';
 import 'package:kidbank/features/account/components/account_main.dart';
 import 'package:kidbank/features/account/components/details.dart';
