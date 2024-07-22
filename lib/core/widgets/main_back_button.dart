@@ -10,6 +10,7 @@ class MainBackButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap??(){context.pop();},
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Image.asset('assets/images/back.png',height: 16,width: 8,),
           const SizedBox(width: 8,),
