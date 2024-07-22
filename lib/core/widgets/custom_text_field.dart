@@ -12,6 +12,8 @@ class CustomTextField extends StatefulWidget {
   final Widget Function(BuildContext context, CustomTextFieldState state, bool isError)? suffixBuilder;
   final bool obscureText;
   final TextEditingController? controller;
+  final int maxLines;
+  final TextInputType keyboardType;
 
   const CustomTextField({
     super.key,
@@ -25,6 +27,8 @@ class CustomTextField extends StatefulWidget {
     this.suffixBuilder,
     this.obscureText = false,
     this.controller,
+    this.maxLines=1,
+    this.keyboardType=TextInputType.text,
   });
 
   factory CustomTextField.password({
@@ -91,6 +95,74 @@ class CustomTextField extends StatefulWidget {
           ),
         );
       },
+      controller: controller,
+    );
+  }
+
+  factory CustomTextField.price({
+    String? label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    String? placeholder,
+    TextEditingController? controller
+  }) {
+    TextEditingController controller=TextEditingController();
+    return CustomTextField(
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      placeholder: placeholder,
+      controller: controller,
+      //TODO custom dollar sign
+      prefixBuilder: (context,state,isError)=>Icon(CupertinoIcons.money_dollar,color: Colors.grey300,),
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  factory CustomTextField.quantity({
+    String? label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    String? placeholder,
+    TextEditingController? controller
+  }) {
+    controller=controller??TextEditingController(text: '1');
+    return CustomTextField(
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      placeholder: placeholder,
+      controller: controller,
+      suffixBuilder: (context, state, isError) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: (){
+                controller!.text = (int.parse(controller.text) + 1).toString();
+              },
+              child: Icon(CupertinoIcons.plus,size: 18,color: Colors.grey300,),
+            ),
+            const SizedBox(width: 6,),
+            GestureDetector(
+              onTap: (){
+                controller!.text = (int.parse(controller.text) - 1).toString();
+              },
+              child: Icon(CupertinoIcons.minus,size: 18,color: Colors.grey300,),
+            )
+          ],
+        );
+      },
+      keyboardType: TextInputType.number,
     );
   }
 
@@ -207,6 +279,8 @@ class CustomTextFieldState extends State<CustomTextField> {
                 )
               : null,
           controller: widget.controller,
+          maxLines: widget.maxLines,
+          keyboardType: widget.keyboardType,
         ),
         Text(
           _error ? _errorText : widget.helpText ?? '',
