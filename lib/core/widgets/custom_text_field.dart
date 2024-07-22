@@ -2,34 +2,43 @@ import 'package:flutter/cupertino.dart';
 import '../colors.dart';
 
 class CustomTextField extends StatefulWidget {
-  final String label;
+  final String? label;
   final String? helpText;
   final bool required;
   final String? Function(String?)? validator;
   final bool enabled;
   final String? placeholder;
+  final Widget Function(BuildContext context, CustomTextFieldState state, bool isError)? prefixBuilder;
   final Widget Function(BuildContext context, CustomTextFieldState state, bool isError)? suffixBuilder;
   final bool obscureText;
+  final TextEditingController? controller;
+  final int maxLines;
+  final TextInputType keyboardType;
 
   const CustomTextField({
     super.key,
-    required this.label,
+    this.label,
     this.helpText,
     this.required = false,
     this.validator,
     this.enabled = true,
     this.placeholder,
+    this.prefixBuilder,
     this.suffixBuilder,
     this.obscureText = false,
+    this.controller,
+    this.maxLines=1,
+    this.keyboardType=TextInputType.text,
   });
 
   factory CustomTextField.password({
-    required String label,
+    String? label,
     String? helpText,
     bool required = false,
     String? Function(String?)? validator,
     bool enabled = true,
     String? placeholder,
+    TextEditingController? controller
   }) {
     return CustomTextField(
       label: label,
@@ -48,9 +57,121 @@ class CustomTextField extends StatefulWidget {
               state.obscure ? 'assets/images/eye_slash.png' : 'assets/images/eye.png',
               width: 24,
               height: 24,
-              color: isError ? Color(0xFFFF0000) : Colors.grey300,
+              color: isError ? const Color(0xFFFF0000) : Colors.grey300,
             ));
       },
+      controller: controller,
+    );
+  }
+
+  factory CustomTextField.search({
+    String placeholder = 'Search',
+    String? label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    Function(String)? onSearch,
+    Function()? onCameraTap
+  }) {
+    TextEditingController controller=TextEditingController();
+    if(onSearch!=null) {
+      controller.addListener(() {
+        onSearch(controller.text);
+      });
+    }
+    return CustomTextField(
+      placeholder: placeholder,
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      prefixBuilder: (context, state, isError) {
+        return Image.asset(
+          'assets/images/search.png',
+          width: 24,
+          height: 24,
+        );
+      },
+      suffixBuilder: (context,state,isError){
+        return GestureDetector(
+          onTap: onCameraTap,
+          child: Image.asset(
+            'assets/images/camera.png',
+            width: 24,
+            height: 24,
+          ),
+        );
+      },
+      controller: controller,
+    );
+  }
+
+  factory CustomTextField.price({
+    String? label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    String? placeholder,
+    TextEditingController? controller
+  }) {
+    TextEditingController controller=TextEditingController();
+    return CustomTextField(
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      placeholder: placeholder,
+      controller: controller,
+      //TODO custom dollar sign
+      prefixBuilder: (context,state,isError)=>Icon(CupertinoIcons.money_dollar,color: Colors.grey300,),
+      keyboardType: TextInputType.number,
+    );
+  }
+
+  factory CustomTextField.quantity({
+    String? label,
+    String? helpText,
+    bool required = false,
+    String? Function(String?)? validator,
+    bool enabled = true,
+    String? placeholder,
+    TextEditingController? controller
+  }) {
+    controller=controller??TextEditingController(text: '1');
+    return CustomTextField(
+      label: label,
+      helpText: helpText,
+      required: required,
+      validator: validator,
+      enabled: enabled,
+      placeholder: placeholder,
+      controller: controller,
+      suffixBuilder: (context, state, isError) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            GestureDetector(
+              onTap: (){
+                controller!.text = (int.parse(controller.text) + 1).toString();
+              },
+              child: Icon(CupertinoIcons.plus,size: 18,color: Colors.grey300,),
+            ),
+            const SizedBox(width: 6,),
+            GestureDetector(
+              onTap: (){
+                controller!.text = (int.parse(controller.text) - 1).toString();
+              },
+              child: Icon(CupertinoIcons.minus,size: 18,color: Colors.grey300,),
+            )
+          ],
+        );
+      },
+      keyboardType: TextInputType.number,
     );
   }
 
@@ -120,14 +241,16 @@ class CustomTextFieldState extends State<CustomTextField> {
       children: [
         Row(
           children: [
-            Text(
-              widget.label,
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 13,
-                    color: Colors.grey300,
-                  ),
-              textAlign: TextAlign.left,
-            ),
+            widget.label != null
+                ? Text(
+                    widget.label!,
+                    style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                          fontSize: 13,
+                          color: Colors.grey300,
+                        ),
+                    textAlign: TextAlign.left,
+                  )
+                : Container(),
             if (widget.required)
               Text(
                 ' *',
@@ -152,15 +275,24 @@ class CustomTextFieldState extends State<CustomTextField> {
           placeholderStyle: TextStyle(
             color: _error ? const Color(0xFFFF0000) : Colors.grey200,
           ),
+          prefix: widget.prefixBuilder != null
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 8),
+                  child: widget.prefixBuilder!(context, this, _error),
+                )
+              : null,
           suffix: widget.suffixBuilder != null
               ? Padding(
-                  padding: const EdgeInsets.only(right: 16),
+                  padding: const EdgeInsets.only(right: 8),
                   child: widget.suffixBuilder!(context, this, _error),
                 )
               : null,
+          controller: widget.controller,
+          maxLines: widget.maxLines,
+          keyboardType: widget.keyboardType,
         ),
         Text(
-          _error ? _errorText : widget.helpText??'',
+          _error ? _errorText : widget.helpText ?? '',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                 fontSize: 13,
                 color: _error ? const Color(0xFFFF0000) : Colors.grey300,
