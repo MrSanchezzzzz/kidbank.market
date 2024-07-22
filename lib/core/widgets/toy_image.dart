@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../core/colors.dart';
+import '../colors.dart';
 
 class ToyImage extends StatelessWidget {
   const ToyImage({super.key,this.image});
