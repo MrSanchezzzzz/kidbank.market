@@ -38,6 +38,7 @@ class CustomTextField extends StatefulWidget {
     String? Function(String?)? validator,
     bool enabled = true,
     String? placeholder,
+    TextEditingController? controller
   }) {
     return CustomTextField(
       label: label,
@@ -59,6 +60,7 @@ class CustomTextField extends StatefulWidget {
               color: isError ? const Color(0xFFFF0000) : Colors.grey300,
             ));
       },
+      controller: controller,
     );
   }
 
@@ -69,8 +71,15 @@ class CustomTextField extends StatefulWidget {
     bool required = false,
     String? Function(String?)? validator,
     bool enabled = true,
+    Function(String)? onSearch,
     Function()? onCameraTap
   }) {
+    TextEditingController controller=TextEditingController();
+    if(onSearch!=null) {
+      controller.addListener(() {
+        onSearch(controller.text);
+      });
+    }
     return CustomTextField(
       placeholder: placeholder,
       label: label,
