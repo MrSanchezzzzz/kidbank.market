@@ -8,7 +8,14 @@ class MainBackButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap??(){context.pop();},
+      onTap: onTap??(){
+        if(context.canPop()) {
+          context.pop();
+        }
+        else if(Navigator.of(context).canPop()){
+          Navigator.of(context).pop();
+        }
+        },
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [

@@ -54,6 +54,15 @@ class MainMenu extends StatelessWidget {
                 return const AddToyCategoryScreen();
               }
             );
+          case 4:
+            return CupertinoTabView(
+              routes: {
+                '/account/wallet/top_up':(context)=>const TopUpScreen()
+              },
+                builder: (context) {
+                  return const MyAccount();
+                }
+            );
         }
         return CupertinoTabView(
           builder: (context) {

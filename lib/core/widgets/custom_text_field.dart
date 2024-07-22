@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
+import 'package:kidbank/core/utils/input_formatters.dart';
 import '../colors.dart';
 
 class CustomTextField extends StatefulWidget {
@@ -14,7 +16,7 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final int maxLines;
   final TextInputType keyboardType;
-
+  final List<TextInputFormatter>? formatters;
   const CustomTextField({
     super.key,
     this.label,
@@ -29,6 +31,7 @@ class CustomTextField extends StatefulWidget {
     this.controller,
     this.maxLines=1,
     this.keyboardType=TextInputType.text,
+    this.formatters
   });
 
   factory CustomTextField.password({
@@ -38,7 +41,8 @@ class CustomTextField extends StatefulWidget {
     String? Function(String?)? validator,
     bool enabled = true,
     String? placeholder,
-    TextEditingController? controller
+    TextEditingController? controller,
+    List<TextInputFormatter>? formatters
   }) {
     return CustomTextField(
       label: label,
@@ -61,6 +65,7 @@ class CustomTextField extends StatefulWidget {
             ));
       },
       controller: controller,
+      formatters: formatters,
     );
   }
 
@@ -72,7 +77,8 @@ class CustomTextField extends StatefulWidget {
     String? Function(String?)? validator,
     bool enabled = true,
     Function(String)? onSearch,
-    Function()? onCameraTap
+    Function()? onCameraTap,
+    List<TextInputFormatter>? formatters
   }) {
     TextEditingController controller=TextEditingController();
     if(onSearch!=null) {
@@ -105,6 +111,7 @@ class CustomTextField extends StatefulWidget {
         );
       },
       controller: controller,
+      formatters: formatters,
     );
   }
 
@@ -115,7 +122,7 @@ class CustomTextField extends StatefulWidget {
     String? Function(String?)? validator,
     bool enabled = true,
     String? placeholder,
-    TextEditingController? controller
+    TextEditingController? controller,
   }) {
     TextEditingController controller=TextEditingController();
     return CustomTextField(
@@ -129,6 +136,9 @@ class CustomTextField extends StatefulWidget {
       //TODO custom dollar sign
       prefixBuilder: (context,state,isError)=>Icon(CupertinoIcons.money_dollar,color: Colors.grey300,),
       keyboardType: TextInputType.number,
+      formatters: [
+        MoneyInputFormatter()
+      ],
     );
   }
 
@@ -139,7 +149,7 @@ class CustomTextField extends StatefulWidget {
     String? Function(String?)? validator,
     bool enabled = true,
     String? placeholder,
-    TextEditingController? controller
+    TextEditingController? controller,
   }) {
     controller=controller??TextEditingController(text: '1');
     return CustomTextField(
@@ -172,6 +182,7 @@ class CustomTextField extends StatefulWidget {
         );
       },
       keyboardType: TextInputType.number,
+      formatters: [DigitsInputFormatter()],
     );
   }
 
@@ -269,6 +280,7 @@ class CustomTextFieldState extends State<CustomTextField> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: getBorderColor()),
           ),
+          padding: EdgeInsets.symmetric(horizontal: 7,vertical: 8),
           onChanged: _handleTextChanged,
           obscureText: obscure,
           placeholder: widget.placeholder,
@@ -290,6 +302,7 @@ class CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           maxLines: widget.maxLines,
           keyboardType: widget.keyboardType,
+          inputFormatters: widget.formatters,
         ),
         Text(
           _error ? _errorText : widget.helpText ?? '',

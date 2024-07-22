@@ -3,11 +3,12 @@ import 'package:flutter/cupertino.dart';
 import '../colors.dart';
 
 class MainButton extends StatelessWidget {
-  const MainButton({super.key,this.text='',this.onTap,this.color,this.icon});
+  const MainButton({super.key,this.text='',this.onTap,this.color,this.icon,this.pressedOpacity=0.4});
   final Color? color;
   final Function()? onTap;
   final String? text;
   final Image? icon;
+  final double pressedOpacity;
   @override
   Widget build(BuildContext context) {
     return CupertinoButton(
@@ -15,11 +16,15 @@ class MainButton extends StatelessWidget {
       onPressed: onTap,
       color: color??const Color(0xFFFFA34E),
       disabledColor: Colors.grey100,
+      pressedOpacity: pressedOpacity,
       borderRadius: const BorderRadius.all(Radius.circular(14)),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          icon==null?Container():icon!,
+          icon==null?Container():Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: icon!,
+          ),
           Text(
             text ?? '',
             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(

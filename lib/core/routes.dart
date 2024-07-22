@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/app/main_menu.dart';
+import 'package:kidbank/features/account/presentation/screens/my_account.dart';
+import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
+import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_age.dart';
@@ -115,7 +118,16 @@ final GoRouter router = GoRouter(
             GoRoute(path: 'age',name: 'age',builder: (context,state)=>const AddToyAgeScreen()),
             GoRoute(path: 'fill_details',name: 'fill_details',builder: (context,state)=> const AddToyFillDetailsScreen()),
           ],
-
+        ),
+        GoRoute(
+            path: 'account',
+            builder: (context,state)=>MyAccount(),
+          routes: <RouteBase>[
+            GoRoute(path: 'wallet',builder: (context,state)=>AccountWalletScreen(),
+            routes: <RouteBase>[
+              GoRoute(path: 'top_up',builder: (context,state)=>TopUpScreen())
+            ])
+          ]
         )
       ],
     ),
