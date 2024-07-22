@@ -14,6 +14,9 @@ dependencies:
   cupertino_icons: ^1.0.6
   go_router: ^14.2.0
   adaptive_dialog: ^2.1.0
+  hooks_riverpod: ^2.5.1
+  flutter_hooks: ^0.20.5
+  riverpod_annotation: ^2.3.5
 
 dev_dependencies:
   flutter_test:
@@ -23,23 +26,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - path: assets/images/back.png
-    - path: assets/images/mascot.png
-    - path: assets/images/teddybear.png
-    - path: assets/images/checkmark.png
-    - path: assets/images/logo_shadow.png
-    - path: assets/images/google.png
-    - path: assets/images/apple.png
-    - path: assets/images/mascot_adult.png
-    - path: assets/images/mascot_kid.png
-    - path: assets/images/eye.png
-    - path: assets/images/eye_slash.png
-    - path: assets/images/logo_shadow_black.png
-    - path: assets/images/account_photo.png
-    - path: assets/images/right_icon.png
-    - path: assets/images/star.png
-    - path: assets/images/white_star.png
-
+    - path: assets/images/
 
   fonts:
     - family: Lato

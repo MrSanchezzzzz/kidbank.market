@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 import 'package:kidbank/theme.dart';
 
 import '../core/routes.dart';
