@@ -29,7 +29,7 @@ class CatalogueScreen extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            CatalogueFilters(
+                            const CatalogueFilters(
                               onSortTap: null,//TODO display sort menu
                               onFilterTap: null,//TODO display filter meny
                             ),

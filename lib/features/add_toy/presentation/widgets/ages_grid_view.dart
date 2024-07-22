@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/ui_card.dart';
-import 'package:kidbank/features/add_toy/data/selected_category_riverpod.dart';
 
 import '../../../../core/models/ages.dart';
 import '../../data/selected_age_riverpod.dart';
-import 'category_card.dart';
 
 class AgesGridView extends ConsumerWidget {
   const AgesGridView({super.key});
