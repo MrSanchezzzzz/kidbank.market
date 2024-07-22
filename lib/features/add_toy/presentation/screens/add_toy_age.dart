@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/features/add_toy/data/selected_age_riverpod.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
@@ -20,7 +19,7 @@ class AddToyAgeScreen extends StatelessWidget {
         backgroundColor: Colors.white100,
         navigationBar: CupertinoNavigationBar(
           leading: MainBackButton(label: 'Back',onTap: (){Navigator.of(context).pop();},),
-          middle: Text('Age'),
+          middle: const Text('Age'),
         ),
         child: Stack(
           alignment: Alignment.bottomCenter,
@@ -66,7 +65,7 @@ class AddToyAgeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
                     return MainButton(text: 'Continue',onTap: ref.watch(selectedAgeProvider)!=null?(){
-                      Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>AddToyFillDetailsScreen()));
+                      Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>const AddToyFillDetailsScreen()));
                     }:null,);
                   },),
                 ),

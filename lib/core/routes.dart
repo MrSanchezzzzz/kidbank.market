@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/app/main_menu.dart';
-import 'package:kidbank/core/widgets/bottom_navigation_bar/riverpod/bottom_navbar_riverpod.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_age.dart';
@@ -10,7 +8,6 @@ import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.d
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
-import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
 import 'package:kidbank/features/registration/presentation/screens/auth.dart';
 

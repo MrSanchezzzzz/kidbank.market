@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/models/categories.dart';
@@ -20,8 +19,8 @@ class AddToyCategoryScreen extends ConsumerWidget {
       resizeToAvoidBottomInset: false,
       backgroundColor: Colors.white100,
         navigationBar: CupertinoNavigationBar(
-          leading: context.canPop()?MainBackButton(label: 'Back',):null,
-          middle: Text('Category'),
+          leading: context.canPop()?const MainBackButton(label: 'Back',):null,
+          middle: const Text('Category'),
         ),
         child: Stack(
           alignment: Alignment.bottomCenter,
