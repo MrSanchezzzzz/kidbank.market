@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/toy_image.dart';
+import 'package:kidbank/core/widgets/toy_image.dart';
 
 import '../../../../core/colors.dart';
 
