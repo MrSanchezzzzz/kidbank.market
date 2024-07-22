@@ -74,7 +74,7 @@ class NavigationBarButton extends StatelessWidget{
     return GestureDetector(
       onTap: onTap,
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16,vertical: 2),
+        padding: const EdgeInsets.only(left:12,right: 12),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           mainAxisSize: MainAxisSize.min,
