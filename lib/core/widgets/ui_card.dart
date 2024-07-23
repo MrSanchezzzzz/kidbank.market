@@ -49,7 +49,6 @@ class _UiCardState extends State<UiCard> {
             Positioned(
                 left: 0,
                 top: 0,
-                //TODO Custom checkbox
                 child: CustomCheckBox(
                   value: widget.checked,
                   onChanged: (_){
