@@ -22,10 +22,7 @@ class ListingListItem extends StatelessWidget {
         children: [
           trailingTitle??Container(),
           //TODO custom chevron
-          Icon(
-            CupertinoIcons.chevron_forward,
-            color: delete?CupertinoColors.destructiveRed:Colors.grey300,
-          )
+          const CupertinoListTileChevron()
         ],
       ):
       null,
