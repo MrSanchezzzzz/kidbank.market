@@ -14,6 +14,7 @@ import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
 import 'package:kidbank/features/registration/presentation/screens/auth.dart';
 
+import '../features/account/presentation/screens/my_account.dart';
 import '../features/add_child/presentation/add_child_finish.dart';
 import '../features/chose_role/presentation/screens/role_selection.dart';
 import '../features/onboarding/presentation/onboarding_currency.dart';
@@ -25,8 +26,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      //TODO home page
-      builder: (context, state) =>  MainMenu(),
+      builder: (context, state) =>  const MainMenu(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
@@ -121,11 +121,21 @@ final GoRouter router = GoRouter(
         ),
         GoRoute(
             path: 'account',
-            builder: (context,state)=>MyAccount(),
+            builder: (context,state)=>const MyAccount(),
           routes: <RouteBase>[
-            GoRoute(path: 'wallet',builder: (context,state)=>AccountWalletScreen(),
+            GoRoute(path: 'wallet',builder: (context,state)=>const AccountWalletScreen(),
             routes: <RouteBase>[
-              GoRoute(path: 'top_up',builder: (context,state)=>TopUpScreen())
+              GoRoute(path: 'top_up',builder: (context,state)=>const TopUpScreen())
+            ])
+          ]
+        ),
+        GoRoute(
+            path: 'account',
+            builder: (context,state)=>const MyAccount(),
+          routes: <RouteBase>[
+            GoRoute(path: 'wallet',builder: (context,state)=>const AccountWalletScreen(),
+            routes: <RouteBase>[
+              GoRoute(path: 'top_up',builder: (context,state)=>const TopUpScreen())
             ])
           ]
         )
