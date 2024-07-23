@@ -17,7 +17,7 @@ class OnboardingCurrencyScreen extends StatelessWidget {
         context.pop();
       },
       onNext: () {
-        //TODO
+        //TODO finish onboarding
       },
       finish: true,
       child: Column(
