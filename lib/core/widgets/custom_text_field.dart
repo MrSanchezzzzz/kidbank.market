@@ -133,8 +133,9 @@ class CustomTextField extends StatefulWidget {
       enabled: enabled,
       placeholder: placeholder,
       controller: controller,
-      //TODO custom dollar sign
-      prefixBuilder: (context,state,isError)=>Icon(CupertinoIcons.money_dollar,color: Colors.grey300,),
+      prefixBuilder: (context,state,isError)=>Text('\$',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+        color: Colors.grey300
+      ),),
       keyboardType: TextInputType.number,
       formatters: [
         MoneyInputFormatter()
