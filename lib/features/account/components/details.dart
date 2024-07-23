@@ -37,7 +37,7 @@ class Details extends StatelessWidget {
                 _buildDetailsItem(context:context, title: 'My children',isFirst:  true,),
                 _buildDivider(context),
                 _buildDetailsItem(context:context,title: 'My wallet',onPressed: (){
-                  Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>AccountWalletScreen()));
+                  Navigator.of(context).pushNamed('/account/wallet');
                 }),
                 _buildDivider(context),
                 _buildDetailsItem(context:context,title: 'My deals',),
