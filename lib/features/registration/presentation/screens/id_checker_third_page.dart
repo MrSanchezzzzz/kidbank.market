@@ -6,15 +6,8 @@ import 'package:kidbank/features/registration/presentation/widgets/image_picker.
 
 import '../widgets/id_checker.dart';
 
-class ThirdIdCheckerPage extends StatefulWidget {
+class ThirdIdCheckerPage extends StatelessWidget {
   const ThirdIdCheckerPage({super.key});
-  @override
-  State<ThirdIdCheckerPage> createState() => _ThirdIdCheckerPageState();
-}
-class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
-  void next() {
-    context.push('/auth/id_check_success_page');
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +35,7 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
           ],
         ),
       ),
-      onNext: () => next(),
+      onNext: () => context.push('/auth/id_check_success_page'),
     );
   }
 }
