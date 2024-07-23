@@ -18,6 +18,7 @@ dependencies:
   flutter_hooks: ^0.20.5
   riverpod_annotation: ^2.3.5
   pie_chart: ^5.4.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
