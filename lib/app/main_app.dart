@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:kidbank/theme.dart';
 
 import '../core/routes.dart';
@@ -12,6 +13,10 @@ class MainApp extends StatelessWidget {
       routerConfig: router,
       theme: defaultTheme,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        DefaultCupertinoLocalizations.delegate,
+        DefaultMaterialLocalizations.delegate
+      ],
     );
   }
 }
