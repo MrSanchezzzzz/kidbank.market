@@ -28,7 +28,8 @@ class WalletPaymentMethods extends StatelessWidget {
                 'Add payment method',
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Colors.purple600),
               ),
-              onTap: null,
+              trailing: const CupertinoListTileChevron(),
+              onTap: (){},
             ),
           ],
         )
