@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/core/widgets/step_progressbar.dart';
 
-import '../../../core/widgets/main_back_button.dart';
-import '../../../core/widgets/main_button.dart';
+import '../../../../core/widgets/main_back_button.dart';
+import '../../../../core/widgets/main_button.dart';
 
 class OnboardingScaffold extends StatelessWidget {
   const OnboardingScaffold({super.key,required this.title,required this.currentStep,this.onBack,this.onNext,this.child,this.finish=false});
@@ -39,14 +39,14 @@ class OnboardingScaffold extends StatelessWidget {
                     ],
                   )
               ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(child: MainButton(text: 'Back',onTap: onBack,
-                    color: CupertinoTheme.of(context).scaffoldBackgroundColor,)),
+                  onBack!=null?MainButton(text: 'Back',onTap: onBack,
+                    color: CupertinoTheme.of(context).scaffoldBackgroundColor,):Container(),
                   const SizedBox(width: 16,),
-                  Expanded(child: MainButton(text:finish?'Finish':'Next',onTap: onNext),)
+                  MainButton(text:finish?'Finish':'Next',onTap: onNext)
                 ],
               ),
             ],

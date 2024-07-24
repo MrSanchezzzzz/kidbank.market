@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/widgets/image_container.dart';
-import 'onboarding_scaffold.dart';
+import 'widgets/onboarding_scaffold.dart';
 
 class OnboardingExploreScreen extends StatelessWidget {
   const OnboardingExploreScreen({super.key});
