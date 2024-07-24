@@ -2,7 +2,7 @@ import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/features/registration/presentation/widgets/image_picker.dart';
+import 'package:kidbank/features/sign_up/presentation/widgets/image_picker.dart';
 
 import '../widgets/id_checker.dart';
 

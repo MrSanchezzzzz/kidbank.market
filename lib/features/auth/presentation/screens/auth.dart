@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:go_router/go_router.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/link_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/features/registration/presentation/widgets/auth_integration_container.dart';
-import 'package:kidbank/features/registration/presentation/widgets/or_line.dart';
+import 'package:kidbank/features/sign_up/presentation/widgets/auth_integration_container.dart';
+import 'package:kidbank/features/sign_up/presentation/widgets/or_line.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -116,16 +117,16 @@ class _AuthScreenState extends State<AuthScreen> {
                   const SizedBox(height: 16),
                   const OrLine(),
                   const SizedBox(height: 16),
-                  AuthIntegrationContainer.apple(),
-                  const SizedBox(height: 16),
                   AuthIntegrationContainer.google(),
+                  const SizedBox(height: 16),
+                  AuthIntegrationContainer.apple(),
                   const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text('Don’t have an account?'),
                       LinkButton(text: 'Sign up',onPressed: (){
-                        //TODO go to sign up
+                        context.push('/auth/sign_up');
                       },),
                     ],
                   ),
