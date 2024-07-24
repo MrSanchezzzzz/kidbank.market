@@ -10,12 +10,12 @@ class Details extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 16,),
+          const SizedBox(height: 16,),
           Padding(
             padding: const EdgeInsets.only(left: 0, top: 16, right: 8, bottom: 0),
             child: Container(
               height: 26,
-              padding: EdgeInsets.only(left: 8),
+              padding: const EdgeInsets.only(left: 8),
               child: Text(
                 'DETAILS',
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
@@ -77,7 +77,7 @@ class Details extends StatelessWidget {
                   fontWeight: FontWeight.w400,
                 ),
               ),
-            Container(
+            SizedBox(
               child: right_icon,
               width: 24,
               height: 24,
