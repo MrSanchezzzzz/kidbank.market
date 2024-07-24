@@ -17,33 +17,32 @@ class CustomTextField extends StatefulWidget {
   final int maxLines;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? formatters;
-  const CustomTextField({
-    super.key,
-    this.label,
-    this.helpText,
-    this.required = false,
-    this.validator,
-    this.enabled = true,
-    this.placeholder,
-    this.prefixBuilder,
-    this.suffixBuilder,
-    this.obscureText = false,
-    this.controller,
-    this.maxLines=1,
-    this.keyboardType=TextInputType.text,
-    this.formatters
-  });
 
-  factory CustomTextField.password({
-    String? label,
-    String? helpText,
-    bool required = false,
-    String? Function(String?)? validator,
-    bool enabled = true,
-    String? placeholder,
-    TextEditingController? controller,
-    List<TextInputFormatter>? formatters
-  }) {
+  const CustomTextField(
+      {super.key,
+      this.label,
+      this.helpText,
+      this.required = false,
+      this.validator,
+      this.enabled = true,
+      this.placeholder,
+      this.prefixBuilder,
+      this.suffixBuilder,
+      this.obscureText = false,
+      this.controller,
+      this.maxLines = 1,
+      this.keyboardType = TextInputType.text,
+      this.formatters});
+
+  factory CustomTextField.password(
+      {String? label,
+      String? helpText,
+      bool required = false,
+      String? Function(String?)? validator,
+      bool enabled = true,
+      String? placeholder,
+      TextEditingController? controller,
+      List<TextInputFormatter>? formatters}) {
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -69,19 +68,18 @@ class CustomTextField extends StatefulWidget {
     );
   }
 
-  factory CustomTextField.search({
-    String placeholder = 'Search',
-    String? label,
-    String? helpText,
-    bool required = false,
-    String? Function(String?)? validator,
-    bool enabled = true,
-    Function(String)? onSearch,
-    Function()? onCameraTap,
-    List<TextInputFormatter>? formatters
-  }) {
-    TextEditingController controller=TextEditingController();
-    if(onSearch!=null) {
+  factory CustomTextField.search(
+      {String placeholder = 'Search',
+      String? label,
+      String? helpText,
+      bool required = false,
+      String? Function(String?)? validator,
+      bool enabled = true,
+      Function(String)? onSearch,
+      Function()? onCameraTap,
+      List<TextInputFormatter>? formatters}) {
+    TextEditingController controller = TextEditingController();
+    if (onSearch != null) {
       controller.addListener(() {
         onSearch(controller.text);
       });
@@ -100,7 +98,7 @@ class CustomTextField extends StatefulWidget {
           height: 24,
         );
       },
-      suffixBuilder: (context,state,isError){
+      suffixBuilder: (context, state, isError) {
         return GestureDetector(
           onTap: onCameraTap,
           child: Image.asset(
@@ -124,7 +122,7 @@ class CustomTextField extends StatefulWidget {
     String? placeholder,
     TextEditingController? controller,
   }) {
-    TextEditingController controller=TextEditingController();
+    TextEditingController controller = TextEditingController();
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -133,13 +131,12 @@ class CustomTextField extends StatefulWidget {
       enabled: enabled,
       placeholder: placeholder,
       controller: controller,
-      prefixBuilder: (context,state,isError)=>Text('\$',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-        color: Colors.grey300
-      ),),
+      prefixBuilder: (context, state, isError) => Text(
+        '\$',
+        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Colors.grey300),
+      ),
       keyboardType: TextInputType.number,
-      formatters: [
-        MoneyInputFormatter()
-      ],
+      formatters: [MoneyInputFormatter()],
     );
   }
 
@@ -152,7 +149,7 @@ class CustomTextField extends StatefulWidget {
     String? placeholder,
     TextEditingController? controller,
   }) {
-    controller=controller??TextEditingController(text: '1');
+    controller = controller ?? TextEditingController(text: '1');
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -167,17 +164,27 @@ class CustomTextField extends StatefulWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 controller!.text = (int.parse(controller.text) + 1).toString();
               },
-              child: Icon(CupertinoIcons.plus,size: 18,color: Colors.grey300,),
+              child: Icon(
+                CupertinoIcons.plus,
+                size: 18,
+                color: Colors.grey300,
+              ),
             ),
-            const SizedBox(width: 6,),
+            const SizedBox(
+              width: 6,
+            ),
             GestureDetector(
-              onTap: (){
+              onTap: () {
                 controller!.text = (int.parse(controller.text) - 1).toString();
               },
-              child: Icon(CupertinoIcons.minus,size: 18,color: Colors.grey300,),
+              child: Icon(
+                CupertinoIcons.minus,
+                size: 18,
+                color: Colors.grey300,
+              ),
             )
           ],
         );
@@ -256,20 +263,20 @@ class CustomTextFieldState extends State<CustomTextField> {
             widget.label != null
                 ? Text(
                     widget.label!,
-                    style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                          fontSize: 13,
-                          color: Colors.grey300,
-                        ),
+                    style: CupertinoTheme.of(context)
+                        .textTheme
+                        .textStyle
+                        .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
                     textAlign: TextAlign.left,
                   )
                 : Container(),
             if (widget.required)
               Text(
                 ' *',
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      fontSize: 13,
-                      color: const Color(0xFFFF0000),
-                    ),
+                style: CupertinoTheme.of(context)
+                    .textTheme
+                    .textStyle
+                    .copyWith(fontSize: 13, color: const Color(0xFFFF0000), fontWeight: FontWeight.w700),
               ),
           ],
         ),
@@ -281,7 +288,7 @@ class CustomTextFieldState extends State<CustomTextField> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: getBorderColor()),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 7,vertical: 8),
+          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
           onChanged: _handleTextChanged,
           obscureText: obscure,
           placeholder: widget.placeholder,
