@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import '../../../core/colors.dart';
 import '../../../core/images.dart';
 
@@ -34,15 +33,13 @@ class Details extends StatelessWidget {
             ),
             child: Column(
               children: [
-                _buildDetailsItem(context:context, title: 'My children',isFirst:  true,),
+                _buildDetailsItem(context, 'My children', true, false),
                 _buildDivider(context),
-                _buildDetailsItem(context:context,title: 'My wallet',onPressed: (){
-                  Navigator.of(context).pushNamed('/account/wallet');
-                }),
+                _buildDetailsItem(context, 'My wallet', false, false),
                 _buildDivider(context),
-                _buildDetailsItem(context:context,title: 'My deals',),
+                _buildDetailsItem(context, 'My deals', false, false),
                 _buildDivider(context),
-                _buildDetailsItem(context:context,title: 'Settings', isLast: true),
+                _buildDetailsItem(context, 'Settings', false, true),
               ],
             ),
           ),
@@ -51,10 +48,12 @@ class Details extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsItem({required BuildContext context,required String title,bool isFirst=false, bool isLast=false,Function()? onPressed}) {
+  Widget _buildDetailsItem(BuildContext context, String title, bool isFirst, bool isLast) {
     return CupertinoButton(
       padding: EdgeInsets.zero,
-      onPressed: onPressed,
+      onPressed: () {
+        print('$title pressed');
+      },
       child: Container(
         height: 44,
         decoration: BoxDecoration(

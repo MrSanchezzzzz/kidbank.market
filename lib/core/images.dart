@@ -7,3 +7,4 @@ Image account_photo = Image.asset('assets/images/account_photo.png');
 Image right_icon = Image.asset('assets/images/right_icon.png');
 Image full_star = Image.asset('assets/images/star.png', width: 16, height: 16,);
 Image star = Image.asset('assets/images/white_star.png');
+Image smsEdit=Image.asset('assets/images/sms_edit.png',width: 24,height: 24,);
