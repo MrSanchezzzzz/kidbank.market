@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/colors.dart';
 import '../../../core/widgets/image_container.dart';
-import 'onboarding_scaffold.dart';
+import 'widgets/onboarding_scaffold.dart';
 
 class OnboardingToyScreen extends StatelessWidget {
   const OnboardingToyScreen({super.key});
@@ -16,7 +16,7 @@ class OnboardingToyScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          const SizedBox(height: 16,),
+          const SizedBox(height: 8,),
           Text('Add a toy you want to sell or exchange. Take a picture and write a description.', style: CupertinoTheme
               .of(context)
               .textTheme
