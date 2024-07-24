@@ -291,7 +291,7 @@ class CustomTextFieldState extends State<CustomTextField> {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: getBorderColor()),
           ),
-          padding: EdgeInsets.symmetric(horizontal: 7, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
           onChanged: _handleTextChanged,
           obscureText: obscure,
           placeholder: widget.placeholder,

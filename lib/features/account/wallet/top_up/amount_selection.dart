@@ -49,7 +49,7 @@ class _TopUpAmountSelectionState extends State<TopUpAmountSelection> {
             ),
           ],
         ),
-        SizedBox(height: 8),
+        const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [

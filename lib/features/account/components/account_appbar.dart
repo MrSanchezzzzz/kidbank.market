@@ -7,7 +7,7 @@ class AccountAppbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 44,
       child: Row(
         children: [
@@ -27,7 +27,7 @@ class AccountAppbar extends StatelessWidget {
               ],
             ),
           ),
-          Container(
+          SizedBox(
             width: 32,
             height: 32,
             child: logo_shadow_black,
