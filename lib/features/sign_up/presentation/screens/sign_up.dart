@@ -196,7 +196,7 @@ class _SignUpState extends State<SignUp> {
               MainButton(
                 onTap: emailValid && passwordValid && passwordConfirm
                     ? next
-                    : next,//TODO return to null
+                    : null,
                 text: 'Continue',
               ),
             ],
