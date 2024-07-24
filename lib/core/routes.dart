@@ -39,9 +39,33 @@ final GoRouter router = GoRouter(
             builder: (context,state)=>const AuthScreen(),
             routes: <RouteBase>[
               GoRoute(
-                  path: "sign_in",
-                builder:(context,state)=> const Placeholder()
-              )
+                  path: "sign_up",
+                builder:(context,state)=> const SignUp()
+              ),
+              GoRoute(
+                  path: "improve",
+                  builder:(context,state)=> const ImprovePage()
+              ),
+              GoRoute(
+                  path: "id_check_select_document_page",
+                  builder:(context,state)=> const FirstIdCheckerPage()
+              ),
+              GoRoute(
+                  path: "id_check_enter_id_data_page",
+                  builder:(context,state)=> const SecondIdCheckerPage()
+              ),
+              GoRoute(
+                  path: "id_check_upload_photo_page",
+                  builder:(context,state)=> const ThirdIdCheckerPage()
+              ),
+              GoRoute(
+                  path: "id_check_success_page",
+                  builder:(context,state)=> const SuccessIdCheckerPage()
+              ),
+              GoRoute(
+                  path: "notification_page",
+                  builder:(context,state)=> const NotificationPage()
+              ),
             ]
         ),
         //Child auth
