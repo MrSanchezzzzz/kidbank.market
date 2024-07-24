@@ -17,6 +17,7 @@ class CustomTextField extends StatefulWidget {
   final int maxLines;
   final TextInputType keyboardType;
   final List<TextInputFormatter>? formatters;
+  final bool readOnly;
 
   const CustomTextField(
       {super.key,
@@ -32,7 +33,9 @@ class CustomTextField extends StatefulWidget {
       this.controller,
       this.maxLines = 1,
       this.keyboardType = TextInputType.text,
-      this.formatters});
+      this.formatters,
+      this.readOnly=false
+      });
 
   factory CustomTextField.password(
       {String? label,
@@ -311,6 +314,7 @@ class CustomTextFieldState extends State<CustomTextField> {
           maxLines: widget.maxLines,
           keyboardType: widget.keyboardType,
           inputFormatters: widget.formatters,
+          readOnly: widget.readOnly,
         ),
         Text(
           _error ? _errorText : widget.helpText ?? '',
