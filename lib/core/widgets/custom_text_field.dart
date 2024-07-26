@@ -80,7 +80,9 @@ class CustomTextField extends StatefulWidget {
       bool enabled = true,
       Function(String)? onSearch,
       Function()? onCameraTap,
-      List<TextInputFormatter>? formatters}) {
+      List<TextInputFormatter>? formatters,
+      bool showCamera=true
+      }) {
     TextEditingController controller = TextEditingController();
     if (onSearch != null) {
       controller.addListener(() {
@@ -101,7 +103,7 @@ class CustomTextField extends StatefulWidget {
           height: 24,
         );
       },
-      suffixBuilder: (context, state, isError) {
+      suffixBuilder: showCamera?(context, state, isError) {
         return GestureDetector(
           onTap: onCameraTap,
           child: Image.asset(
@@ -110,7 +112,7 @@ class CustomTextField extends StatefulWidget {
             height: 24,
           ),
         );
-      },
+      }:null,
       controller: controller,
       formatters: formatters,
     );
@@ -260,6 +262,7 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [
