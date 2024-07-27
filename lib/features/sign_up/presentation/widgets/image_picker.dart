@@ -1,15 +1,16 @@
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 
+// ignore: must_be_immutable
 class ImagePickerPage extends StatefulWidget {
-   ImagePickerPage({
+  ImagePickerPage({
     super.key,
     required this.title,
     required this.onTap,
-    this.image, this.clear,
+    this.image,
+    this.clear,
   });
   final String title;
   final void Function()? onTap;
@@ -21,8 +22,6 @@ class ImagePickerPage extends StatefulWidget {
 }
 
 class _ImagePickerPageState extends State<ImagePickerPage> {
- 
-
   @override
   Widget build(BuildContext context) {
     return Center(

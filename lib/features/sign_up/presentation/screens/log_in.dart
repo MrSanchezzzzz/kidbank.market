@@ -6,14 +6,14 @@ import 'package:kidbank/core/widgets/main_button.dart';
 
 import '../../../../core/colors.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class LogIn extends StatefulWidget {
+  const LogIn({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _LogInState extends State<LogIn> {
   bool emailValid = false,
       passwordValid = false,
       passwordConfirm = false,
@@ -32,12 +32,7 @@ class _SignUpState extends State<SignUp> {
     super.dispose();
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Handle form submission
-      const Text('Passwords match!');
-    }
-  }
+ 
 
   bool _passwordsMatch() {
     return _passwordController.text == _confirmPasswordController.text;
@@ -186,7 +181,6 @@ class _SignUpState extends State<SignUp> {
                 label: 'Phone number',
                 placeholder: '+380 00 000 00 00',
                 required: false,
-                //TODO phone validation
                 keyboardType: TextInputType.phone,
                 validator: isValidPhoneNumber,
               ),

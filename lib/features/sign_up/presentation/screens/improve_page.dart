@@ -35,7 +35,10 @@ class _ImprovePageState extends State<ImprovePage> {
       ),
       backgroundColor: const Color(0xfff3edff),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 16),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 13,
+          vertical: 50,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -105,16 +108,17 @@ class _ImprovePageState extends State<ImprovePage> {
               label: '',
               placeholder: 'Place for other ideas',
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+            const SizedBox(height: 150),
+            Column(
               children: [
                 MainButton(
-                  color: Colors.orange100,
+                  color: Colors.purple100,
                   text: 'Skip',
                   onTap: () {
                     ///Skip
                   },
                 ),
+                const SizedBox(height: 10),
                 MainButton(
                   onTap: () {
                     next();

@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/core/widgets/step_progressbar.dart';
@@ -6,12 +7,12 @@ import 'package:kidbank/core/widgets/step_progressbar.dart';
 class IdCheker extends StatelessWidget {
   const IdCheker(
       {super.key,
-        required this.title,
-        required this.currentStep,
-        this.onBack,
-        this.onNext,
-        this.child,
-        this.finish = false});
+      required this.title,
+      required this.currentStep,
+      this.onBack,
+      this.onNext,
+      this.child,
+      this.finish = false});
   final String title;
   final int currentStep;
   final Function()? onBack;
@@ -33,28 +34,36 @@ class IdCheker extends StatelessWidget {
           middle: Text(title),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 13,
+            vertical: 50,
+          ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
                   child: Column(
-                    children: [
-                      StepProgressbar(
-                        stepCount: steps.length,
-                        stepLabels: steps,
-                        currentStep: currentStep,
-                      ),
-                      child ?? Container(),
-                    ],
-                  )),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: MainButton(text: 'Next', onTap: onNext),
-                  )
+                  StepProgressbar(
+                    stepCount: steps.length,
+                    stepLabels: steps,
+                    currentStep: currentStep,
+                  ),
+                  child ?? Container(),
+                ],
+              )),
+              Column(
+                children: [
+                  ///TODO Implemente OnSkip Function
+
+                  MainButton(
+                    text: 'Skip',
+                    onTap: () {},
+                    color: Colors.purple100,
+                  ),
+                  const SizedBox(height: 10),
+
+                  MainButton(text: 'Next', onTap: onNext),
                 ],
               ),
             ],

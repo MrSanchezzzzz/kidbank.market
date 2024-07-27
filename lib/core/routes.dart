@@ -13,6 +13,7 @@ import 'package:kidbank/features/auth/presentation/screens/auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
+import 'package:kidbank/features/sign_up/presentation/screens/check_email.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_for_page.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_third_page.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_cheker_first_page.dart';
@@ -32,7 +33,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const RoleSelectionScreen(),
+      builder: (context, state) =>  const CheckEmail(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
