@@ -3,8 +3,8 @@ import 'package:kidbank/core/widgets/toy_image.dart';
 
 import '../../../../core/colors.dart';
 
-class GridItem extends StatelessWidget {
-  const GridItem({super.key});
+class CatalogueGridItem extends StatelessWidget {
+  const CatalogueGridItem({super.key});
   //TODO final Toy
   @override
   Widget build(BuildContext context) {

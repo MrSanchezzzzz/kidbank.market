@@ -15,14 +15,14 @@ class CatalogueItemsView extends ConsumerWidget {
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
         children: const [
-          GridItem(),
-          GridItem(),
-          GridItem(),
-          GridItem(),
-          GridItem(),
-          GridItem(),
-      ],
-    );
+          CatalogueGridItem(),
+          CatalogueGridItem(),
+          CatalogueGridItem(),
+          CatalogueGridItem(),
+          CatalogueGridItem(),
+          CatalogueGridItem(),
+        ],
+      );
   }
 
   @override
