@@ -5,95 +5,66 @@ import '../../../core/images.dart';
 class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const SizedBox(height: 16,),
           Padding(
-            padding: const EdgeInsets.only(left: 0, top: 16, right: 8, bottom: 0),
+            padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
             child: Container(
               height: 26,
               padding: const EdgeInsets.only(left: 8),
               child: Text(
                 'DETAILS',
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  color: Colors.grey300,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600
+                    color: Colors.grey300,
+                    fontSize: 13,
+                    fontWeight: FontWeight.w600
                 ),
               ),
             ),
           ),
           Container(
             decoration: BoxDecoration(
-              color: Colors.white100,
-              borderRadius: BorderRadius.circular(10)
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: Column(
+            child: CupertinoListSection.insetGrouped(
               children: [
-                _buildDetailsItem(context, 'My children', true, false),
-                _buildDivider(context),
-                _buildDetailsItem(context, 'My wallet', false, false),
-                _buildDivider(context),
-                _buildDetailsItem(context, 'My deals', false, false),
-                _buildDivider(context),
-                _buildDetailsItem(context, 'Settings', false, true),
+                _buildDetailsItem(context, 'My children'),
+                _buildDetailsItem(context, 'My wallet'),
+                _buildDetailsItem(context, 'My deals'),
+                _buildDetailsItem(context, 'Rating'),
+                _buildDetailsItem(context, 'Settings'),
               ],
             ),
           ),
         ],
-      ),
     );
   }
 
-  Widget _buildDetailsItem(BuildContext context, String title, bool isFirst, bool isLast) {
-    return CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: () {
-        print('$title pressed');
-      },
-      child: Container(
-        height: 44,
-        decoration: BoxDecoration(
-          color: Colors.white100,
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(isFirst ? 10 : 0),
-            topRight: Radius.circular(isFirst ? 10 : 0),
-            bottomLeft: Radius.circular(isLast ? 10 : 0),
-            bottomRight: Radius.circular(isLast ? 10 : 0),
-          ),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-            SizedBox(
-              child: right_icon,
-              width: 24,
-              height: 24,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildDivider(BuildContext context) {
+  Widget _buildDetailsItem(BuildContext context, String title) {
     return Container(
-      height: 1,
-      color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-      margin: const EdgeInsets.only(left: 16)
+      decoration: BoxDecoration(
+        color: Colors.white100,
+        border: Border(
+          bottom: BorderSide(
+            color: CupertinoTheme.of(context).scaffoldBackgroundColor,
+          ),
+        ),
+      ),
+      child: CupertinoListTile(
+        title: Text(
+          title,
+          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        trailing: SizedBox(height: 16, width: 16, child: right_icon),
+        onTap: () {
+          print('$title pressed');
+        },
+      ),
     );
   }
 }

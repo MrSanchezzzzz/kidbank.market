@@ -12,15 +12,22 @@ import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_detai
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
-import 'package:kidbank/features/registration/presentation/screens/auth.dart';
 
-import '../features/account/presentation/screens/my_account.dart';
+
 import '../features/add_child/presentation/add_child_finish.dart';
+import '../features/auth/presentation/screens/auth.dart';
 import '../features/chose_role/presentation/screens/role_selection.dart';
 import '../features/onboarding/presentation/onboarding_currency.dart';
 import '../features/onboarding/presentation/onboarding_explore.dart';
 import '../features/onboarding/presentation/onboarding_start.dart';
 import '../features/onboarding/presentation/onboarding_toy.dart';
+import '../features/sign_up/presentation/screens/id_checker_for_page.dart';
+import '../features/sign_up/presentation/screens/id_checker_third_page.dart';
+import '../features/sign_up/presentation/screens/id_cheker_first_page.dart';
+import '../features/sign_up/presentation/screens/id_cheker_second_page.dart';
+import '../features/sign_up/presentation/screens/improve_page.dart';
+import '../features/sign_up/presentation/screens/notification_page.dart';
+import '../features/sign_up/presentation/screens/sign_up.dart';
 
 final GoRouter router = GoRouter(
   routes: [

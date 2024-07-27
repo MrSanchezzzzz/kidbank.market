@@ -21,31 +21,31 @@ class CustomTextField extends StatefulWidget {
 
   const CustomTextField(
       {super.key,
-      this.label,
-      this.helpText,
-      this.required = false,
-      this.validator,
-      this.enabled = true,
-      this.placeholder,
-      this.prefixBuilder,
-      this.suffixBuilder,
-      this.obscureText = false,
-      this.controller,
-      this.maxLines = 1,
-      this.keyboardType = TextInputType.text,
-      this.formatters,
-      this.readOnly=false
+        this.label,
+        this.helpText,
+        this.required = false,
+        this.validator,
+        this.enabled = true,
+        this.placeholder,
+        this.prefixBuilder,
+        this.suffixBuilder,
+        this.obscureText = false,
+        this.controller,
+        this.maxLines = 1,
+        this.keyboardType = TextInputType.text,
+        this.formatters,
+        this.readOnly=false
       });
 
   factory CustomTextField.password(
       {String? label,
-      String? helpText,
-      bool required = false,
-      String? Function(String?)? validator,
-      bool enabled = true,
-      String? placeholder,
-      TextEditingController? controller,
-      List<TextInputFormatter>? formatters}) {
+        String? helpText,
+        bool required = false,
+        String? Function(String?)? validator,
+        bool enabled = true,
+        String? placeholder,
+        TextEditingController? controller,
+        List<TextInputFormatter>? formatters}) {
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -73,14 +73,14 @@ class CustomTextField extends StatefulWidget {
 
   factory CustomTextField.search(
       {String placeholder = 'Search',
-      String? label,
-      String? helpText,
-      bool required = false,
-      String? Function(String?)? validator,
-      bool enabled = true,
-      Function(String)? onSearch,
-      Function()? onCameraTap,
-      List<TextInputFormatter>? formatters}) {
+        String? label,
+        String? helpText,
+        bool required = false,
+        String? Function(String?)? validator,
+        bool enabled = true,
+        Function(String)? onSearch,
+        Function()? onCameraTap,
+        List<TextInputFormatter>? formatters}) {
     TextEditingController controller = TextEditingController();
     if (onSearch != null) {
       controller.addListener(() {
@@ -265,13 +265,13 @@ class CustomTextFieldState extends State<CustomTextField> {
           children: [
             widget.label != null
                 ? Text(
-                    widget.label!,
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .textStyle
-                        .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
-                    textAlign: TextAlign.left,
-                  )
+              widget.label!,
+              style: CupertinoTheme.of(context)
+                  .textTheme
+                  .textStyle
+                  .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
+              textAlign: TextAlign.left,
+            )
                 : Container(),
             if (widget.required)
               Text(
@@ -300,15 +300,15 @@ class CustomTextFieldState extends State<CustomTextField> {
           ),
           prefix: widget.prefixBuilder != null
               ? Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: widget.prefixBuilder!(context, this, _error),
-                )
+            padding: const EdgeInsets.only(left: 8),
+            child: widget.prefixBuilder!(context, this, _error),
+          )
               : null,
           suffix: widget.suffixBuilder != null
               ? Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: widget.suffixBuilder!(context, this, _error),
-                )
+            padding: const EdgeInsets.only(right: 8),
+            child: widget.suffixBuilder!(context, this, _error),
+          )
               : null,
           controller: widget.controller,
           maxLines: widget.maxLines,
@@ -319,9 +319,9 @@ class CustomTextFieldState extends State<CustomTextField> {
         Text(
           _error ? _errorText : widget.helpText ?? '',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                fontSize: 13,
-                color: _error ? const Color(0xFFFF0000) : Colors.grey300,
-              ),
+            fontSize: 13,
+            color: _error ? const Color(0xFFFF0000) : Colors.grey300,
+          ),
           textAlign: TextAlign.right,
         ),
       ],
