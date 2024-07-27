@@ -6,7 +6,7 @@ import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_filter
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/filter_modal_sheet.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/sort_modal_sheet.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button.dart';
 
 import '../../../core/colors.dart' as project_colors;
@@ -14,14 +14,6 @@ import '../../../core/colors.dart' as project_colors;
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
 
-  void showSortModal(BuildContext context) {
-    CustomModalBottomSheet.show(
-        context: context,
-        sheet: const CustomModalBottomSheet(
-          title: 'Photo search',
-          body: SortModalSheet(),
-        ));
-  }
 
   void showFilterModal(BuildContext context) {
     CustomModalBottomSheet.show(
@@ -50,7 +42,7 @@ class CatalogueScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           CatalogueFilters(onSortTap: () {
-                            showSortModal(context);
+                            //TODO show sort
                           }, onFilterTap: () {
                             showFilterModal(context);
                           }),

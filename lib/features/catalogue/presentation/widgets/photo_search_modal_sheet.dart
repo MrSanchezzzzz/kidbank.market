@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import '../../../../core/images.dart';
 import '../../../../core/widgets/ui_card.dart';
 
-class SortModalSheet extends StatelessWidget {
-  const SortModalSheet({super.key});
+class PhotoSearchModalSheet extends StatelessWidget {
+  const PhotoSearchModalSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
