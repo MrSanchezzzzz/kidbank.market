@@ -156,7 +156,7 @@ class _SecondIdCheckerPageState extends State<SecondIdCheckerPage> {
               required: true,
               placeholder: 'TU88029-131',
             ),
-            CustomTextField(
+            const CustomTextField(
               label: 'Expires',
               required: true,
               placeholder: '28/12/2024',

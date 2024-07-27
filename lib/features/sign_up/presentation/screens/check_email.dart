@@ -5,6 +5,7 @@ import 'package:kidbank/core/widgets/link_button.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 
+
 class CheckEmail extends StatefulWidget {
   const CheckEmail({super.key});
 
@@ -50,6 +51,7 @@ class _CheckEmailState extends State<CheckEmail> {
     });
     return 'Enter valid code';
   }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
