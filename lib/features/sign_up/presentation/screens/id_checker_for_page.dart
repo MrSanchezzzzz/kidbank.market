@@ -12,24 +12,24 @@ class SuccessIdCheckerPage extends StatelessWidget {
     return IdCheker(
       currentStep: 3,
       title: 'Rating',
-      child:
-      Padding(
+      onNext: () => context.push('/auth/notification_page'),
+      nextB: 'Continiue',
+      child: Padding(
         padding: const EdgeInsets.only(top: 25.0),
         child: Center(
           child: Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  CupertinoIcons.check_mark,
-                  color: Colors.green200,
-                  size: 50,
+                Image.asset(
+                  'assets/images/success.png',
+                  width: 48,
+                  height: 48,
                 ),
                 const SizedBox(height: 10),
                 const Text(
@@ -52,9 +52,7 @@ class SuccessIdCheckerPage extends StatelessWidget {
             ),
           ),
         ),
-
       ),
-      onNext: () => context.push('/auth/notification_page'),
     );
   }
 }

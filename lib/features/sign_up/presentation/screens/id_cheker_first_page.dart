@@ -8,8 +8,10 @@ class FirstIdCheckerPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IdCheker(
+      skip: 'Skip',
       currentStep: 0,
       title: 'ID checker',
+      onNext: () => context.push('/auth/id_check_enter_id_data_page'), nextB: 'Next',
       child: Padding(
         padding: const EdgeInsets.symmetric(
           
@@ -73,7 +75,6 @@ class FirstIdCheckerPage extends StatelessWidget {
           ],
         ),
       ),
-      onNext: () => context.push('/auth/id_check_enter_id_data_page'),
     );
   }
 }

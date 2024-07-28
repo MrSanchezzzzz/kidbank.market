@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/image_picker.dart';
@@ -75,6 +74,8 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
       currentStep: 2,
       title: 'ID checker',
       onNext: _gallaryPicked || _cameraPicked ? next : null,
+      skip: 'Skip',
+      nextB: 'Next',
       child: Padding(
         padding: const EdgeInsets.only(top: 25.0),
         child: Column(

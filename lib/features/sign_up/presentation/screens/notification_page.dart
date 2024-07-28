@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
@@ -21,17 +20,24 @@ class NotificationPage extends StatelessWidget {
       ),
       backgroundColor: const Color(0xfff3edff),
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 16),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 13,
+          vertical: 16,
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            const Text('Turn on notifications'),
+            Text(
+              'Turn on notifications',
+              style: CupertinoTheme.of(context)
+                  .textTheme
+                  .textStyle
+                  .copyWith(fontSize: 34, color: Colors.grey500),
+            ),
             Center(
               child: Container(
                 padding: const EdgeInsets.all(20),
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Container(
                       width: 60,
@@ -42,36 +48,29 @@ class NotificationPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    const Text(
+                    Text(
                       "Don't miss important messages like orders’ management or your child's activity.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: CupertinoColors.systemGrey,
-                      ),
+                      style: CupertinoTheme.of(context)
+                          .textTheme
+                          .textStyle
+                          .copyWith(fontSize: 17, color: Colors.grey500),
                     ),
                   ],
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(top: 460.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MainButton(
-                    color: Colors.orange100,
-                    text: 'Skip',
-                    onTap: () {
-                      ///Skep
-                    },
-                  ),
-                  MainButton(
-                    onTap: () {},
-                    text: 'Turn on',
-                  ),
-                ],
-              ),
+            SizedBox(height: MediaQuery.of(context).size.height/2),
+            MainButton(
+              color: Colors.purple100,
+              text: 'Skip',
+              onTap: () {
+                ///Skep
+              },
+            ),
+            MainButton(
+              onTap: () {},
+              text: 'Turn on',
             )
           ],
         ),

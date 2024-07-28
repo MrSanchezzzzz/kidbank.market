@@ -59,6 +59,8 @@ class _SecondIdCheckerPageState extends State<SecondIdCheckerPage> {
       currentStep: 1,
       title: 'ID checker',
       onNext: _isButtonVisible ? next : null,
+      nextB: 'Next',
+      skip: 'Skip',
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 50,

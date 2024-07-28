@@ -5,21 +5,25 @@ import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/core/widgets/step_progressbar.dart';
 
 class IdCheker extends StatelessWidget {
-  const IdCheker(
-      {super.key,
-      required this.title,
-      required this.currentStep,
-      this.onBack,
-      this.onNext,
-      this.child,
-      this.finish = false,
-      });
+  const IdCheker({
+    super.key,
+    required this.title,
+    required this.currentStep,
+    this.onBack,
+    this.onNext,
+    this.child,
+    this.finish = false,
+    this.skip,
+    required this.nextB,
+  });
   final String title;
   final int currentStep;
   final Function()? onBack;
   final Function()? onNext;
   final Widget? child;
   final bool finish;
+  final String? skip;
+  final String nextB;
   @override
   Widget build(BuildContext context) {
     final List<String> steps = ['Chose', 'Data', 'Photo', 'Finish'];
@@ -55,16 +59,13 @@ class IdCheker extends StatelessWidget {
               )),
               Column(
                 children: [
-                  ///TODO Implemente OnSkip Function
-
                   MainButton(
-                    text: 'Skip',
+                    text: skip,
                     onTap: () {},
-                    color: Colors.purple100,
+                    color: Colors.purple50,
                   ),
                   const SizedBox(height: 10),
-
-                  MainButton(text: 'Next', onTap: onNext),
+                  MainButton(text: nextB, onTap: onNext),
                 ],
               ),
             ],
