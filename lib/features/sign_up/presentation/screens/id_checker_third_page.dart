@@ -18,8 +18,8 @@ class ThirdIdCheckerPage extends StatefulWidget {
 class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
   File? _imageCamera;
   File? _imageGallery;
-  bool gallaryPicked = false;
-   bool cameraPicked = false;
+  bool _gallaryPicked = false;
+  bool _cameraPicked = false;
 
 //Picked photo from gallary
   Future<bool> _pickImageFromGallary() async {
@@ -30,7 +30,7 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
     setState(() {
       if (pickedFileGallery != null) {
         _imageGallery = File(pickedFileGallery.path);
-        gallaryPicked = true;
+        _gallaryPicked = true;
       }
     });
     return true;
@@ -38,29 +38,30 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
 
   //Picked photo from camera
   Future<bool> _pickImageFromCamera() async {
-  
-      final picker = ImagePicker();
-      final pickedFileGallery =
-          await picker.pickImage(source: ImageSource.camera);
+    final picker = ImagePicker();
+    final pickedFileGallery =
+        await picker.pickImage(source: ImageSource.camera);
 
-      setState(() {
-        if (pickedFileGallery != null) {
-          _imageCamera = File(pickedFileGallery.path);
-          cameraPicked =true;
-        } 
-      });
-      return true;
+    setState(() {
+      if (pickedFileGallery != null) {
+        _imageCamera = File(pickedFileGallery.path);
+        _cameraPicked = true;
+      }
+    });
+    return true;
   }
 
   void _clearGallaryImage() {
     setState(() {
       _imageGallery = null;
+      _gallaryPicked = false;
     });
   }
 
   void _clearCameraImage() {
     setState(() {
       _imageCamera = null;
+      _cameraPicked = false;
     });
   }
 
@@ -73,7 +74,7 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
     return IdCheker(
       currentStep: 2,
       title: 'ID checker',
-      onNext: gallaryPicked|| cameraPicked? next : null,
+      onNext: _gallaryPicked || _cameraPicked ? next : null,
       child: Padding(
         padding: const EdgeInsets.only(top: 25.0),
         child: Column(
