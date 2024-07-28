@@ -18,33 +18,27 @@ class ThirdIdCheckerPage extends StatefulWidget {
 class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
   File? _imageCamera;
   File? _imageGallery;
+  bool gallaryPicked = false;
+   bool cameraPicked = false;
 
 //Picked photo from gallary
-  Future<void> _pickImageFromGallary() async {
-    try {
-      final picker = ImagePicker();
-      final pickedFileGallery =
-          await picker.pickImage(source: ImageSource.gallery);
+  Future<bool> _pickImageFromGallary() async {
+    final picker = ImagePicker();
+    final pickedFileGallery =
+        await picker.pickImage(source: ImageSource.gallery);
 
-      setState(() {
-        if (pickedFileGallery != null) {
-          _imageGallery = File(pickedFileGallery.path);
-        } else {
-          if (kDebugMode) {
-            print('No image selected.');
-          }
-        }
-      });
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error: $e');
+    setState(() {
+      if (pickedFileGallery != null) {
+        _imageGallery = File(pickedFileGallery.path);
+        gallaryPicked = true;
       }
-    }
+    });
+    return true;
   }
 
   //Picked photo from camera
-  Future<void> _pickImageFromCamera() async {
-    try {
+  Future<bool> _pickImageFromCamera() async {
+  
       final picker = ImagePicker();
       final pickedFileGallery =
           await picker.pickImage(source: ImageSource.camera);
@@ -52,17 +46,10 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
       setState(() {
         if (pickedFileGallery != null) {
           _imageCamera = File(pickedFileGallery.path);
-        } else {
-          if (kDebugMode) {
-            print('No image selected.');
-          }
-        }
+          cameraPicked =true;
+        } 
       });
-    } catch (e) {
-      if (kDebugMode) {
-        print('Error: $e');
-      }
-    }
+      return true;
   }
 
   void _clearGallaryImage() {
@@ -77,11 +64,16 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
     });
   }
 
+  void next() {
+    context.push('/auth/id_check_success_page');
+  }
+
   @override
   Widget build(BuildContext context) {
     return IdCheker(
       currentStep: 2,
       title: 'ID checker',
+      onNext: gallaryPicked|| cameraPicked? next : null,
       child: Padding(
         padding: const EdgeInsets.only(top: 25.0),
         child: Column(
@@ -114,7 +106,6 @@ class _ThirdIdCheckerPageState extends State<ThirdIdCheckerPage> {
           ],
         ),
       ),
-      onNext: () => context.push('/auth/id_check_success_page'),
     );
   }
 }

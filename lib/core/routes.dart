@@ -33,7 +33,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const SecondIdCheckerPage(),
+      builder: (context, state) =>  const ThirdIdCheckerPage(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
