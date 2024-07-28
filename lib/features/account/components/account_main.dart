@@ -15,7 +15,7 @@ class _AccountMainState extends State<AccountMain> {
   String name = 'Veronika';
   String surname = 'Shvets';
   String email = 'veronika.shvets@gmail.com';
-  int rating = 2;
+  double rating = 3.5;
 
   void _onTap(BuildContext context) async {
     final result = await Navigator.of(context).push(
@@ -67,7 +67,11 @@ class _AccountMainState extends State<AccountMain> {
                 height: 24,
                 child: right_icon,
               ),
-              subtitle: RatingStars(rating: rating,)
+              subtitle: RatingStars(
+                rating: rating,
+                color: Colors.grey300,
+                size: 16.0,
+              ),
             ),
           ),
         ),

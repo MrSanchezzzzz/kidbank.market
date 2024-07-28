@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../core/colors.dart';
-import '../../../core/images.dart';
-
 class RatingStars extends StatelessWidget {
-  final int rating;
+  final double rating;
+  final Color color;
+  final double size;
 
-  const RatingStars({required this.rating, Key? key}) : super(key: key);
+  const RatingStars({
+    required this.rating,
+    this.color = const Color(0xFFD1D1D1),
+    this.size = 13.33,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +20,26 @@ class RatingStars extends StatelessWidget {
           'Rating: ',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontSize: 15,
-            color: Colors.grey300,
+            color: color,
           ),
         ),
-        const SizedBox(width: 4),
         ...List.generate(5, (index) {
+          IconData icon;
+          if (index < rating.floor()) {
+            icon = CupertinoIcons.star_fill;
+          } else if (index < rating) {
+            icon = CupertinoIcons.star_lefthalf_fill;
+          } else {
+            icon = CupertinoIcons.star;
+          }
           return SizedBox(
-            width: 16,
-            height: 16,
-            child: index < rating ? full_star : star,
+            width: size,
+            height: size,
+            child: Icon(
+              icon,
+              color: color,
+              size: size,
+            ),
           );
         }),
       ],
