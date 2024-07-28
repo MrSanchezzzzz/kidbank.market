@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
+import 'package:kidbank/features/account/components/rating_star.dart';
 import '../presentation/screens/account_info.dart';
 
 class AccountMain extends StatefulWidget {
@@ -14,6 +15,7 @@ class _AccountMainState extends State<AccountMain> {
   String name = 'Veronika';
   String surname = 'Shvets';
   String email = 'veronika.shvets@gmail.com';
+  int rating = 2;
 
   void _onTap(BuildContext context) async {
     final result = await Navigator.of(context).push(
@@ -48,6 +50,7 @@ class _AccountMainState extends State<AccountMain> {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 6),
             child: CupertinoListTile(
+              backgroundColorActivated: Colors.white100,
               onTap: () => _onTap(context),
               padding: EdgeInsets.zero,
               leading: ClipOval(
@@ -64,23 +67,7 @@ class _AccountMainState extends State<AccountMain> {
                 height: 24,
                 child: right_icon,
               ),
-              subtitle: Row(
-                children: [
-                  Text(
-                    'Rating: ',
-                    style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      fontSize: 15,
-                      color: Colors.grey300,
-                    ),
-                  ),
-                  const SizedBox(width: 4),
-                  SizedBox(width: 16, height: 16, child: full_star),
-                  SizedBox(width: 16, height: 16, child: full_star),
-                  SizedBox(width: 16, height: 16, child: full_star),
-                  SizedBox(width: 16, height: 16, child: full_star),
-                  SizedBox(width: 16, height: 16, child: star),
-                ],
-              ),
+              subtitle: RatingStars(rating: rating,)
             ),
           ),
         ),
