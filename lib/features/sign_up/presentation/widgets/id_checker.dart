@@ -12,7 +12,8 @@ class IdCheker extends StatelessWidget {
       this.onBack,
       this.onNext,
       this.child,
-      this.finish = false});
+      this.finish = false,
+      });
   final String title;
   final int currentStep;
   final Function()? onBack;

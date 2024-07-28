@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
-import 'package:intl/intl.dart';
 import '../widgets/id_checker.dart';
 
 class SecondIdCheckerPage extends StatefulWidget {
@@ -12,22 +11,40 @@ class SecondIdCheckerPage extends StatefulWidget {
 }
 
 class _SecondIdCheckerPageState extends State<SecondIdCheckerPage> {
-  bool nameValid = false,
-      sureNameValid = false,
-      idNumberValid = false,
-      expiresDateValid = false;
-
-  final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _sureNameController = TextEditingController();
   final _idNumberController = TextEditingController();
   final _expiresDateController = TextEditingController();
 
+  bool _isButtonVisible = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController.addListener(_checkInput);
+    _sureNameController.addListener(_checkInput);
+    _idNumberController.addListener(_checkInput);
+    _expiresDateController.addListener(_checkInput);
+  }
+
+  void _checkInput() {
+    setState(() {
+      _isButtonVisible = _nameController.text.trim().isNotEmpty &&
+          _sureNameController.text.trim().isNotEmpty &&
+          _idNumberController.text.trim().isNotEmpty &&
+          _expiresDateController.text.trim().isNotEmpty;
+    });
+  }
+
   @override
   void dispose() {
+    _nameController.removeListener(_checkInput);
     _nameController.dispose();
+    _sureNameController.removeListener(_checkInput);
     _sureNameController.dispose();
+    _idNumberController.removeListener(_checkInput);
     _idNumberController.dispose();
+    _expiresDateController.removeListener(_checkInput);
     _expiresDateController.dispose();
     super.dispose();
   }
@@ -36,97 +53,12 @@ class _SecondIdCheckerPageState extends State<SecondIdCheckerPage> {
     context.push('/auth/id_check_upload_photo_page');
   }
 
-  String? validateName(String? value) {
-    // Check if the value is null or empty
-    if (value == null) {
-      setState(() {
-        nameValid = false;
-      });
-      return null;
-    }
-
-    // Check if the name contains only alphabetic characters and spaces
-    final RegExp nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
-    if (!nameRegExp.hasMatch(value)) {
-      setState(() {
-        nameValid = true;
-      });
-      return null;
-    }
-
-    // Check if the name is too short or too long
-    if (value.length < 2) {
-      return 'Name must be at least 2 characters long';
-    }
-    if (value.length > 10) {
-      return 'Name must be less than 50 characters long';
-    }
-
-    return null; // Return null if the name is valid
-  }
-
-  String? validateSureName(String? value) {
-    // Check if the value is null or empty
-    if (value == null) {
-       setState(() {
-        sureNameValid = false;
-      });
-      return null;
-    }
-
-    // Check if the name contains only alphabetic characters and spaces
-    final RegExp nameRegExp = RegExp(r'^[a-zA-Z\s]+$');
-    if (!nameRegExp.hasMatch(value)) {
-       setState(() {
-        sureNameValid = true;
-      });
-      return null;
-    }
-
-    // Check if the name is too short or too long
-    if (value.length < 2) {
-      return 'Name must be at least 2 characters long';
-    }
-    if (value.length > 50) {
-      return 'Name must be less than 50 characters long';
-    }
-
-    return null; // Return null if the name is valid
-  }
-
-  String? validateIdNumber(String? value) {
-    // Check if the value is null or empty
-    if (value == null) {
-       setState(() {
-        idNumberValid = false;
-      });
-      return null;
-    }
-
-    // Check if the ID number contains only uppercase letters and digits
-    final RegExp idRegExp = RegExp(r'^[A-Z0-9]+$');
-    if (!idRegExp.hasMatch(value)) {
-       setState(() {
-        idNumberValid = true;
-      });
-      return null;
-    }
-
-    // Check if the ID number is of a specific length (e.g., at least 8 characters)
-    if (value.length < 8) {
-      return 'ID number must be at least 8 characters long';
-    }
-
-    return null; // Return null if the ID number is valid
-  }
-
-  
   @override
   Widget build(BuildContext context) {
     return IdCheker(
       currentStep: 1,
       title: 'ID checker',
-     onNext: next,
+      onNext: _isButtonVisible ? next : null,
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: 50,
@@ -139,24 +71,25 @@ class _SecondIdCheckerPageState extends State<SecondIdCheckerPage> {
               ],
             ),
             CustomTextField(
-              validator: validateName,
+              controller: _nameController,
               label: 'Name',
               required: true,
               placeholder: 'Katarzuna',
             ),
             CustomTextField(
-              validator: validateSureName,
+              controller: _sureNameController,
               label: 'Surname',
               required: true,
               placeholder: 'Kowalska',
             ),
             CustomTextField(
-              validator: validateIdNumber,
+              controller: _idNumberController,
               label: 'ID number',
               required: true,
               placeholder: 'TU88029-131',
             ),
-            const CustomTextField(
+            CustomTextField(
+              controller: _expiresDateController,
               label: 'Expires',
               required: true,
               placeholder: '28/12/2024',
