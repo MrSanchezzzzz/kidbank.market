@@ -10,14 +10,6 @@ class CatalogueNavbar extends StatelessWidget {
 
   final Function(String)? onSearch;
 
-  void showPhotoSearchModal(BuildContext context) {
-    CustomModalBottomSheet.show(
-        context: context,
-        sheet: const CustomModalBottomSheet(
-          title: 'Toy\'s filter',
-          body: PhotoSearchModalSheet(),
-        ));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,16 +57,7 @@ class CatalogueNavbar extends StatelessWidget {
               )
             ],
           ),
-          Text(
-            'Catalogue',
-            style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle.copyWith(fontSize: 34),
-            textAlign: TextAlign.left,
-          ),
-          CustomTextField.search(
-            onCameraTap: (){
-              showPhotoSearchModal(context);
-            },
-          )
+
         ],
       ),
     );

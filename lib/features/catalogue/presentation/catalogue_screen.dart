@@ -10,6 +10,7 @@ import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_mod
 import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button.dart';
 
 import '../../../core/colors.dart' as project_colors;
+import '../../../core/widgets/custom_text_field.dart';
 
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
@@ -24,14 +25,40 @@ class CatalogueScreen extends StatelessWidget {
         ));
   }
 
+  void showPhotoSearchModal(BuildContext context) {
+    CustomModalBottomSheet.show(
+        context: context,
+        sheet: const CustomModalBottomSheet(
+          title: 'Toy\'s filter',
+          body: PhotoSearchModalSheet(),
+        ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
         backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
         child: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const CatalogueNavbar(),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: Text(
+                  'Catalogue',
+                  style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle.copyWith(fontSize: 34),
+                  textAlign: TextAlign.left,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: CustomTextField.search(
+                  onCameraTap: (){
+                    showPhotoSearchModal(context);
+                  },
+                ),
+              ),
               Expanded(
                 child: Container(
                   color: project_colors.Colors.white100,
