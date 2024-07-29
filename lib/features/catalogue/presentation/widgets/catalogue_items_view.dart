@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/features/catalogue/data/display_mode_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/grid_item.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/list_item.dart';
 
 
 class CatalogueItemsView extends ConsumerWidget {
@@ -9,7 +10,8 @@ class CatalogueItemsView extends ConsumerWidget {
 
   Widget _displayItems(bool isGrid){
     //TODO ListView.Builder for different display options
-    return GridView.count(
+    if(isGrid) {
+      return GridView.count(
         crossAxisCount: 2,
         childAspectRatio: 0.75,
         crossAxisSpacing: 16,
@@ -23,6 +25,12 @@ class CatalogueItemsView extends ConsumerWidget {
           CatalogueGridItem(),
         ],
       );
+    }
+    return ListView.builder(
+        itemBuilder: (context,index){
+          return const CatalogueListItem();
+        }
+    );
   }
 
   @override
