@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+import '../../../core/images.dart';
+
 class RatingStars extends StatelessWidget {
   final double rating;
   final Color color;
@@ -24,22 +26,18 @@ class RatingStars extends StatelessWidget {
           ),
         ),
         ...List.generate(5, (index) {
-          IconData icon;
+          Image image;
           if (index < rating.floor()) {
-            icon = CupertinoIcons.star_fill;
+            image = full_star;
           } else if (index < rating) {
-            icon = CupertinoIcons.star_lefthalf_fill;
+            image = full_star;
           } else {
-            icon = CupertinoIcons.star;
+            image = star;
           }
           return SizedBox(
             width: size,
             height: size,
-            child: Icon(
-              icon,
-              color: color,
-              size: size,
-            ),
+            child: image,
           );
         }),
       ],
