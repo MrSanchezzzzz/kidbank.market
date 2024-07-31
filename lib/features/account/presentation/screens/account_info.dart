@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
+import 'package:kidbank/core/images.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 
@@ -74,6 +75,9 @@ class _AccountInfoState extends State<AccountInfo> {
                     label: 'Email',
                     controller: widget.emailController,
                     enabled: _isEditing,
+                    suffixBuilder:  (context, state, isError) {
+                      return input_label;
+                    },
                   ),
                 ],
               ),
