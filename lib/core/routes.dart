@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/app/main_menu.dart';
 import 'package:kidbank/features/account/presentation/screens/my_account.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
@@ -12,8 +11,8 @@ import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_detai
 import 'package:kidbank/features/auth/presentation/screens/auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
+import 'package:kidbank/features/check_out/check_out.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
-import 'package:kidbank/features/sign_up/presentation/screens/check_email.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_for_page.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_third_page.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_cheker_first_page.dart';
@@ -33,7 +32,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const NotificationPage(),
+      builder: (context, state) =>  const CheckOut(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
