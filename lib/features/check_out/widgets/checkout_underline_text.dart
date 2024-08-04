@@ -6,13 +6,14 @@ class CheckoutUnderlineText extends StatelessWidget {
     super.key,
     required this.title,
     required this.price,
+    required this.linevisible,
   });
   final String title;
   final double price;
+  final bool linevisible;
 
   @override
   Widget build(BuildContext context) {
-    bool _line = false;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -43,11 +44,13 @@ class CheckoutUnderlineText extends StatelessWidget {
             ],
           ),
         ),
-        Container(
-          width: 370,
-          height: 0.4,
-          color: Colors.purple300,
-        )
+        linevisible == true
+            ? Container(
+                width: 370,
+                height: 0.4,
+                color: Colors.purple300,
+              )
+            : const Padding(padding: EdgeInsets.all(0)),
       ],
     );
   }

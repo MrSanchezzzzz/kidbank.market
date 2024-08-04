@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
-import 'package:kidbank/core/widgets/bottom_navigation_bar/navigation_bar_button.dart';
 import 'package:kidbank/core/widgets/custom_place_holder.dart';
 import 'package:kidbank/core/widgets/custom_radio_button.dart';
-
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
 import 'package:kidbank/features/check_out/widgets/check_out_nav_bar.dart';
 import 'package:kidbank/features/check_out/widgets/checkout_underline_text.dart';
 import 'package:kidbank/features/check_out/widgets/order_toy.dart';
@@ -42,7 +39,7 @@ class _CheckOutState extends State<CheckOut> {
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 15,
-              vertical: 15,
+              vertical: 10,
             ),
             child: Row(
               children: [
@@ -66,7 +63,7 @@ class _CheckOutState extends State<CheckOut> {
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 15,
-              vertical: 20,
+              vertical: 10,
             ),
             child: Row(
               children: [
@@ -99,7 +96,10 @@ class _CheckOutState extends State<CheckOut> {
           ),
           const CustomPlaceHolder(),
           const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            padding: EdgeInsets.symmetric(
+              horizontal: 10,
+              vertical: 10,
+            ),
             child: Row(
               children: [
                 CustomRadioButton(
@@ -111,7 +111,10 @@ class _CheckOutState extends State<CheckOut> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15),
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+              horizontal: 15,
+            ),
             child: Row(
               children: [
                 Text(
@@ -134,7 +137,10 @@ class _CheckOutState extends State<CheckOut> {
             price: 50,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 15,
+            ),
             child: Row(
               children: [
                 Text(
@@ -151,20 +157,23 @@ class _CheckOutState extends State<CheckOut> {
           const CheckoutUnderlineText(
             title: 'Price',
             price: 5.99,
+            linevisible: true,
           ),
           const CheckoutUnderlineText(
             title: 'Delivery',
             price: 5.00,
+            linevisible: true,
           ),
           const CheckoutUnderlineText(
             title: 'Price',
             price: 10.99,
+            linevisible: false,
           ),
           SizedBox(
             width: 358,
             child: MainButton(
-              text: 'Confirm th order',
-              onTap: (){},
+              text: 'Confirm the order',
+              onTap: () {},
             ),
           ),
         ],
