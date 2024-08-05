@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hive/hive.dart';
 import '../../../../core/colors.dart';
 
 class NotificationSetting extends StatefulWidget {
@@ -7,9 +8,31 @@ class NotificationSetting extends StatefulWidget {
 }
 
 class _NotificationSettingState extends State<NotificationSetting> {
+  late Box settingsBox;
   bool _inAppSounds = false;
   bool _inAppVibrate = false;
   bool _emailNotification = false;
+
+  @override
+  void initState() {
+    super.initState();
+    settingsBox = Hive.box('settings');
+    _loadSettings();
+  }
+
+  void _loadSettings() {
+    setState(() {
+      _inAppSounds = settingsBox.get('inAppSounds', defaultValue: false);
+      _inAppVibrate = settingsBox.get('inAppVibrate', defaultValue: false);
+      _emailNotification = settingsBox.get('emailNotification', defaultValue: false);
+    });
+  }
+
+  void _saveSettings() {
+    settingsBox.put('inAppSounds', _inAppSounds);
+    settingsBox.put('inAppVibrate', _inAppVibrate);
+    settingsBox.put('emailNotification', _emailNotification);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,21 +40,16 @@ class _NotificationSettingState extends State<NotificationSetting> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-              left: 16, top: 16, right: 8, bottom: 0),
+          padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
           child: Container(
             height: 26,
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               'NOTIFICATION',
-              style: CupertinoTheme
-                  .of(context)
-                  .textTheme
-                  .textStyle
-                  .copyWith(
-                  color: Colors.grey300,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                color: Colors.grey300,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -42,23 +60,23 @@ class _NotificationSettingState extends State<NotificationSetting> {
           ),
           child: CupertinoListSection.insetGrouped(
             children: [
-              _buildNotificationItem(
-                  context, 'In-app sounds', _inAppSounds, (value) {
+              _buildNotificationItem(context, 'In-app sounds', _inAppSounds, (value) {
                 setState(() {
                   _inAppSounds = value;
                 });
+                _saveSettings();
               }),
-              _buildNotificationItem(
-                  context, 'In-app vibrate', _inAppVibrate, (value) {
+              _buildNotificationItem(context, 'In-app vibrate', _inAppVibrate, (value) {
                 setState(() {
                   _inAppVibrate = value;
                 });
+                _saveSettings();
               }),
-              _buildNotificationItem(
-                  context, 'Email notification', _emailNotification, (value) {
+              _buildNotificationItem(context, 'Email notification', _emailNotification, (value) {
                 setState(() {
                   _emailNotification = value;
                 });
+                _saveSettings();
               }),
             ],
           ),

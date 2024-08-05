@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-
+import 'package:hive/hive.dart';
 import '../../../../core/colors.dart';
 
 class PrivacyPolicy extends StatefulWidget {
@@ -10,7 +10,25 @@ class PrivacyPolicy extends StatefulWidget {
 }
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
+  late Box settingsBox;
   bool _isSwitchedOn = false;
+
+  @override
+  void initState() {
+    super.initState();
+    settingsBox = Hive.box('settings');
+    _loadSettings();
+  }
+
+  void _loadSettings() {
+    setState(() {
+      _isSwitchedOn = settingsBox.get('isSwitchedOn', defaultValue: false);
+    });
+  }
+
+  void _saveSettings() {
+    settingsBox.put('isSwitchedOn', _isSwitchedOn);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +36,16 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.only(
-              left: 16, top: 16, right: 8, bottom: 0),
+          padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
           child: Container(
             height: 26,
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               'PRIVACY POLICY',
-              style: CupertinoTheme
-                  .of(context)
-                  .textTheme
-                  .textStyle
-                  .copyWith(
-                  color: Colors.grey300,
-                  fontSize: 13,
-                  fontWeight: FontWeight.w600
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                color: Colors.grey300,
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ),
@@ -52,6 +65,7 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
                   setState(() {
                     _isSwitchedOn = value;
                   });
+                  _saveSettings();
                 },
                 activeColor: Colors.orange300,
                 trackColor: Colors.grey100,
