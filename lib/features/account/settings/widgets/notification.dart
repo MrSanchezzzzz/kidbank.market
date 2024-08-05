@@ -42,7 +42,6 @@ class _NotificationSettingState extends State<NotificationSetting> {
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
           child: Container(
-            height: 26,
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               'NOTIFICATION',

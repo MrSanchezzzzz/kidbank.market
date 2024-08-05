@@ -1,3 +1,4 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import '../../../../core/colors.dart';
 import '../../../../core/images.dart';
@@ -13,7 +14,6 @@ class ActionsSettings extends StatelessWidget {
           padding: const EdgeInsets.only(
               left: 16, top: 16, right: 8, bottom: 0),
           child: Container(
-            height: 26,
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               'ACTIONS',
@@ -82,7 +82,16 @@ class ActionsSettings extends StatelessWidget {
               ),
             );
           } else if (title == 'Log out' || title == 'Delete account') {
-            _showConfirmationDialog(context, title);
+            String message = title == 'Log out'
+                ? 'Do you really want to log out?'
+                : 'Do you really want to delete your account?';
+            showOkCancelAlertDialog(
+              context: context,
+              title: title,
+              okLabel: 'Approve',
+              cancelLabel: 'Reject',
+              message: message,
+            );
           }
         },
       ),
