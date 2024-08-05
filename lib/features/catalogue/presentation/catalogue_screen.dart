@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_modal_bottom_sheet.dart';
 import 'package:kidbank/core/widgets/tab_selector.dart';
+import 'package:kidbank/features/catalogue/data/display_mode_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_filters.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
@@ -83,10 +85,17 @@ class CatalogueScreen extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                      const TabSelector(
-                        labels: ['All toys', 'My toys'],
-                        callbacks: [],
-                        startIndex: 1,
+                      Consumer(
+                        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                          return TabSelector(
+                            labels: const ['All toys', 'My toys'],
+                            callbacks: [
+                              (){ref.read(myToysProvider.notifier).setDisplayMode(true);},
+                              (){ref.read(myToysProvider.notifier).setDisplayMode(false);},
+                            ],
+                            startIndex: 0,
+                          );
+                        },
                       ),
                       const SizedBox(
                         height: 8,

@@ -11,6 +11,7 @@ import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.d
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
+import 'package:kidbank/features/catalogue/toy_details/toy_details.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/improve_page.dart';
 import '../features/add_child/presentation/add_child_finish.dart';
@@ -148,6 +149,7 @@ final GoRouter router = GoRouter(
             GoRoute(path: 'fill_details',name: 'fill_details',builder: (context,state)=> const AddToyFillDetailsScreen()),
           ],
         ),
+
         GoRoute(
             path: 'account',
             builder: (context,state)=>const MyAccount(),
@@ -158,15 +160,13 @@ final GoRouter router = GoRouter(
             ])
           ]
         ),
-        GoRoute(
-            path: 'account',
-            builder: (context,state)=>const MyAccount(),
-          routes: <RouteBase>[
-            GoRoute(path: 'wallet',builder: (context,state)=>const AccountWalletScreen(),
-            routes: <RouteBase>[
-              GoRoute(path: 'top_up',builder: (context,state)=>const TopUpScreen())
-            ])
-          ]
+
+        //Toy details
+        GoRoute(path: 'toy_details',
+            builder: (context,state){
+              //TODO get Toy from extras
+              return const ToyDetailsScreen();
+            }
         )
       ],
     ),

@@ -7,28 +7,30 @@ import 'package:kidbank/features/catalogue/presentation/widgets/list_item.dart';
 
 class CatalogueItemsView extends ConsumerWidget {
   const CatalogueItemsView({super.key});
-
-  Widget _displayItems(bool isGrid){
-    //TODO ListView.Builder for different display options
+  //TODO toys array here
+  Widget _displayItems(bool isGrid,bool isMyToys){
     if(isGrid) {
       return GridView.count(
         crossAxisCount: 2,
-        childAspectRatio: 0.75,
+        childAspectRatio: isMyToys?0.6:0.75,
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
-        children: const [
-          CatalogueGridItem(),
-          CatalogueGridItem(),
-          CatalogueGridItem(),
-          CatalogueGridItem(),
-          CatalogueGridItem(),
-          CatalogueGridItem(),
+        children: [
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
+          CatalogueGridItem(isMyToy: isMyToys,),
         ],
       );
     }
     return ListView.builder(
+      itemCount: 8,
         itemBuilder: (context,index){
-          return const CatalogueListItem();
+          return CatalogueListItem(isMyToy:isMyToys);
         }
     );
   }
@@ -36,6 +38,7 @@ class CatalogueItemsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context,WidgetRef ref) {
     bool isGrid=ref.watch(displayModeProvider);
-    return _displayItems(isGrid);
+    bool isMyToys=ref.watch(myToysProvider);
+    return _displayItems(isGrid,isMyToys);
   }
 }

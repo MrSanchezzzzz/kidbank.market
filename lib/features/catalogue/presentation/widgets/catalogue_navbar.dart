@@ -15,7 +15,7 @@ class CatalogueNavbar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(color: CupertinoTheme.of(context).barBackgroundColor),
-      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 10),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 8, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -57,7 +57,6 @@ class CatalogueNavbar extends StatelessWidget {
               )
             ],
           ),
-
         ],
       ),
     );
