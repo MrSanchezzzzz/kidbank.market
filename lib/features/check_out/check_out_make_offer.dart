@@ -27,6 +27,7 @@ class _CheckOutMakeOfferState extends State<CheckOutMakeOffer> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: const Color(0xFFFFFFFF),
       navigationBar: const CupertinoNavigationBar(
         leading: Row(
           mainAxisSize: MainAxisSize.min,
@@ -124,10 +125,10 @@ class _CheckOutMakeOfferState extends State<CheckOutMakeOffer> {
                   'Price',
                   style:
                       CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.grey500,
-                ),
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.grey500,
+                          ),
                 ),
                 const Text('\$5.99')
               ],
@@ -232,7 +233,6 @@ class _CheckOutMakeOfferState extends State<CheckOutMakeOffer> {
             price: 5.00,
             linevisible: true,
           ),
-          
           SizedBox(
             width: 358,
             child: MainButton(

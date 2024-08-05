@@ -22,6 +22,7 @@ class _CheckOutState extends State<CheckOut> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: const Color(0xFFFFFFFF),
       navigationBar: const CupertinoNavigationBar(
         leading: Row(
           mainAxisSize: MainAxisSize.min,

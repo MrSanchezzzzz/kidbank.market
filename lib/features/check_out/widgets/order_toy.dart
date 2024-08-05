@@ -39,7 +39,7 @@ class OrderToy extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 50.0),
+              padding: const EdgeInsets.only(right: 50.0,left: 10),
               child: Text(
                 title,
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
@@ -48,12 +48,15 @@ class OrderToy extends StatelessWidget {
                     color: Colors.grey500),
               ),
             ),
-            Text(
-              '$price\$',
-              style: CupertinoTheme.of(context)
-                  .textTheme
-                  .textStyle
-                  .copyWith(fontSize: 15, color: Colors.grey400),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: Text(
+                '$price\$',
+                style: CupertinoTheme.of(context)
+                    .textTheme
+                    .textStyle
+                    .copyWith(fontSize: 15, color: Colors.grey400),
+              ),
             ),
           ],
         ),
