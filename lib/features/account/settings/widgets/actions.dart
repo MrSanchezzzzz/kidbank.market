@@ -1,7 +1,8 @@
 import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
-import '../../../../core/colors.dart';
-import '../../../../core/images.dart';
+import 'package:kidbank/core/colors.dart';
+import 'package:kidbank/core/images.dart';
+import '../../../../core/setting_hive.dart';
 import '../presentation/change_password.dart';
 
 class ActionsSettings extends StatelessWidget {
@@ -37,7 +38,7 @@ class ActionsSettings extends StatelessWidget {
             children: [
               _buildActionsItem(context, 'Change password'),
               _buildActionsItem(context, 'Log out'),
-              _buildActionsItem(context, 'Delete account')
+              _buildActionsItem(context, 'Delete account'),
             ],
           ),
         ),
@@ -73,7 +74,7 @@ class ActionsSettings extends StatelessWidget {
         trailing: title == 'Change password'
             ? SizedBox(height: 16, width: 16, child: right_icon)
             : null,
-        onTap: () {
+        onTap: () async {
           if (title == 'Change password') {
             Navigator.push(
               context,
@@ -82,52 +83,19 @@ class ActionsSettings extends StatelessWidget {
               ),
             );
           } else if (title == 'Log out' || title == 'Delete account') {
-            String message = title == 'Log out'
-                ? 'Do you really want to log out?'
-                : 'Do you really want to delete your account?';
             showOkCancelAlertDialog(
               context: context,
               title: title,
+              message: title == 'Log out'
+                  ? 'Do you really want to log out?'
+                  : 'Do you really want to delete your account?',
               okLabel: 'Approve',
               cancelLabel: 'Reject',
-              message: message,
+              isDestructiveAction: title == 'Delete account',
             );
           }
         },
       ),
-    );
-  }
-
-  void _showConfirmationDialog(BuildContext context, String action) {
-    showCupertinoDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return CupertinoAlertDialog(
-          title: Text(
-            action == 'Log out' ? 'Approval Needed' : 'Approval Needed',
-            ),
-          content: Text(
-            action == 'Log out'
-                ? 'Do you really want to log out?'
-                : 'Do you really want to delete your account?',
-          ),
-          actions: [
-            CupertinoDialogAction(
-              onPressed: () {
-                //TODO Дії для лог-ауту або видалення акаунту
-                Navigator.of(context).pop();
-              },
-              child: Text('Approve', style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Colors.purple600),),
-            ),
-            CupertinoDialogAction(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Reject', style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(color: Colors.purple600),),
-            )
-          ],
-        );
-      },
     );
   }
 }

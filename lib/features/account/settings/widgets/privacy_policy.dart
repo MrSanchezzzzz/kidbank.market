@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hive/hive.dart';
-import '../../../../core/colors.dart';
+import 'package:kidbank/core/colors.dart';
+
+import '../../../../core/setting_hive.dart';
 
 class PrivacyPolicy extends StatefulWidget {
   const PrivacyPolicy({super.key});
@@ -10,24 +11,12 @@ class PrivacyPolicy extends StatefulWidget {
 }
 
 class _PrivacyPolicyState extends State<PrivacyPolicy> {
-  late Box settingsBox;
   bool _isSwitchedOn = false;
 
   @override
   void initState() {
     super.initState();
-    settingsBox = Hive.box('settings');
-    _loadSettings();
-  }
-
-  void _loadSettings() {
-    setState(() {
-      _isSwitchedOn = settingsBox.get('isSwitchedOn', defaultValue: false);
-    });
-  }
-
-  void _saveSettings() {
-    settingsBox.put('isSwitchedOn', _isSwitchedOn);
+    _isSwitchedOn = HiveService.getSetting('twoStepVerification', defaultValue: false);
   }
 
   @override
@@ -43,9 +32,9 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
             child: Text(
               'PRIVACY POLICY',
               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                color: Colors.grey300,
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
+                  color: Colors.grey300,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600
               ),
             ),
           ),
@@ -61,11 +50,11 @@ class _PrivacyPolicyState extends State<PrivacyPolicy> {
               title: const Text('Two-step verification'),
               trailing: CupertinoSwitch(
                 value: _isSwitchedOn,
-                onChanged: (bool value) {
+                onChanged: (bool value) async {
                   setState(() {
                     _isSwitchedOn = value;
                   });
-                  _saveSettings();
+                  await HiveService.putSetting('twoStepVerification', value);
                 },
                 activeColor: Colors.orange300,
                 trackColor: Colors.grey100,
