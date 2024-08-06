@@ -42,30 +42,21 @@ class _ChangePasswordState extends State<ChangePassword> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
               child: Column(
                 children: [
-                  CustomTextField(
+                  CustomTextField.password(
                     label: 'Enter old password',
                     enabled: _isEditing,
-                    suffixBuilder: (context, state, isError) {
-                      return eye_block;
-                    },
                     placeholder: 'Password',
                     required: true,
                   ),
-                  CustomTextField(
+                  CustomTextField.password(
                     label: 'Enter new password',
                     enabled: _isEditing,
-                    suffixBuilder: (context, state, isError) {
-                      return eye_block;
-                    },
                     placeholder: 'Password',
                     required: true,
                   ),
-                  CustomTextField(
+                  CustomTextField.password(
                     label: 'Confirm password',
                     enabled: _isEditing,
-                    suffixBuilder: (context, state, isError) {
-                      return eye_block;
-                    },
                     placeholder: 'Password',
                     required: true,
                   ),
