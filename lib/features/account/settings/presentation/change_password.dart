@@ -4,7 +4,6 @@ import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import '../../../../core/images.dart';
 import '../../../../core/widgets/main_back_button.dart';
-import '../../components/info_appbar.dart';
 
 class ChangePassword extends StatefulWidget {
   const ChangePassword({super.key});
