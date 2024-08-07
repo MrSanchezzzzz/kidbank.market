@@ -11,8 +11,8 @@ import '../../../../core/colors.dart';
 import '../../data/filter.dart';
 
 class FilterPriceSelect extends ConsumerStatefulWidget {
-  const FilterPriceSelect({super.key});
-
+  const FilterPriceSelect({super.key,this.onSelected});
+  final Function((int,int))? onSelected;
   @override
   ConsumerState<FilterPriceSelect> createState() => _FilterPriceSelectState();
 }

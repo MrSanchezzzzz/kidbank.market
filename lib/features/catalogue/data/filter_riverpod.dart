@@ -21,6 +21,16 @@ class FilterNotifier extends StateNotifier<Filter> {
   void setColors(List<Color> colors) {
     state=state.copyWith(colors: colors);
   }
+  void addColor(Color color){
+    List<Color> colors=state.colors;
+    colors.add(color);
+    state=state.copyWith(colors: colors);
+  }
+  void removeColor(Color color){
+    List<Color> colors=state.colors;
+    colors.remove(color);
+    state=state.copyWith(colors: colors);
+  }
   void setPrices(int min,int max) {
     state=state.copyWith(prices: (min,max));
   }

@@ -70,11 +70,16 @@ class CatalogueScreen extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          CatalogueFilters(onSortTap: () {
-                            //TODO show sort
-                          }, onFilterTap: () {
-                            showFilterModal(context);
-                          }),
+                          Consumer(
+                            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                              int filtersCount=ref.watch(filterProvider).count;
+                              return Text(filtersCount==0?'No filters were applied':'$filtersCount filters applied',
+                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                  fontSize: 15,color: project_colors.Colors.grey300
+                                ),
+                              );
+                            },
+                          ),
                           ViewTypeButton(
                             onTap: (isGrid) {
                               //TODO change display type
