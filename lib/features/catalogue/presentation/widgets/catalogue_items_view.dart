@@ -12,7 +12,7 @@ class CatalogueItemsView extends ConsumerWidget {
     if(isGrid) {
       return GridView.count(
         crossAxisCount: 2,
-        childAspectRatio: 0.75,
+        childAspectRatio: 0.7,
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
         children: [

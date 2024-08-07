@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_modal_bottom_sheet.dart';
 import 'package:kidbank/core/widgets/tab_selector.dart';
 import 'package:kidbank/features/catalogue/data/display_mode_riverpod.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_filters.dart';
+import 'package:kidbank/features/catalogue/data/filter_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/filter_modal_sheet.dart';
@@ -13,6 +13,7 @@ import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button
 
 import '../../../core/colors.dart' as project_colors;
 import '../../../core/widgets/custom_text_field.dart';
+import '../../../core/widgets/filter_button.dart';
 
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
@@ -53,12 +54,24 @@ class CatalogueScreen extends StatelessWidget {
                   textAlign: TextAlign.left,
                 ),
               ),
-              Padding(
+              Container(
+                width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: CustomTextField.search(
-                  onCameraTap: (){
-                    showPhotoSearchModal(context);
-                  },
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      child: CustomTextField.search(
+                        onCameraTap: (){
+                          showPhotoSearchModal(context);
+                        },
+                      ),
+                    ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 18,top: 12),
+                        child: FilterButton(onTap: (){showFilterModal(context);},),
+                      )
+                  ],
                 ),
               ),
               Expanded(

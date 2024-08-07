@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/core/add_button.dart';
+import 'package:kidbank/core/widgets/main_square_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/buy_button.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/toy_info.dart';
 import 'package:kidbank/features/catalogue/toy_details/toy_details.dart';
 
 import '../../../../core/colors.dart';
@@ -17,33 +19,49 @@ class CatalogueListItem extends StatelessWidget {
       },
       child: Container(
         width: MediaQuery.of(context).size.width,
-        height: 78,
+        height: 80,
         margin: const EdgeInsets.only(bottom: 16),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const ToyImage(size: 78),
+            const ToyImage(size: 80),
             const SizedBox(width: 16),  // Add some spacing between the image and the text
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Row(
                   children: [
-                    Text(
-                      'Teddy bear',
-                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                        fontWeight: FontWeight.w700,
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Teddy bear',
+                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 4,),
+                          const ToyInfo()
+                        ],
                       ),
                     ),
-                    const SizedBox(height: 8,),
-                    const Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text.',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Image.asset('assets/images/hearth.png',width: 24,height: 24,),
+                        const SizedBox(width: 8,),
+                        const CatalogueBuyButton()
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -57,7 +75,7 @@ class CatalogueListItem extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    const SizedBox(width: 32,child: MainAddButton(),),
+                    SizedBox(width: 32,child: MainSquareButton(image: Image.asset('assets/images/add.png'),),),
                     const SizedBox(width: 4,),
                     Image.asset('assets/images/hearth.png',width: 16,height: 16,)
                   ],

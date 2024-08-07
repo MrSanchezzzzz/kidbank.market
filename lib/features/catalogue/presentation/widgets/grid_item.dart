@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/core/add_button.dart';
+import 'package:kidbank/core/widgets/main_square_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/buy_button.dart';
+import 'package:kidbank/features/catalogue/presentation/widgets/toy_info.dart';
 
 import '../../../../core/colors.dart';
 
@@ -24,16 +26,21 @@ class CatalogueGridItem extends StatelessWidget {
           Text('Name',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontWeight: FontWeight.w700
           ),),
-          Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-              fontSize: 13,color:Colors.grey400
-            ),
-          ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const ToyInfo(),
+                  GestureDetector(
+                    onTap: (){
+                      print('a');
+                    },
+                    child: const CatalogueBuyButton(),
+                  ),
+                ],
+              ),
           if(isMyToy)...{
             Padding(
-              padding: EdgeInsets.only(top: 4),
+              padding: const EdgeInsets.only(top: 4),
               child:Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -44,7 +51,7 @@ class CatalogueGridItem extends StatelessWidget {
                   ),),
                   SizedBox(
                       width: 44,
-                      child: MainAddButton()
+                      child: MainSquareButton(image: Image.asset('assets/images/add.png'),)
                   )
                 ],
               ),

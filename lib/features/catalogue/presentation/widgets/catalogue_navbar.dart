@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/core/widgets/balance_indicator.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
 
@@ -31,13 +32,7 @@ class CatalogueNavbar extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //TODO assert money string length <16
-                  Text(
-                    '400\$',
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .textStyle
-                        .copyWith(fontWeight: FontWeight.w700, color: Colors.purple600),
-                  ),
+                  const BalanceIndicator(),
                   Row(
                     children: [
                       GestureDetector(
