@@ -85,18 +85,6 @@ class CatalogueScreen extends StatelessWidget {
                       const SizedBox(
                         height: 16,
                       ),
-                      Consumer(
-                        builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                          return TabSelector(
-                            labels: const ['All toys', 'My toys'],
-                            callbacks: [
-                              (){ref.read(myToysProvider.notifier).setDisplayMode(true);},
-                              (){ref.read(myToysProvider.notifier).setDisplayMode(false);},
-                            ],
-                            startIndex: 0,
-                          );
-                        },
-                      ),
                       const SizedBox(
                         height: 8,
                       ),

@@ -15,8 +15,3 @@ class DisplayModeNotifier extends StateNotifier<bool> {
 final displayModeProvider = StateNotifierProvider<DisplayModeNotifier, bool>((ref) {
   return DisplayModeNotifier();
 });
-
-//TODO replace with toy list provider
-final myToysProvider = StateNotifierProvider<DisplayModeNotifier, bool>((ref) {
-  return DisplayModeNotifier();
-});
