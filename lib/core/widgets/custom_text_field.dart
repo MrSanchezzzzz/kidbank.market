@@ -127,7 +127,6 @@ class CustomTextField extends StatefulWidget {
     String? placeholder,
     TextEditingController? controller,
   }) {
-    TextEditingController controller = TextEditingController();
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -170,7 +169,9 @@ class CustomTextField extends StatefulWidget {
           children: [
             GestureDetector(
               onTap: () {
-                controller!.text = (int.parse(controller.text) + 1).toString();
+                if(controller!=null&&controller.text.isNotEmpty) {
+                  controller!.text = (int.parse(controller.text) + 1).toString();
+                }
               },
               child: Icon(
                 CupertinoIcons.plus,
@@ -183,7 +184,12 @@ class CustomTextField extends StatefulWidget {
             ),
             GestureDetector(
               onTap: () {
-                controller!.text = (int.parse(controller.text) - 1).toString();
+                if(controller!=null&&controller.text.isNotEmpty) {
+                  int num=int.parse(controller.text);
+                  if(num>1) {
+                    controller.text = (--num).toString();
+                  }
+                }
               },
               child: Icon(
                 CupertinoIcons.minus,
