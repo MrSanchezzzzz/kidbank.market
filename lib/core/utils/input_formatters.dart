@@ -9,7 +9,10 @@ class MoneyInputFormatter extends TextInputFormatter {
   @override
   TextEditingValue formatEditUpdate(
       TextEditingValue oldValue, TextEditingValue newValue) {
-    if (_regExp.hasMatch(newValue.text)) {
+    if(newValue.text.isEmpty){
+      return newValue;
+    }
+    else if (_regExp.hasMatch(newValue.text)) {
       return newValue;
     }
     return oldValue;
