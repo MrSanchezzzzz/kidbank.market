@@ -65,7 +65,7 @@ class AddToyAgeScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16),
                   child: Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
                     return MainButton(text: 'Continue',onTap: ref.watch(selectedAgeProvider)!=null?(){
-                      Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>const AddToyFillDetailsScreen()));
+                      Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>const ListToyScreen()));
                     }:null,);
                   },),
                 ),

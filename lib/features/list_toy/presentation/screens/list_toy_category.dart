@@ -37,7 +37,7 @@ class AddToyCategoryScreen extends ConsumerWidget {
                     const SizedBox(height: 4,),
                     Consumer(
                       builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                        Category? category = ref.watch(selectedCategoryProvider);
+                        ToyProperty? category = ref.watch(selectedCategoryProvider);
                         return Text(category!=null?'You\'ve selected a category ${category.name}':'',
                           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                               color: Colors.purple700
