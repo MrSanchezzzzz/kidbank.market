@@ -67,10 +67,20 @@ class _AccountMainState extends State<AccountMain> {
                 height: 24,
                 child: right_icon,
               ),
-              subtitle: RatingStars(
-                rating: rating,
-                color: Colors.grey300,
-                size: 16.0,
+              subtitle: Row(
+                children: [
+                  Text(
+                    'Rating: ',
+                    style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                      fontSize: 15,
+                    ),
+                  ),
+                  RatingStars(
+                    rating: rating,
+                    color: Colors.grey300,
+                    size: 16.0,
+                  ),
+                ],
               ),
             ),
           ),
