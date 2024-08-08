@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_modal_bottom_sheet.dart';
-import 'package:kidbank/core/widgets/tab_selector.dart';
-import 'package:kidbank/features/catalogue/data/display_mode_riverpod.dart';
 import 'package:kidbank/features/catalogue/data/filter_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';

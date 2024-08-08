@@ -170,7 +170,7 @@ class CustomTextField extends StatefulWidget {
             GestureDetector(
               onTap: () {
                 if(controller!=null&&controller.text.isNotEmpty) {
-                  controller!.text = (int.parse(controller.text) + 1).toString();
+                  controller.text = (int.parse(controller.text) + 1).toString();
                 }
               },
               child: Icon(

@@ -4,7 +4,6 @@ import 'package:kidbank/core/widgets/main_square_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/buy_button.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/toy_info.dart';
-import 'package:kidbank/features/catalogue/toy_details/toy_details.dart';
 
 import '../../../../core/colors.dart';
 

@@ -1,10 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/widgets/balance_indicator.dart';
-import 'package:kidbank/core/widgets/custom_text_field.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
-
-import '../../../../core/colors.dart';
-import '../../../../core/widgets/custom_modal_bottom_sheet.dart';
 
 class CatalogueNavbar extends StatelessWidget {
   const CatalogueNavbar({super.key, this.onSearch});

@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/models/categories.dart';
 import 'package:kidbank/core/models/toy_property.dart';
-import 'package:kidbank/core/widgets/ui_card.dart';
-import 'package:kidbank/features/list_toy/data/selected_category_riverpod.dart';
 import 'package:kidbank/features/list_toy/presentation/widgets/category_card.dart';
 
 import '../../data/toy_listing_riverpod.dart';

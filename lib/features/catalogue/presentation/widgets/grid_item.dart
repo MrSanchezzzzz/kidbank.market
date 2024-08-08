@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/core/widgets/main_square_button.dart';
-import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/buy_button.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/toy_info.dart';
@@ -32,7 +31,6 @@ class CatalogueGridItem extends StatelessWidget {
                   const ToyInfo(),
                   GestureDetector(
                     onTap: (){
-                      print('a');
                     },
                     child: const CatalogueBuyButton(),
                   ),

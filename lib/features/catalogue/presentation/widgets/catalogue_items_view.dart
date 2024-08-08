@@ -15,7 +15,7 @@ class CatalogueItemsView extends ConsumerWidget {
         childAspectRatio: 0.7,
         crossAxisSpacing: 16,
         mainAxisSpacing: 8,
-        children: [
+        children: const [
           CatalogueGridItem(),
           CatalogueGridItem(),
           CatalogueGridItem(),
@@ -30,7 +30,7 @@ class CatalogueItemsView extends ConsumerWidget {
     return ListView.builder(
       itemCount: 8,
         itemBuilder: (context,index){
-          return CatalogueListItem();
+          return const CatalogueListItem();
         }
     );
   }

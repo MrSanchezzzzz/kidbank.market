@@ -34,7 +34,7 @@ class ListToyProperties extends StatelessWidget {
         Consumer(builder: (BuildContext context, WidgetRef ref, Widget? child) {
           ToyColor? color=ref.watch(selectedColorProvider);
           return CupertinoListTile(
-            title: Text('Color'),
+            title: const Text('Color'),
             onTap: (){},//TODO onTap
             trailing: Row(
               mainAxisAlignment: MainAxisAlignment.end,

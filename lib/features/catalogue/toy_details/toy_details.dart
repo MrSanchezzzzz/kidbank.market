@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
-import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
 import 'package:kidbank/features/catalogue/toy_details/toy_details_actions.dart';

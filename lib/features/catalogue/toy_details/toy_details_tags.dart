@@ -7,7 +7,7 @@ class ToyDetailsTags extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Wrap(
+    return const Wrap(
       spacing: 8,
       children: [
           Tag(text: 'Stuffed toy',),

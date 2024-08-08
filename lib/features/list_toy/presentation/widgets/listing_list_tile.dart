@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../core/colors.dart';
-import '../../../../core/models/ages.dart';
 import '../../../../core/models/toy_property.dart';
 import '../../data/toy_listing_riverpod.dart';
 

@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../colors.dart';
-
 class FilterButton extends StatelessWidget {
   const FilterButton({super.key,this.onTap});
   final Function()? onTap;

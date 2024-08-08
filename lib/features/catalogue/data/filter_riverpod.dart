@@ -3,8 +3,6 @@ import 'dart:ui';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/models/toy_property.dart';
 
-import '../../../core/models/ages.dart';
-import '../../../core/models/categories.dart';
 import 'filter.dart';
 
 class FilterNotifier extends StateNotifier<Filter> {

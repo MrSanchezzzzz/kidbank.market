@@ -2,9 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:kidbank/features/account/presentation/screens/my_account.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
-
-import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.dart';
 import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
+import 'package:kidbank/features/list_toy/presentation/screens/list_toy.dart';
 
 import '../core/colors.dart';
 import '../core/widgets/bottom_navigation_bar/add_button.dart';
@@ -53,7 +52,7 @@ class MainMenu extends StatelessWidget {
           case 2:
             return CupertinoTabView(
               builder: (context) {
-                return const AddToyCategoryScreen();
+                return const ListToyScreen();
               }
             );
           case 4:
