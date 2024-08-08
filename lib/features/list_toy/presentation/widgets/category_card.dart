@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/models/categories.dart';
+import 'package:kidbank/core/models/toy_property.dart';
 import 'package:kidbank/core/widgets/ui_card.dart';
 
 class CategoryCard extends StatelessWidget {
   const CategoryCard({super.key,required this.category,this.onChanged,this.checked=false});
-  final Category category;
+  final ToyProperty category;
   final Function()? onChanged;
   final bool checked;
   @override

@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/features/add_toy/data/selected_age_riverpod.dart';
-import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
+import 'package:kidbank/features/list_toy/presentation/screens/list_toy.dart';
 
 import '../../../../core/colors.dart';
-import '../../../../core/models/ages.dart';
+import '../../../../core/models/toy_property.dart';
 import '../../../../core/widgets/main_back_button.dart';
 import '../../../../core/widgets/main_button.dart';
+import '../../data/toy_listing_riverpod.dart';
 import '../widgets/ages_grid_view.dart';
 
 class AddToyAgeScreen extends StatelessWidget {
@@ -36,7 +36,7 @@ class AddToyAgeScreen extends StatelessWidget {
                       const SizedBox(height: 4,),
                       Consumer(
                         builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                          Age? age = ref.watch(selectedAgeProvider);
+                          ToyProperty? age = ref.watch(selectedAgeProvider);
                           return Text(age!=null?'You\'ve selected a group age ${age.name}':'',
                             style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                                 color: Colors.grey400

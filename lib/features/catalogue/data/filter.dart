@@ -1,7 +1,6 @@
 import 'dart:ui';
 
-import '../../../core/models/ages.dart';
-import '../../../core/models/categories.dart';
+import 'package:kidbank/core/models/toy_property.dart';
 
 
 class Filter{
@@ -9,14 +8,18 @@ class Filter{
   static const int maxPrice=100;
   static const int minPriceDelta=0;
 
-  late List<Category> categories;
-  late List<Age> ages;
+  late List<ToyProperty> categories;
+  late List<ToyProperty> ages;
+  late bool tradability;
+  late List<ToyProperty> conditions;
   late List<Color> colors;
   late (int,int) prices;
 
   Filter(){
     categories=[];
     ages=[];
+    tradability=true;
+    conditions=[];
     colors=[];
     prices=(0,100);
   }
@@ -35,14 +38,18 @@ class Filter{
 
 
   Filter copyWith({
-    List<Category>? categories,
-    List<Age>? ages,
+    List<ToyProperty>? categories,
+    List<ToyProperty>? ages,
+    bool? tradability,
+    List<ToyProperty>? conditions,
     List<Color>? colors,
     (int,int)? prices,
   }) {
     return Filter()
       ..categories = categories ?? this.categories
       ..ages = ages ?? this.ages
+      ..tradability=tradability??this.tradability
+      ..conditions=conditions??this.conditions
       ..colors = colors ?? this.colors
       ..prices = prices ?? this.prices;
   }
