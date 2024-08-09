@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/features/account/rating/presentation/no_rating.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import '../../../core/colors.dart';
 import '../../../core/images.dart';
@@ -47,7 +48,12 @@ class Details extends StatelessWidget {
                 print('My deals pressed');
               }),
               _buildDetailsItem(context, 'Rating', () {
-                print('Rating pressed');
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => const NoRating(),
+                  ),
+                );
               }),
               _buildDetailsItem(context, 'Settings', () {
                 Navigator.push(
@@ -56,6 +62,9 @@ class Details extends StatelessWidget {
                     builder: (context) => const Settings(),
                   ),
                 );
+              }),
+              _buildDetailsItem(context, 'Terms and conditions', () {
+                print('Terms and conditions');
               }),
             ],
           ),
