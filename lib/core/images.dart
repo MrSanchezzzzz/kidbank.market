@@ -13,3 +13,6 @@ Image input_label=Image.asset('assets/images/email_custom_tf.png',width: 24,heig
 Image eye=Image.asset('assets/images/eye.png',width: 24,height: 24,);
 Image eye_block=Image.asset('assets/images/eye_block.png',width: 24,height: 24,);
 Image no_rating_star=Image.asset('assets/images/no_rating_star.png',width: 48,height: 48,);
+Image orange_full_star = Image.asset('assets/images/orange_star.png');
+Image orange_half_star = Image.asset('assets/images/orange_halfstar.png');
+Image orange_empty_star = Image.asset('assets/images/orange_emptystar.png');

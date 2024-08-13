@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../core/images.dart';
+import '../../../../core/images.dart';
 class RatingStars extends StatelessWidget {
   final double rating;
-  final Color color;
   final double size;
 
   const RatingStars({
     required this.rating,
-    this.color = const Color(0xFFD1D1D1),
     this.size = 13.33,
     Key? key,
   }) : super(key: key);

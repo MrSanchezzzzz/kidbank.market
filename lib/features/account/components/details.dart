@@ -1,13 +1,19 @@
 import 'package:flutter/cupertino.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/features/account/rating/presentation/no_rating.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import '../../../core/colors.dart';
 import '../../../core/images.dart';
+import '../../../core/providers/rating_provider.dart';
+import '../rating/components/orange_rating_star.dart';
+import '../rating/presentation/rating_info.dart';
 import '../settings/presentation/setings.dart';
 
-class Details extends StatelessWidget {
+class Details extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref ) {
+    final orangeRating = ref.watch(orangeStarsProvider);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -15,7 +21,6 @@ class Details extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
           child: Container(
-            height: 26,
             padding: const EdgeInsets.only(left: 8),
             child: Text(
               'DETAILS',
@@ -48,13 +53,8 @@ class Details extends StatelessWidget {
                 print('My deals pressed');
               }),
               _buildDetailsItem(context, 'Rating', () {
-                Navigator.push(
-                  context,
-                  CupertinoPageRoute(
-                    builder: (context) => const NoRating(),
-                  ),
-                );
-              }),
+                _handleRatingTap(context, orangeRating);
+              }, rating: orangeRating),
               _buildDetailsItem(context, 'Settings', () {
                 Navigator.push(
                   context,
@@ -73,7 +73,25 @@ class Details extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsItem(BuildContext context, String title, VoidCallback onTap) {
+  void _handleRatingTap(BuildContext context, double rating) {
+    if (rating > 0) {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => RatingInfo(rating: rating),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        CupertinoPageRoute(
+          builder: (context) => const NoRating(),
+        ),
+      );
+    }
+  }
+
+  Widget _buildDetailsItem(BuildContext context, String title, VoidCallback onTap, {double? rating}) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.white100,
@@ -84,12 +102,20 @@ class Details extends StatelessWidget {
         ),
       ),
       child: CupertinoListTile(
-        title: Text(
-          title,
-          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-            fontSize: 17,
-            fontWeight: FontWeight.w400,
-          ),
+        title: Row(
+          children: [
+            Text(
+              title,
+              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            if (rating != null) ...[
+              const SizedBox(width: 8),
+              OrangeRatingStars(rating: rating),
+            ]
+          ],
         ),
         trailing: SizedBox(height: 16, width: 16, child: right_icon),
         onTap: onTap,

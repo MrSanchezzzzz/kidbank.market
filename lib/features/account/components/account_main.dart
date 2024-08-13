@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
-import 'package:kidbank/features/account/components/rating_star.dart';
+import 'package:kidbank/features/account/rating/components/rating_star.dart';
 import '../presentation/screens/account_info.dart';
 
 class AccountMain extends StatefulWidget {
@@ -66,21 +66,6 @@ class _AccountMainState extends State<AccountMain> {
                 width: 24,
                 height: 24,
                 child: right_icon,
-              ),
-              subtitle: Row(
-                children: [
-                  Text(
-                    'Rating: ',
-                    style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                      fontSize: 15,
-                    ),
-                  ),
-                  RatingStars(
-                    rating: rating,
-                    color: Colors.grey300,
-                    size: 16.0,
-                  ),
-                ],
               ),
             ),
           ),
