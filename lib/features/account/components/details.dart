@@ -78,7 +78,7 @@ class Details extends ConsumerWidget {
       Navigator.push(
         context,
         CupertinoPageRoute(
-          builder: (context) => RatingInfo(rating: rating),
+          builder: (context) => const RatingInfo(),
         ),
       );
     } else {

@@ -14,8 +14,8 @@ class OrangeRatingStars extends StatelessWidget {
     this.fullStarColor = const Color(0xFFFFA500),
     this.halfStarColor = const Color(0xFFFFA500),
     this.emptyStarColor = const Color(0xFFC0C0C0),
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

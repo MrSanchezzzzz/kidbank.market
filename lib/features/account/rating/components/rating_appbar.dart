@@ -14,7 +14,9 @@ class RatingNavbar extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final orangeRating = ref.watch(orangeStarsProvider);
-    final greyRating = ref.watch(greyStarsProvider);
+    final productRating = ref.watch(productStarsProvider);
+    final deadlinesRating = ref.watch(deadlinesStarsProvider);
+    final communicationRating = ref.watch(communicationStarsProvider);
     return Container(
       decoration: BoxDecoration(color: CupertinoTheme.of(context).barBackgroundColor),
       padding: const EdgeInsets.only(left: 16, right: 16, bottom: 16, top: 10),
@@ -46,9 +48,9 @@ class RatingNavbar extends ConsumerWidget {
               Expanded(
                 child: Column(
                   children: [
-                    _item('Product: ', greyRating, context),
-                    _item('Delivery deadlines: ', greyRating, context),
-                    _item('Communication: ', greyRating, context),
+                    _item('Product: ', productRating, context),
+                    _item('Delivery deadlines: ', deadlinesRating, context),
+                    _item('Communication: ', communicationRating, context),
                   ],
                 ),
               ),
