@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import '../../../core/colors.dart';
 import '../../../core/images.dart';
 
@@ -52,6 +53,10 @@ class Details extends StatelessWidget {
     return CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () {
+        if(title=='My wallet'){
+          Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>AccountWalletScreen()));
+          return;
+        }
         print('$title pressed');
       },
       child: Container(

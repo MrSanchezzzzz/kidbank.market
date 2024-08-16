@@ -15,7 +15,7 @@ class WalletTransactions extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         Text(
-          'TRANSACTIONS',
+          'Transactions',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 13, color: Colors.grey300),
         ),
         const SizedBox(

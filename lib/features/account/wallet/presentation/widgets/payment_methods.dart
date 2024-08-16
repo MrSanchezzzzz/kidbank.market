@@ -12,7 +12,7 @@ class WalletPaymentMethods extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'PAYMENT METHODS',
+          'Payment methods',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(fontSize: 13, color: Colors.grey300),
         ),
         const SizedBox(
