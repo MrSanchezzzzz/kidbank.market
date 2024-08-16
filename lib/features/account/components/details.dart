@@ -17,7 +17,7 @@ class Details extends StatelessWidget {
               height: 26,
               padding: const EdgeInsets.only(left: 8),
               child: Text(
-                'DETAILS',
+                'Details',
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                   color: Colors.grey300,
                   fontSize: 13,
