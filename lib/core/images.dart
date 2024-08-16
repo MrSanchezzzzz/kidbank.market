@@ -23,3 +23,4 @@ Image dislike_icn = Image.asset('assets/images/dislike.png');
 Image dislike_active = Image.asset('assets/images/dislike_active.png');
 Image like_active = Image.asset('assets/images/like_active.png');
 Image report = Image.asset('assets/images/report.png');
+Image check_mark=Image.asset('assets/images/account_checkmark.png',width: 24,height: 24,);

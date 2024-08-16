@@ -33,6 +33,10 @@ class RatingInfo extends ConsumerWidget {
                   return ReviewItem(
                     photoCount: review.photoCount,
                     name: review.name,
+                    surname: review.surname,
+                    likeCount: review.likeCount,
+                    dislikeCount: review.dislikeCount,
+                    official: review.official,
                     date: review.date,
                     textReview: review.textReview,
                     productMark: review.productMark,

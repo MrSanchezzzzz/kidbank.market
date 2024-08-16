@@ -6,8 +6,12 @@ import 'orange_rating_star.dart';
 
 class ReviewItem extends StatefulWidget {
   final String name;
+  final String surname;
   final String date;
   final String textReview;
+  final int likeCount;
+  final int dislikeCount;
+  final String? official;
   final int? photoCount;
   final double? productMark;
   final double? deadlinesMark;
@@ -16,8 +20,12 @@ class ReviewItem extends StatefulWidget {
   const ReviewItem({
     Key? key,
     required this.name,
+    required this.surname,
     required this.date,
     required this.textReview,
+    required this.likeCount,
+    required this.dislikeCount,
+    this.official,
     this.photoCount,
     this.productMark,
     this.deadlinesMark,
@@ -53,6 +61,7 @@ class _ReviewItemState extends State<ReviewItem> {
       }
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -69,7 +78,7 @@ class _ReviewItemState extends State<ReviewItem> {
                   child: account_photo,
                 ),
                 title: Text(
-                  widget.name,
+                  '${widget.name} ${widget.surname}',
                   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                     fontSize: 16,
                     color: Colors.grey500,
@@ -83,6 +92,22 @@ class _ReviewItemState extends State<ReviewItem> {
                   ),
                 ),
               ),
+
+              if (widget.official != null && widget.official!.isNotEmpty) ...[
+                Row(
+                  children: [
+                    SizedBox(width: 24, height: 24, child: check_mark,),
+                    const SizedBox(width: 8,),
+                    Text(
+                      widget.official!,
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                        color: Colors.green200,
+                        fontSize: 15
+                      ),
+                    )
+                  ],
+                )
+              ],
               if (widget.productMark != null ||
                   widget.deadlinesMark != null ||
                   widget.communicationMark != null) ...[
@@ -139,18 +164,54 @@ class _ReviewItemState extends State<ReviewItem> {
                   const Spacer(),
                   CupertinoButton(
                     onPressed: toggleLike,
-                    child: SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: isLiked ? like_active : like_icn,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: isLiked ? like_active : like_icn,
+                        ),
+                        if (widget.likeCount > 0) ...[
+                          Row(
+                            children: [
+                              const SizedBox(width: 4,),
+                              Text(
+                                widget.likeCount > 99 ? '99+' : widget.likeCount.toString(),
+                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                  fontSize: 13,
+                                  color: Colors.grey500,
+                                ),
+                              ),
+                            ],
+                          )
+                        ]
+                      ],
                     ),
                   ),
                   CupertinoButton(
                     onPressed: toggleDislike,
-                    child: SizedBox(
-                      width: 16,
-                      height: 16,
-                      child: isDisliked ? dislike_active : dislike_icn,
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 16,
+                          height: 16,
+                          child: isDisliked ? dislike_active : dislike_icn,
+                        ),
+                        if (widget.dislikeCount > 0) ...[
+                          Row(
+                            children: [
+                              const SizedBox(width: 4,),
+                              Text(
+                                widget.dislikeCount > 99 ? '99+' : widget.dislikeCount.toString(),
+                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                  fontSize: 13,
+                                  color: Colors.grey500,
+                                ),
+                              ),
+                            ],
+                          )
+                        ]
+                      ],
                     ),
                   ),
                   CupertinoButton(
