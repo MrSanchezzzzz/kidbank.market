@@ -1,6 +1,6 @@
-
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+import '../models/reply_model.dart';
 import '../models/review_model.dart';
 
 final reviewProvider = StateProvider<List<ReviewModel>>((ref) {
@@ -17,6 +17,16 @@ final reviewProvider = StateProvider<List<ReviewModel>>((ref) {
       productMark: 4.0,
       deadlinesMark: null,
       communicationMark: null,
+      replies: [
+        ReplyModel(
+          name: 'Name',
+          surname: 'Surname',
+          date: '2024/08/14',
+          textReply: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco',
+          likeCount: 10,
+          dislikeCount: 2,
+        ),
+      ],
     ),
     ReviewModel(
       name: 'Name',
@@ -29,6 +39,8 @@ final reviewProvider = StateProvider<List<ReviewModel>>((ref) {
       productMark: 4.0,
       deadlinesMark: 1.0,
       communicationMark: 5.0,
+      replies: [
+      ],
     ),
   ];
 });

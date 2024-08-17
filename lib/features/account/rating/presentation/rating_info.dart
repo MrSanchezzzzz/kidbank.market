@@ -42,6 +42,7 @@ class RatingInfo extends ConsumerWidget {
                     productMark: review.productMark,
                     deadlinesMark: review.deadlinesMark,
                     communicationMark: review.communicationMark,
+                    replies: review.replies,
                   );
                 },
               ),

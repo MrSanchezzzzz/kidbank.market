@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:kidbank/features/account/rating/presentation/reply_screen.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../core/images.dart';
+import '../../../../core/models/reply_model.dart';
+import '../../../../core/models/review_model.dart';
 import 'orange_rating_star.dart';
 
 class ReviewItem extends StatefulWidget {
@@ -16,6 +19,7 @@ class ReviewItem extends StatefulWidget {
   final double? productMark;
   final double? deadlinesMark;
   final double? communicationMark;
+  final List<ReplyModel> replies;
 
   const ReviewItem({
     Key? key,
@@ -29,7 +33,7 @@ class ReviewItem extends StatefulWidget {
     this.photoCount,
     this.productMark,
     this.deadlinesMark,
-    this.communicationMark,
+    this.communicationMark, required this.replies,
   }) : super(key: key);
 
   @override
@@ -39,14 +43,28 @@ class ReviewItem extends StatefulWidget {
 class _ReviewItemState extends State<ReviewItem> {
   bool isLiked = false;
   bool isDisliked = false;
+  late int likeCount;
+  late int dislikeCount;
+
+  @override
+  void initState() {
+    super.initState();
+    likeCount = widget.likeCount;
+    dislikeCount = widget.dislikeCount;
+  }
 
   void toggleLike() {
     setState(() {
       if (isLiked) {
         isLiked = false;
+        likeCount--;
       } else {
         isLiked = true;
-        isDisliked = false;
+        likeCount++;
+        if (isDisliked) {
+          isDisliked = false;
+          dislikeCount--;
+        }
       }
     });
   }
@@ -55,9 +73,14 @@ class _ReviewItemState extends State<ReviewItem> {
     setState(() {
       if (isDisliked) {
         isDisliked = false;
+        dislikeCount--;
       } else {
         isDisliked = true;
-        isLiked = false;
+        dislikeCount++;
+        if (isLiked) {
+          isLiked = false;
+          likeCount--;
+        }
       }
     });
   }
@@ -153,13 +176,34 @@ class _ReviewItemState extends State<ReviewItem> {
                       children: [
                         SizedBox(width: 16, height: 16, child: reply_icn),
                         const SizedBox(width: 5),
-                        Text('Reply',
-                            style: CupertinoTheme.of(context)
+                        Text(style: CupertinoTheme.of(context)
                                 .textTheme
-                                .navActionTextStyle),
+                                .navActionTextStyle,
+                            'Reply (' + widget.replies.length.toString()+')'),
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => ReplyScreen(review:
+                          ReviewModel(
+                            name: widget.name,
+                            surname: widget.surname,
+                            date: widget.date,
+                            textReview: widget.textReview,
+                            likeCount: likeCount,
+                            dislikeCount: dislikeCount,
+                            official: widget.official,
+                            photoCount: widget.photoCount,
+                            productMark: widget.productMark,
+                            deadlinesMark: widget.deadlinesMark,
+                            communicationMark: widget.communicationMark,
+                            replies: widget.replies,
+                          ),)
+                        ),
+                      );
+                    },
                   ),
                   const Spacer(),
                   CupertinoButton(
@@ -171,12 +215,12 @@ class _ReviewItemState extends State<ReviewItem> {
                           height: 16,
                           child: isLiked ? like_active : like_icn,
                         ),
-                        if (widget.likeCount > 0) ...[
+                        if (likeCount > 0) ...[
                           Row(
                             children: [
                               const SizedBox(width: 4,),
                               Text(
-                                widget.likeCount > 99 ? '99+' : widget.likeCount.toString(),
+                                likeCount > 99 ? '99+' : likeCount.toString(),
                                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                                   fontSize: 13,
                                   color: Colors.grey500,
@@ -197,12 +241,12 @@ class _ReviewItemState extends State<ReviewItem> {
                           height: 16,
                           child: isDisliked ? dislike_active : dislike_icn,
                         ),
-                        if (widget.dislikeCount > 0) ...[
+                        if (dislikeCount > 0) ...[
                           Row(
                             children: [
                               const SizedBox(width: 4,),
                               Text(
-                                widget.dislikeCount > 99 ? '99+' : widget.dislikeCount.toString(),
+                                dislikeCount > 99 ? '99+' : dislikeCount.toString(),
                                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                                   fontSize: 13,
                                   color: Colors.grey500,
