@@ -5,7 +5,6 @@ import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/features/check_out/widgets/check_out_nav_bar.dart';
 import 'package:kidbank/features/check_out/widgets/order_toy.dart';
-import 'package:kidbank/features/check_out/widgets/search_field.dart';
 
 class CheckOutApplyItems extends StatefulWidget {
   const CheckOutApplyItems({super.key});

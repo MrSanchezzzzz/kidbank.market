@@ -5,6 +5,7 @@ import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
+import 'package:kidbank/features/add_color/presentation/screens/set_toy_colors.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_age.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
@@ -33,7 +34,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const CheckOutApplyItems(),
+      builder: (context, state) =>  const SetToyColors(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',

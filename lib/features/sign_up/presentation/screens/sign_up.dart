@@ -186,7 +186,6 @@ class _SignUpState extends State<SignUp> {
                 label: 'Phone number',
                 placeholder: '+380 00 000 00 00',
                 required: false,
-                //TODO phone validation
                 keyboardType: TextInputType.phone,
                 validator: isValidPhoneNumber,
               ),
