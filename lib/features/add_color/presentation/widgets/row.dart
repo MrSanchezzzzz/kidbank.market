@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/colors.dart';
 
 class CustomRow extends StatelessWidget {
   const CustomRow({

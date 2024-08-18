@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
+import 'package:kidbank/features/add_color/presentation/widgets/gred.dart';
 import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
 
 class SetToyColors extends StatefulWidget {
@@ -48,6 +49,7 @@ class _SetToyColorsState extends State<SetToyColors> {
             width: MediaQuery.of(context).size.height,
             color: Colors.grey100,
           ),
+          Gred()
         ],
       ),
     );
