@@ -1,9 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kidbank/core/utils/countries.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
+import 'package:kidbank/core/widgets/dropdown.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-
 import '../../../../core/colors.dart';
 
 class SignUp extends StatefulWidget {
@@ -134,7 +135,7 @@ class _SignUpState extends State<SignUp> {
           child: Column(
             key: _formKey,
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               ///Name Field
               const CustomTextField(
@@ -155,6 +156,19 @@ class _SignUpState extends State<SignUp> {
                 placeholder: 'user.mail@gmail.com',
                 required: true,
                 validator: validateEmail,
+              ),
+              //TODO replace String to Country
+              Dropdown(
+                  label: 'Country',
+                  placeholder: 'Choose country',
+                  required: true,
+                  itemBuilder: (BuildContext context, String value) {
+                    return CupertinoListTile(title: Text(value));
+                  },
+                  onSelected: (String value) {  },
+                  suggestionsCallback: (String search) {
+                    return countries.where((e)=>e.toLowerCase().contains(search.toLowerCase())).toList();
+                  }
               ),
               const CustomTextField(
                 label: 'Phone number',

@@ -18,7 +18,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter>? formatters;
   final bool readOnly;
-
+  final FocusNode? focusNode;
   const CustomTextField(
       {super.key,
       this.label,
@@ -34,7 +34,8 @@ class CustomTextField extends StatefulWidget {
       this.maxLines = 1,
       this.keyboardType = TextInputType.text,
       this.formatters,
-      this.readOnly=false
+      this.readOnly=false,
+        this.focusNode
       });
 
   factory CustomTextField.password(
@@ -217,7 +218,7 @@ class CustomTextFieldState extends State<CustomTextField> {
 
   @override
   void initState() {
-    _focusNode = FocusNode();
+    _focusNode = widget.focusNode??FocusNode();
     _focusNode.addListener(() {
       setState(() {});
     });
