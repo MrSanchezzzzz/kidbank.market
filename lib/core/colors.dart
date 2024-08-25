@@ -31,4 +31,21 @@ abstract class Colors{
   static Color red100=const Color(0xFFFFBAB6);
   static Color green200=const Color(0xFF007328);
   static Color green100=const Color(0xFFAAF0BC);
+
+
+
+  //Toy Colors
+  static Color toyBrown = const Color (0xFF845D32);
+  static Color toyGreen = const Color(0xFF007328);
+  static Color toyGrey = const Color (0xFFA7A7A7);
+  static Color toyPink = const Color (0xFFFFC0CB);
+  static Color toyPurple = const Color (0xFF9A339C);
+  static Color toyYellow = const Color (0xFFFFEC42);
+  static Color toyBlue = const Color (0xFF00BFFE);
+  static Color toyRed = const Color (0xD4FF0909);
+  static Color toyWhite = const Color (0xFFFFFFFF);
+  static Color toyBlack = const Color (0xFF000000);
+  
+ 
+
 }

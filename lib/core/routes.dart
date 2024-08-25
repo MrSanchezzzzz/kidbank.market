@@ -12,8 +12,6 @@ import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_detai
 import 'package:kidbank/features/auth/presentation/screens/auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth.dart';
 import 'package:kidbank/features/auth/presentation/screens/child_auth_count.dart';
-import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
-import 'package:kidbank/features/check_out/check_out_apply_items.dart';
 import 'package:kidbank/features/onboarding/presentation/onboarding_profile.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_for_page.dart';
 import 'package:kidbank/features/sign_up/presentation/screens/id_checker_third_page.dart';
