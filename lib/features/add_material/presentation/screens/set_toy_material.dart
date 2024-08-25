@@ -6,80 +6,9 @@ import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:kidbank/features/add_material/data/material_picker.dart';
+import 'package:kidbank/features/add_material/data/toy_materil_model.dart';
 
-class ToyMaterial {
-  final String label;
-
-  ToyMaterial({required this.label});
-}
-
-class ToyMaterialPickerModel {
-  final ToyMaterial? firstMaterial;
-  final ToyMaterial? secondMaterial;
-
-  ToyMaterialPickerModel({this.firstMaterial, this.secondMaterial});
-
-  int get selectedCount {
-    int count = 0;
-    if (firstMaterial != null) count++;
-    if (secondMaterial != null) count++;
-    return count;
-  }
-
-  bool isSelected(String materialLabel) {
-    return firstMaterial?.label == materialLabel ||
-        secondMaterial?.label == materialLabel;
-  }
-
-  ToyMaterialPickerModel copyWith(
-      {ToyMaterial? firstMaterial, ToyMaterial? secondMaterial}) {
-    return ToyMaterialPickerModel(
-      firstMaterial: firstMaterial ?? this.firstMaterial,
-      secondMaterial: secondMaterial ?? this.secondMaterial,
-    );
-  }
-}
-
-class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
-  ToyMaterialPickerNotifier() : super(ToyMaterialPickerModel());
-
-  void selectMaterial(ToyMaterial material) {
-    if (state.firstMaterial == null) {
-      state = state.copyWith(firstMaterial: material);
-    } else if (state.secondMaterial == null) {
-      state = state.copyWith(secondMaterial: material);
-    }
-  }
-
-  void deselectMaterial(ToyMaterial material) {
-    if (state.firstMaterial?.label == material.label) {
-      state = state.copyWith(firstMaterial: null);
-    } else if (state.secondMaterial?.label == material.label) {
-      state = state.copyWith(secondMaterial: null);
-    }
-  }
-
-  void toggleMaterial(ToyMaterial material) {
-    if (state.isSelected(material.label)) {
-      deselectMaterial(material);
-    } else {
-      if (state.selectedCount < 2) {
-        selectMaterial(material);
-      } else {
-        state = state.copyWith(
-          firstMaterial: state.secondMaterial,
-          secondMaterial: material,
-        );
-      }
-    }
-  }
-}
-
-final selectedMaterialsProvider =
-    StateNotifierProvider<ToyMaterialPickerNotifier, ToyMaterialPickerModel>(
-        (ref) {
-  return ToyMaterialPickerNotifier();
-});
 class SetToyMaterial extends ConsumerWidget {
   const SetToyMaterial({super.key});
 
@@ -98,8 +27,10 @@ class SetToyMaterial extends ConsumerWidget {
     int chosenToyMaterial = selectedMaterials.selectedCount;
 
     List<String> selectedMaterialLabels = [
-      if (selectedMaterials.firstMaterial != null) selectedMaterials.firstMaterial!.label,
-      if (selectedMaterials.secondMaterial != null) selectedMaterials.secondMaterial!.label,
+      if (selectedMaterials.firstMaterial != null)
+        selectedMaterials.firstMaterial!.label,
+      if (selectedMaterials.secondMaterial != null)
+        selectedMaterials.secondMaterial!.label,
     ];
 
     return CupertinoPageScaffold(

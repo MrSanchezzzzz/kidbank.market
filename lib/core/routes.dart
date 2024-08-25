@@ -34,7 +34,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const AddConditions(),
+      builder: (context, state) =>  const SetToyMaterial(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',
