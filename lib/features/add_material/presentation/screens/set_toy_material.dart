@@ -7,7 +7,6 @@ import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class ToyMaterial {
   final String label;
 
@@ -28,17 +27,18 @@ class ToyMaterialPickerModel {
   }
 
   bool isSelected(String materialLabel) {
-    return firstMaterial?.label == materialLabel || secondMaterial?.label == materialLabel;
+    return firstMaterial?.label == materialLabel ||
+        secondMaterial?.label == materialLabel;
   }
 
-  ToyMaterialPickerModel copyWith({ToyMaterial? firstMaterial, ToyMaterial? secondMaterial}) {
+  ToyMaterialPickerModel copyWith(
+      {ToyMaterial? firstMaterial, ToyMaterial? secondMaterial}) {
     return ToyMaterialPickerModel(
       firstMaterial: firstMaterial ?? this.firstMaterial,
       secondMaterial: secondMaterial ?? this.secondMaterial,
     );
   }
 }
-
 
 class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
   ToyMaterialPickerNotifier() : super(ToyMaterialPickerModel());
@@ -68,13 +68,11 @@ class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
   }
 }
 
-
-
 final selectedMaterialsProvider =
-    StateNotifierProvider<ToyMaterialPickerNotifier, ToyMaterialPickerModel>((ref) {
+    StateNotifierProvider<ToyMaterialPickerNotifier, ToyMaterialPickerModel>(
+        (ref) {
   return ToyMaterialPickerNotifier();
 });
-
 
 class SetToyMaterial extends ConsumerWidget {
   const SetToyMaterial({super.key});
@@ -125,12 +123,15 @@ class SetToyMaterial extends ConsumerWidget {
             fontWeight: FontWeight.w400,
           ),
           const SizedBox(height: 10),
+
+          //Line
           Container(
             width: MediaQuery.of(context).size.width,
             height: 1,
             color: Colors.grey100,
           ),
           const SizedBox(height: 10),
+
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -145,23 +146,27 @@ class SetToyMaterial extends ConsumerWidget {
                 itemBuilder: (context, index) {
                   final material = materials[index];
                   final String label = material['label'] as String;
-                  final icon = material['icon'] as Image; // Assuming it's an Image widget
+                  final icon = material['icon'] as Image;
                   final isSelected = selectedMaterials.isSelected(label);
+                  final checked = isSelected; // Use checked variable
 
                   return GestureDetector(
                     onTap: () {
                       final toyMaterial = ToyMaterial(label: label);
-                      ref.watch(selectedMaterialsProvider.notifier).toggleMaterial(toyMaterial);
+                      ref
+                          .read(selectedMaterialsProvider.notifier)
+                          .toggleMaterial(toyMaterial);
                     },
                     child: Stack(
                       children: [
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
+                            color: checked ? Colors.purple200 : Colors.white100,
+                            borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: isSelected ? Colors.toyBlue : Colors.grey100,
-                              width: 2,
-                            ),
+                                color: checked
+                                    ? Colors.purple400
+                                    : Colors.grey100),
                           ),
                           child: Center(
                             child: Column(
@@ -178,10 +183,12 @@ class SetToyMaterial extends ConsumerWidget {
                           top: 8,
                           left: 8,
                           child: CustomCheckBox(
-                            value: isSelected,
+                            value: checked,
                             onChanged: (bool? value) {
                               final toyMaterial = ToyMaterial(label: label);
-                              ref.watch(selectedMaterialsProvider.notifier).toggleMaterial(toyMaterial);
+                              ref
+                                  .read(selectedMaterialsProvider.notifier)
+                                  .toggleMaterial(toyMaterial);
                             },
                           ),
                         ),

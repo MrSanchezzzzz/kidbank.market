@@ -78,6 +78,7 @@ class AddToyFillDetailsScreen extends StatelessWidget {
                         } else if (value.length > 1000) {
                           return 'Max lenght limit overflowed';
                         }
+                        return null;
                       },
                       maxLines: 5,
                     ),
