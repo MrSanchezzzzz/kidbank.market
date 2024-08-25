@@ -61,9 +61,19 @@ class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
 
   void toggleMaterial(ToyMaterial material) {
     if (state.isSelected(material.label)) {
+      // Deselect if already selected
       deselectMaterial(material);
-    } else if (state.selectedCount < 2) {
-      selectMaterial(material);
+    } else {
+      if (state.selectedCount < 2) {
+        // Select if less than 2 are selected
+        selectMaterial(material);
+      } else {
+        // If 2 are already selected, replace the first selected
+        state = state.copyWith(
+          firstMaterial: state.secondMaterial,
+          secondMaterial: material,
+        );
+      }
     }
   }
 }
@@ -83,10 +93,10 @@ class SetToyMaterial extends ConsumerWidget {
 
     final List<Map<String, dynamic>> materials = [
       {'icon': toyTree, 'label': 'Wooden'},
-      {'icon': toyTree, 'label': 'Textiles'},
-      {'icon': toyTree, 'label': 'Plastic'},
-      {'icon': toyTree, 'label': 'Metal'},
-      {'icon': toyTree, 'label': "I'm not sure"},
+      {'icon': toyBear, 'label': 'Textiles'},
+      {'icon': toyPlastic, 'label': 'Plastic'},
+      {'icon': toyMetal, 'label': 'Metal'},
+      {'icon': toyNotShure, 'label': "I'm not sure"},
     ];
 
     int chosenToyMaterial = selectedMaterials.selectedCount;
@@ -124,7 +134,7 @@ class SetToyMaterial extends ConsumerWidget {
           ),
           const SizedBox(height: 10),
 
-          //Line
+          // Line
           Container(
             width: MediaQuery.of(context).size.width,
             height: 1,
@@ -186,9 +196,17 @@ class SetToyMaterial extends ConsumerWidget {
                             value: checked,
                             onChanged: (bool? value) {
                               final toyMaterial = ToyMaterial(label: label);
-                              ref
-                                  .read(selectedMaterialsProvider.notifier)
-                                  .toggleMaterial(toyMaterial);
+                              if (value == true) {
+                                // Call selectMaterial if checked
+                                ref
+                                    .read(selectedMaterialsProvider.notifier)
+                                    .selectMaterial(toyMaterial);
+                              } else {
+                                // Call deselectMaterial if unchecked
+                                ref
+                                    .read(selectedMaterialsProvider.notifier)
+                                    .deselectMaterial(toyMaterial);
+                              }
                             },
                           ),
                         ),
