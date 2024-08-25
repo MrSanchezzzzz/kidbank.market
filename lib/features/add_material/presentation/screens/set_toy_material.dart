@@ -61,14 +61,11 @@ class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
 
   void toggleMaterial(ToyMaterial material) {
     if (state.isSelected(material.label)) {
-      // Deselect if already selected
       deselectMaterial(material);
     } else {
       if (state.selectedCount < 2) {
-        // Select if less than 2 are selected
         selectMaterial(material);
       } else {
-        // If 2 are already selected, replace the first selected
         state = state.copyWith(
           firstMaterial: state.secondMaterial,
           secondMaterial: material,
@@ -83,7 +80,6 @@ final selectedMaterialsProvider =
         (ref) {
   return ToyMaterialPickerNotifier();
 });
-
 class SetToyMaterial extends ConsumerWidget {
   const SetToyMaterial({super.key});
 
@@ -101,6 +97,12 @@ class SetToyMaterial extends ConsumerWidget {
 
     int chosenToyMaterial = selectedMaterials.selectedCount;
 
+    // Get a list of selected material labels
+    List<String> selectedMaterialLabels = [
+      if (selectedMaterials.firstMaterial != null) selectedMaterials.firstMaterial!.label,
+      if (selectedMaterials.secondMaterial != null) selectedMaterials.secondMaterial!.label,
+    ];
+
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
         leading: Row(
@@ -111,7 +113,9 @@ class SetToyMaterial extends ConsumerWidget {
         ),
         border: Border(bottom: BorderSide.none),
         backgroundColor: Color(0xfff3edff),
-        middle: Text('Add Material'),
+        middle: Text(
+          'Add Material',
+        ),
       ),
       backgroundColor: Colors.white100,
       child: Column(
@@ -126,7 +130,7 @@ class SetToyMaterial extends ConsumerWidget {
           const SizedBox(height: 20),
           CustomRow(
             title: chosenToyMaterial > 0
-                ? 'You have chosen $chosenToyMaterial material${chosenToyMaterial == 1 ? '' : 's'}.'
+                ? 'You have chosen ${selectedMaterialLabels.join(' and ')}.'
                 : "Pick up to 2 variants or choose 'I'm not sure' if\nyou don't know.",
             fSize: 17,
             clr: chosenToyMaterial > 0 ? Colors.purple700 : Colors.grey500,
@@ -158,7 +162,7 @@ class SetToyMaterial extends ConsumerWidget {
                   final String label = material['label'] as String;
                   final icon = material['icon'] as Image;
                   final isSelected = selectedMaterials.isSelected(label);
-                  final checked = isSelected; // Use checked variable
+                  final checked = isSelected;
 
                   return GestureDetector(
                     onTap: () {
@@ -197,12 +201,10 @@ class SetToyMaterial extends ConsumerWidget {
                             onChanged: (bool? value) {
                               final toyMaterial = ToyMaterial(label: label);
                               if (value == true) {
-                                // Call selectMaterial if checked
                                 ref
                                     .read(selectedMaterialsProvider.notifier)
                                     .selectMaterial(toyMaterial);
                               } else {
-                                // Call deselectMaterial if unchecked
                                 ref
                                     .read(selectedMaterialsProvider.notifier)
                                     .deselectMaterial(toyMaterial);
