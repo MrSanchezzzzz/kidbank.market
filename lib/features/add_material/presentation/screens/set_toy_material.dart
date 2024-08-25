@@ -97,7 +97,6 @@ class SetToyMaterial extends ConsumerWidget {
 
     int chosenToyMaterial = selectedMaterials.selectedCount;
 
-    // Get a list of selected material labels
     List<String> selectedMaterialLabels = [
       if (selectedMaterials.firstMaterial != null) selectedMaterials.firstMaterial!.label,
       if (selectedMaterials.secondMaterial != null) selectedMaterials.secondMaterial!.label,
@@ -130,7 +129,7 @@ class SetToyMaterial extends ConsumerWidget {
           const SizedBox(height: 20),
           CustomRow(
             title: chosenToyMaterial > 0
-                ? 'You have chosen ${selectedMaterialLabels.join(' and ')}.'
+                ? 'You have chosen "${selectedMaterialLabels.join(' and ')}."'
                 : "Pick up to 2 variants or choose 'I'm not sure' if\nyou don't know.",
             fSize: 17,
             clr: chosenToyMaterial > 0 ? Colors.purple700 : Colors.grey500,
