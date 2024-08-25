@@ -16,4 +16,8 @@ Image toyBear=Image.asset('assets/images/teddybear.png',width: 40,height: 40,);
 Image toyPlastic=Image.asset('assets/images/plustic.png',width: 40,height: 40,);
 Image toyMetal=Image.asset('assets/images/metal.png',width: 40,height: 40,);
 Image toyNotShure=Image.asset('assets/images/not_sure.png',width: 40,height: 40,);
+Image conditionPrize=Image.asset('assets/images/prize.png',width: 40,height: 40,);
+Image conditionLikeNew=Image.asset('assets/images/likeNew.png',width: 40,height: 40,);
+Image conditionRefresh=Image.asset('assets/images/refresh.png',width: 40,height: 40,);
+Image conditionRenewed=Image.asset('assets/images/renewed.png',width: 40,height: 40,);
 

@@ -6,79 +6,8 @@ import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-class Condition {
-  final String label;
-
-  Condition({required this.label});
-}
-
-class ConditionPickerModel {
-  final Condition? firstCondition;
-  final Condition? secondCondition;
-
-  ConditionPickerModel({this.firstCondition, this.secondCondition});
-
-  int get selectedCount {
-    int count = 0;
-    if (firstCondition != null) count++;
-    if (secondCondition != null) count++;
-    return count;
-  }
-
-  bool isSelected(String conditionlLabel) {
-    return firstCondition?.label == conditionlLabel ||
-        secondCondition?.label == conditionlLabel;
-  }
-
-  ConditionPickerModel copyWith(
-      {Condition? firstCondition, Condition? secondCondition}) {
-    return ConditionPickerModel(
-      firstCondition: firstCondition ?? firstCondition,
-      secondCondition: secondCondition ?? secondCondition,
-    );
-  }
-}
-
-class ConditionPickerNotifier extends StateNotifier<ConditionPickerModel> {
-  ConditionPickerNotifier() : super(ConditionPickerModel());
-
-  void selectMaterial(Condition condition) {
-    if (state.firstCondition == null) {
-      state = state.copyWith(firstCondition: condition);
-    } else if (state.secondCondition == null) {
-      state = state.copyWith(secondCondition: condition);
-    }
-  }
-
-  void deselectMaterial(Condition condition) {
-    if (state.firstCondition?.label == condition.label) {
-      state = state.copyWith(firstCondition: null);
-    } else if (state.secondCondition?.label == condition.label) {
-      state = state.copyWith(secondCondition: null);
-    }
-  }
-
-  void toggleCondition(Condition condition) {
-    if (state.isSelected(condition.label)) {
-      deselectMaterial(condition);
-    } else {
-      if (state.selectedCount < 2) {
-        selectMaterial(condition);
-      } else {
-        state = state.copyWith(
-          firstCondition: state.secondCondition,
-          secondCondition: condition,
-        );
-      }
-    }
-  }
-}
-
-final selectedConditionProvider =
-    StateNotifierProvider<ConditionPickerNotifier, ConditionPickerModel>((ref) {
-  return ConditionPickerNotifier();
-});
+import 'package:kidbank/features/add_condition/data/condition_model.dart';
+import 'package:kidbank/features/add_condition/data/condition_provider.dart';
 
 class AddConditions extends ConsumerWidget {
   const AddConditions({super.key});
@@ -88,15 +17,14 @@ class AddConditions extends ConsumerWidget {
     final selectedCondition = ref.watch(selectedConditionProvider);
 
     final List<Map<String, dynamic>> materials = [
-      {'icon': toyTree, 'label': 'Wooden'},
-      {'icon': toyBear, 'label': 'Textiles'},
-      {'icon': toyPlastic, 'label': 'Plastic'},
-      {'icon': toyMetal, 'label': 'Metal'},
-      {'icon': toyNotShure, 'label': "I'm not sure"},
+      {'icon': conditionPrize, 'label': 'New'},
+      {'icon': conditionLikeNew, 'label': 'Like new'},
+      {'icon': conditionRefresh, 'label': 'Used'},
+      {'icon': conditionRenewed, 'label': 'Renewed'},
+     
     ];
 
     int chosenCondition = selectedCondition.selectedCount;
-
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -217,10 +145,7 @@ class AddConditions extends ConsumerWidget {
           MainButton(
             text: 'Confirm',
             color: chosenCondition >= 1 ? Colors.orange300 : Colors.grey100,
-            onTap: chosenCondition >= 1
-                ? () {
-                  }
-                : null,
+            onTap: chosenCondition >= 1 ? () {} : null,
           ),
           const SizedBox(height: 100)
         ],
