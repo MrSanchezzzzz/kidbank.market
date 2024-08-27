@@ -163,7 +163,7 @@ class _SignUpState extends State<SignUp> {
                   placeholder: 'Choose country',
                   required: true,
                   itemBuilder: (BuildContext context, String value) {
-                    return CupertinoListTile(title: Text(value));
+                    return Text(value);
                   },
                   onSelected: (String value) {  },
                   suggestionsCallback: (String search) {

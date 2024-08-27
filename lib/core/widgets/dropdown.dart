@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 
+import '../colors.dart';
 import 'custom_text_field.dart';
 
 class Dropdown<T> extends StatefulWidget {
@@ -48,7 +49,14 @@ class _DropdownState<T> extends State<Dropdown<T>> {
           },
         );
       },
-      itemBuilder: widget.itemBuilder,
+      itemBuilder: (context,value){
+        return CupertinoListTile(
+            title: widget.itemBuilder(context,value)
+        );
+        },
+      itemSeparatorBuilder: (context,index){
+        return Container(height: .4,color: Colors.purple300,margin: const EdgeInsets.symmetric(horizontal: 16),);
+      },
       onSelected: (T value){
         setState(() {
           mainController.text=value.toString();
@@ -59,6 +67,16 @@ class _DropdownState<T> extends State<Dropdown<T>> {
 
       },
       suggestionsCallback: widget.suggestionsCallback,
+      decorationBuilder: (context,child){
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.white100,
+            borderRadius: BorderRadius.circular(8)
+          ),
+          child: child,
+        );
+      },
+      offset: const Offset(0,-8),
     );
   }
 }
