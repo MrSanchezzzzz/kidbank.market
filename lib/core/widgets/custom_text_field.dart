@@ -287,12 +287,11 @@ class CustomTextFieldState extends State<CustomTextField> {
         CupertinoTextField(
           focusNode: _focusNode,
           decoration: BoxDecoration(
-            color: const Color(0xFFFFFFFF),
+            color: widget.enabled ? const Color(0xFFFFFFFF) : Colors.grey100,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: getBorderColor()),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-          onChanged: _handleTextChanged,
+          onChanged: widget.enabled ? _handleTextChanged : null,
           obscureText: obscure,
           placeholder: widget.placeholder,
           placeholderStyle: TextStyle(
@@ -313,8 +312,9 @@ class CustomTextFieldState extends State<CustomTextField> {
           controller: widget.controller,
           maxLines: widget.maxLines,
           keyboardType: widget.keyboardType,
-          inputFormatters: widget.formatters,
-          readOnly: widget.readOnly,
+          inputFormatters: widget.enabled ? widget.formatters : null,
+          readOnly: !widget.enabled || widget.readOnly,
+          textAlignVertical: TextAlignVertical.top,
         ),
         Text(
           _error ? _errorText : widget.helpText ?? '',

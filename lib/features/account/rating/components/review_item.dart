@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/features/account/rating/presentation/reply_screen.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../core/images.dart';
 import '../../../../core/models/reply_model.dart';
-import '../../../../core/models/review_model.dart';
 import 'orange_rating_star.dart';
-
 class ReviewItem extends StatefulWidget {
   final String name;
   final String surname;
@@ -20,9 +17,11 @@ class ReviewItem extends StatefulWidget {
   final double? deadlinesMark;
   final double? communicationMark;
   final List<ReplyModel> replies;
+  final VoidCallback? onReplyTap;
+  final bool isReply;
 
   const ReviewItem({
-    Key? key,
+    super.key,
     required this.name,
     required this.surname,
     required this.date,
@@ -33,8 +32,11 @@ class ReviewItem extends StatefulWidget {
     this.photoCount,
     this.productMark,
     this.deadlinesMark,
-    this.communicationMark, required this.replies,
-  }) : super(key: key);
+    this.communicationMark,
+    required this.replies,
+    this.onReplyTap,
+    this.isReply = false,
+  });
 
   @override
   _ReviewItemState createState() => _ReviewItemState();
@@ -115,7 +117,6 @@ class _ReviewItemState extends State<ReviewItem> {
                   ),
                 ),
               ),
-
               if (widget.official != null && widget.official!.isNotEmpty) ...[
                 Row(
                   children: [
@@ -125,7 +126,7 @@ class _ReviewItemState extends State<ReviewItem> {
                       widget.official!,
                       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                         color: Colors.green200,
-                        fontSize: 15
+                        fontSize: 15,
                       ),
                     )
                   ],
@@ -161,116 +162,92 @@ class _ReviewItemState extends State<ReviewItem> {
                           child: photo_for_marks,
                         );
                       } else {
-                        return _morePhotosWidget(
-                            widget.photoCount! - 5, context);
+                        return _morePhotosWidget(widget.photoCount! - 5, context);
                       }
                     },
                   ),
                 ),
               ],
-              const SizedBox(height: 8),
-              Row(
-                children: [
-                  CupertinoButton(
-                    child: Row(
-                      children: [
-                        SizedBox(width: 16, height: 16, child: reply_icn),
-                        const SizedBox(width: 5),
-                        Text(style: CupertinoTheme.of(context)
+              if (!widget.isReply) ...[
+                const SizedBox(height: 8),
+                Row(
+                  children: [
+                    CupertinoButton(
+                      onPressed: widget.onReplyTap,
+                      child: Row(
+                        children: [
+                          SizedBox(width: 16, height: 16, child: reply_icn),
+                          const SizedBox(width: 5),
+                          Text(
+                            'Reply (${widget.replies.length})',
+                            style: CupertinoTheme.of(context)
                                 .textTheme
                                 .navActionTextStyle,
-                            'Reply (' + widget.replies.length.toString()+')'),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => ReplyScreen(review:
-                          ReviewModel(
-                            name: widget.name,
-                            surname: widget.surname,
-                            date: widget.date,
-                            textReview: widget.textReview,
-                            likeCount: likeCount,
-                            dislikeCount: dislikeCount,
-                            official: widget.official,
-                            photoCount: widget.photoCount,
-                            productMark: widget.productMark,
-                            deadlinesMark: widget.deadlinesMark,
-                            communicationMark: widget.communicationMark,
-                            replies: widget.replies,
-                          ),)
-                        ),
-                      );
-                    },
-                  ),
-                  const Spacer(),
-                  CupertinoButton(
-                    onPressed: toggleLike,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: isLiked ? like_active : like_icn,
-                        ),
-                        if (likeCount > 0) ...[
-                          Row(
-                            children: [
-                              const SizedBox(width: 4,),
-                              Text(
-                                likeCount > 99 ? '99+' : likeCount.toString(),
-                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                  fontSize: 13,
-                                  color: Colors.grey500,
-                                ),
+                    const Spacer(),
+                    CupertinoButton(
+                      onPressed: toggleLike,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: isLiked ? like_active : like_icn,
+                          ),
+                          if (likeCount > 0) ...[
+                            const SizedBox(width: 4,),
+                            Text(
+                              likeCount > 99 ? '99+' : likeCount.toString(),
+                              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                fontSize: 13,
+                                color: Colors.grey500,
                               ),
-                            ],
-                          )
-                        ]
-                      ],
+                            ),
+                          ]
+                        ],
+                      ),
                     ),
-                  ),
-                  CupertinoButton(
-                    onPressed: toggleDislike,
-                    child: Row(
-                      children: [
-                        SizedBox(
-                          width: 16,
-                          height: 16,
-                          child: isDisliked ? dislike_active : dislike_icn,
-                        ),
-                        if (dislikeCount > 0) ...[
-                          Row(
-                            children: [
-                              const SizedBox(width: 4,),
-                              Text(
-                                dislikeCount > 99 ? '99+' : dislikeCount.toString(),
-                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                  fontSize: 13,
-                                  color: Colors.grey500,
-                                ),
+                    CupertinoButton(
+                      onPressed: toggleDislike,
+                      child: Row(
+                        children: [
+                          SizedBox(
+                            width: 16,
+                            height: 16,
+                            child: isDisliked ? dislike_active : dislike_icn,
+                          ),
+                          if (dislikeCount > 0) ...[
+                            const SizedBox(width: 4,),
+                            Text(
+                              dislikeCount > 99 ? '99+' : dislikeCount.toString(),
+                              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                                fontSize: 13,
+                                color: Colors.grey500,
                               ),
-                            ],
-                          )
-                        ]
-                      ],
+                            ),
+                          ]
+                        ],
+                      ),
                     ),
-                  ),
-                  CupertinoButton(
-                    child: SizedBox(width: 16, height: 16, child: report),
-                    onPressed: () {},
-                  ),
-                ],
-              ),
+                    CupertinoButton(
+                      child: SizedBox(width: 16, height: 16, child: report),
+                      onPressed: () {},
+                    ),
+                  ],
+                ),
+              ],
             ],
           ),
         ),
-        Container(
-          height: 1.0,
-          color: CupertinoTheme.of(context).scaffoldBackgroundColor,
-        )
+        if (!widget.isReply) ...[
+          Container(
+            height: 1.0,
+            color: CupertinoTheme.of(context).scaffoldBackgroundColor,
+          )
+        ]
       ],
     );
   }

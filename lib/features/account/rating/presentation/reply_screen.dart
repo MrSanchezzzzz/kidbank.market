@@ -3,6 +3,7 @@ import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/models/review_model.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/features/account/rating/components/review_item.dart';
+import 'package:kidbank/features/account/rating/presentation/reply_create.dart';
 import '../components/reply_item.dart';
 
 class ReplyScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class ReplyScreen extends StatelessWidget {
       backgroundColor: Colors.white100,
       navigationBar: CupertinoNavigationBar(
         leading: const MainBackButton(label: 'Back'),
-        middle: const Text('Reply'),
+        middle: const Text('Replies'),
         backgroundColor: CupertinoTheme.of(context).scaffoldBackgroundColor,
         border: const Border(bottom: BorderSide.none),
       ),
@@ -38,6 +39,14 @@ class ReplyScreen extends StatelessWidget {
               deadlinesMark: review.deadlinesMark,
               communicationMark: review.communicationMark,
               replies: review.replies,
+              onReplyTap: () {
+                Navigator.push(
+                  context,
+                  CupertinoPageRoute(
+                    builder: (context) => ReplyCreateScreen(review: review),
+                  ),
+                );
+              },
             ),
           ),
           ReplyItem(replies: review.replies),

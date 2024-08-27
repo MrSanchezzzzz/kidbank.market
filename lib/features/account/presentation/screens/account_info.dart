@@ -65,11 +65,13 @@ class _AccountInfoState extends State<AccountInfo> {
                     label: 'Name',
                     controller: widget.nameController,
                     enabled: _isEditing,
+                    required: true,
                   ),
                   CustomTextField(
                     label: 'Surname',
                     controller: widget.surnameController,
                     enabled: _isEditing,
+                    required: true,
                   ),
                   CustomTextField(
                     label: 'Email',

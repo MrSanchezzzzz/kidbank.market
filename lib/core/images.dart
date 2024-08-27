@@ -24,3 +24,4 @@ Image dislike_active = Image.asset('assets/images/dislike_active.png');
 Image like_active = Image.asset('assets/images/like_active.png');
 Image report = Image.asset('assets/images/report.png');
 Image check_mark=Image.asset('assets/images/account_checkmark.png',width: 24,height: 24,);
+Image back_cross=Image.asset('assets/images/back_cross.png',width: 24,height: 24,);

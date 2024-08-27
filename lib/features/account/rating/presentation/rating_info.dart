@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/features/account/rating/components/rating_appbar.dart';
 import 'package:kidbank/features/account/rating/components/review_item.dart';
 import 'package:kidbank/features/account/rating/components/sorting_block.dart';
+import 'package:kidbank/features/account/rating/presentation/reply_screen.dart';
 
 import '../../../../core/colors.dart';
 import '../../../../core/models/review_model.dart';
@@ -43,6 +44,14 @@ class RatingInfo extends ConsumerWidget {
                     deadlinesMark: review.deadlinesMark,
                     communicationMark: review.communicationMark,
                     replies: review.replies,
+                    onReplyTap: () {
+                      Navigator.push(
+                        context,
+                        CupertinoPageRoute(
+                          builder: (context) => ReplyScreen(review: review),
+                        ),
+                      );
+                    },
                   );
                 },
               ),
