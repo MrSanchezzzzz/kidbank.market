@@ -82,7 +82,7 @@ class CustomTextField extends StatefulWidget {
       Function(String)? onSearch,
       Function()? onCameraTap,
       List<TextInputFormatter>? formatters,
-      bool showCamera=true
+      bool showCamera=false
       }) {
     TextEditingController controller = TextEditingController();
     if (onSearch != null) {

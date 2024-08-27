@@ -4,7 +4,7 @@ import '../colors.dart';
 
 class TabSelector extends StatefulWidget {
   const TabSelector({super.key,required this.labels,this.callbacks,this.startIndex});
-  final List<String> labels;
+  final List<Widget> labels;
   final List<Function()>? callbacks;
   final int? startIndex;
   @override
@@ -46,9 +46,7 @@ class _TabSelectorState extends State<TabSelector> {
               )
             ),
             child: Center(
-              child: Text(widget.labels[i],style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                fontSize: 15
-              ),),
+              child: widget.labels[i],
             ),
           ),
         ),

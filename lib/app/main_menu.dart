@@ -3,6 +3,7 @@ import 'package:kidbank/features/account/presentation/screens/my_account.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
 import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
+import 'package:kidbank/features/chats/presentation/screens/chat_list_screen.dart';
 import 'package:kidbank/features/list_toy/presentation/screens/list_toy.dart';
 
 import '../core/colors.dart';
@@ -54,6 +55,12 @@ class MainMenu extends StatelessWidget {
               builder: (context) {
                 return const ListToyScreen();
               }
+            );
+          case 3:
+            return CupertinoTabView(
+              builder: (context){
+                return const ChatListScreen();
+              },
             );
           case 4:
             return CupertinoTabView(
