@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:kidbank/core/widgets/custom_check_box.dart';
+import 'package:kidbank/core/widgets/custom_text_field.dart';
 
-import '../../../../core/colors.dart';
+import '../../../../core/colors.dart' as AppColors;
 import '../../../../core/images.dart';
 import '../../../../core/models/reply_model.dart';
+import '../../../../core/widgets/main_button.dart';
 import 'orange_rating_star.dart';
 class ReviewItem extends StatefulWidget {
   final String name;
@@ -47,6 +51,19 @@ class _ReviewItemState extends State<ReviewItem> {
   bool isDisliked = false;
   late int likeCount;
   late int dislikeCount;
+  final List<String> _reports = [
+    'Contains profanity, insults, or\nabusive language',
+    'Includes personal attacks or threats\nagainst the seller or other users',
+    'Promotes hate speech,\ndiscrimination, or intolerance',
+    'Discloses private or sensitive\ninformation about the seller or other\nusers',
+    'Includes links to malicious websites\nor content',
+    'Promotes illegal activities or products',
+    'Contains false, misleading, or\ndefamatory statements about the\nseller or product',
+    'Violates the marketplace\'s terms of\nservice or community guidelines',
+    'Appears to be spam, irrelevant, or\nunrelated to the actual purchase\nexperience',
+    'Other'
+  ];
+  final List<String> _selectedReports = [];
 
   @override
   void initState() {
@@ -97,7 +114,7 @@ class _ReviewItemState extends State<ReviewItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               CupertinoListTile(
-                backgroundColorActivated: Colors.white100,
+                backgroundColorActivated: AppColors.Colors.white100,
                 padding: EdgeInsets.zero,
                 leading: ClipOval(
                   child: account_photo,
@@ -106,14 +123,14 @@ class _ReviewItemState extends State<ReviewItem> {
                   '${widget.name} ${widget.surname}',
                   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                     fontSize: 16,
-                    color: Colors.grey500,
+                    color: AppColors.Colors.grey500,
                   ),
                 ),
                 trailing: Text(
                   widget.date,
                   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                     fontSize: 13,
-                    color: Colors.grey500,
+                    color: AppColors.Colors.grey500,
                   ),
                 ),
               ),
@@ -125,7 +142,7 @@ class _ReviewItemState extends State<ReviewItem> {
                     Text(
                       widget.official!,
                       style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                        color: Colors.green200,
+                        color: AppColors.Colors.green200,
                         fontSize: 15,
                       ),
                     )
@@ -145,7 +162,7 @@ class _ReviewItemState extends State<ReviewItem> {
                 widget.textReview,
                 style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                   fontSize: 17,
-                  color: Colors.grey500,
+                  color: AppColors.Colors.grey500,
                 ),
               ),
               const SizedBox(height: 8),
@@ -168,10 +185,10 @@ class _ReviewItemState extends State<ReviewItem> {
                   ),
                 ),
               ],
-              if (!widget.isReply) ...[
                 const SizedBox(height: 8),
                 Row(
                   children: [
+                    if (!widget.isReply) ...[
                     CupertinoButton(
                       onPressed: widget.onReplyTap,
                       child: Row(
@@ -187,6 +204,7 @@ class _ReviewItemState extends State<ReviewItem> {
                         ],
                       ),
                     ),
+                    ],
                     const Spacer(),
                     CupertinoButton(
                       onPressed: toggleLike,
@@ -203,7 +221,7 @@ class _ReviewItemState extends State<ReviewItem> {
                               likeCount > 99 ? '99+' : likeCount.toString(),
                               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                                 fontSize: 13,
-                                color: Colors.grey500,
+                                color: AppColors.Colors.grey500,
                               ),
                             ),
                           ]
@@ -225,7 +243,7 @@ class _ReviewItemState extends State<ReviewItem> {
                               dislikeCount > 99 ? '99+' : dislikeCount.toString(),
                               style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                                 fontSize: 13,
-                                color: Colors.grey500,
+                                color: AppColors.Colors.grey500,
                               ),
                             ),
                           ]
@@ -234,21 +252,117 @@ class _ReviewItemState extends State<ReviewItem> {
                     ),
                     CupertinoButton(
                       child: SizedBox(width: 16, height: 16, child: report),
-                      onPressed: () {},
+                      onPressed: () {
+                          showModalBottomSheet(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return _buildReportSheet(context);
+                            },
+                            isScrollControlled: true,
+                            isDismissible: true,
+                            enableDrag: true,
+                          );
+                        }
                     ),
                   ],
                 ),
-              ],
-            ],
+              ]
           ),
         ),
-        if (!widget.isReply) ...[
           Container(
             height: 1.0,
             color: CupertinoTheme.of(context).scaffoldBackgroundColor,
           )
         ]
-      ],
+    );
+  }
+
+  Widget _buildReportSheet(BuildContext context) {
+    return ClipRRect(
+      borderRadius: const BorderRadius.only(
+        topLeft: Radius.circular(16.0),
+        topRight: Radius.circular(16.0),
+      ),
+      child: CupertinoPageScaffold(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Center(
+                        child: Text(
+                          'Provide a reason for a report',
+                          style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    CupertinoButton(
+                      padding: EdgeInsets.zero,
+                      child: SizedBox(width: 16, height: 16, child: back_cross),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  for (int i = 0; i < _reports.length; i++)
+                    Padding(
+                      padding: EdgeInsets.only(left: 12, top: i == 0 ? 0 : 16, right: 16),
+                      child: Row(
+                        children: [
+                          CustomCheckBox(
+                            value: _selectedReports.contains(_reports[i]),
+                            onChanged: (bool? isChecked) {
+                              setState(() {
+                                if (isChecked == true) {
+                                  _selectedReports.add(_reports[i]);
+                                } else {
+                                  _selectedReports.remove(_reports[i]);
+                                }
+                              });
+                            },
+                          ),
+                          Text(
+                            _reports[i],
+                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16),
+                child: CustomTextField(
+                  placeholder: 'Enter details of your report',
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: MainButton(
+                  text: 'Send',
+                  color: AppColors.Colors.orange300,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -263,9 +377,9 @@ class _ReviewItemState extends State<ReviewItem> {
         ),
         OrangeRatingStars(
           rating: rating,
-          fullStarColor: Colors.grey300,
-          emptyStarColor: Colors.grey300,
-          halfStarColor: Colors.grey300,
+          fullStarColor: AppColors.Colors.grey300,
+          emptyStarColor: AppColors.Colors.grey300,
+          halfStarColor: AppColors.Colors.grey300,
         ),
       ],
     )
@@ -289,7 +403,7 @@ class _ReviewItemState extends State<ReviewItem> {
           '+$remainingCount',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
             fontSize: 14,
-            color: Colors.white100,
+            color: AppColors.Colors.white100,
             fontWeight: FontWeight.bold,
           ),
         ),
