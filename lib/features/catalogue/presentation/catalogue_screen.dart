@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_modal_bottom_sheet.dart';
+import 'package:kidbank/core/widgets/main_page_title.dart';
+import 'package:kidbank/features/catalogue/data/catalogue_riverpod.dart';
 import 'package:kidbank/features/catalogue/data/filter_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
+import 'package:kidbank/core/widgets/main_navbar.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/filter_modal_sheet.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button.dart';
@@ -15,25 +17,6 @@ import '../../../core/widgets/filter_button.dart';
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
 
-
-  void showFilterModal(BuildContext context) {
-    CustomModalBottomSheet.show(
-        context: context,
-        sheet: const CustomModalBottomSheet(
-          title: 'Toy\'s filter',
-          body: FilterModalSheet(),
-        ));
-  }
-
-  void showPhotoSearchModal(BuildContext context) {
-    CustomModalBottomSheet.show(
-        context: context,
-        sheet: const CustomModalBottomSheet(
-          title: 'Toy\'s filter',
-          body: PhotoSearchModalSheet(),
-        ));
-  }
-
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
@@ -42,35 +25,8 @@ class CatalogueScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const CatalogueNavbar(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Text(
-                  'Catalogue',
-                  style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle.copyWith(fontSize: 34),
-                  textAlign: TextAlign.left,
-                ),
-              ),
-              Container(
-                width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: CustomTextField.search(
-                        onCameraTap: (){
-                          showPhotoSearchModal(context);
-                        },
-                      ),
-                    ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 18,top: 12),
-                        child: FilterButton(onTap: (){showFilterModal(context);},),
-                      )
-                  ],
-                ),
-              ),
+              const MainNavbar(),
+              MainPageHeader(title: 'Catalogue',),
               Expanded(
                 child: Container(
                   color: project_colors.Colors.white100,
@@ -103,7 +59,7 @@ class CatalogueScreen extends StatelessWidget {
                       const SizedBox(
                         height: 8,
                       ),
-                      const Expanded(child: CatalogueItemsView())
+                      Expanded(child: CatalogueItemsView(provider: catalogueProvider,))
                     ],
                   ),
                 ),

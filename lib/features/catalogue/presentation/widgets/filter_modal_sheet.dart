@@ -5,11 +5,21 @@ import 'package:kidbank/features/catalogue/data/filter_riverpod.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/filter_price_select.dart';
 
 import '../../../../core/colors.dart' as project_colors;
+import '../../../../core/widgets/custom_modal_bottom_sheet.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import 'filter_color_picker.dart';
 
 class FilterModalSheet extends StatefulWidget {
   const FilterModalSheet({super.key});
+
+  static void show(BuildContext context,{required String title}) {
+    CustomModalBottomSheet.show(
+        context: context,
+        sheet: CustomModalBottomSheet(
+          title: title,
+          body: const FilterModalSheet(),
+        ));
+  }
 
   @override
   State<FilterModalSheet> createState() => _FilterModalSheetState();

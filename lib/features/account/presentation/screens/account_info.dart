@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
+import 'package:kidbank/core/widgets/dropdown.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
 
+import '../../../../core/utils/countries.dart';
 import '../../../../core/widgets/main_back_button.dart';
 
 class AccountInfo extends StatefulWidget {
@@ -83,6 +85,18 @@ class _AccountInfoState extends State<AccountInfo> {
                   readOnly: !_isEditing,
                   required: true,
                   suffixBuilder: (context,state,isError)=>smsEdit,
+                ),
+                Dropdown(
+                    label: 'Country',
+                    placeholder: 'Choose country',
+                    required: true,
+                    itemBuilder: (BuildContext context, String value) {
+                      return Text(value);
+                    },
+                    onSelected: (String value) {  },
+                    suggestionsCallback: (String search) {
+                      return countries.where((e)=>e.toLowerCase().contains(search.toLowerCase())).toList();
+                    }
                 ),
               ],
             ),

@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_navbar.dart';
+import 'package:kidbank/core/widgets/main_navbar.dart';
 import 'package:kidbank/features/catalogue/toy_details/toy_details_actions.dart';
 import 'package:kidbank/features/catalogue/toy_details/toy_details_info.dart';
 import 'package:kidbank/features/catalogue/toy_details/toy_details_tags.dart';
@@ -21,7 +21,7 @@ class ToyDetailsScreen extends StatelessWidget {
           child:SafeArea(
             child: Column(
               children: [
-                const CatalogueNavbar(),
+                const MainNavbar(),
                 Container(
                   padding: const EdgeInsets.only(left: 16,right: 16,bottom: 8),
                   color: CupertinoTheme.of(context).barBackgroundColor,

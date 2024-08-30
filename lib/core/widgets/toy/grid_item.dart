@@ -2,10 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/core/widgets/main_square_button.dart';
 import 'package:kidbank/core/widgets/toy_image.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/buy_button.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/toy_info.dart';
+import 'package:kidbank/core/widgets/toy/buy_button.dart';
+import 'package:kidbank/core/widgets/toy/toy_info.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/colors.dart';
+import '../../colors.dart';
 
 class CatalogueGridItem extends StatelessWidget {
   const CatalogueGridItem({super.key,this.isMyToy=false});
@@ -21,19 +22,32 @@ class CatalogueGridItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,
         children: [
-          const ToyImage(),
-          Text('Name',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-            fontWeight: FontWeight.w700
-          ),),
-              Row(
+          Skeleton.replace(
+              replacement: Bone.square(size: 171,borderRadius: BorderRadius.circular(16),),
+              child: const ToyImage(),
+          ),
+          Skeleton.replace(
+            replacement: const Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(top: 8.0),
+                  child: Bone.text(fontSize: 12,),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(top: 4.0),
+                  child: Bone.text(fontSize: 12,),
+                ),
+              ],
+            ),
+            child: Text('Name',style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+              fontWeight: FontWeight.w700
+            ),),
+          ),
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const ToyInfo(),
-                  GestureDetector(
-                    onTap: (){
-                    },
-                    child: const CatalogueBuyButton(),
-                  ),
+                  ToyInfo(),
+                  CatalogueBuyButton(),
                 ],
               ),
           if(isMyToy)...{
@@ -54,6 +68,7 @@ class CatalogueGridItem extends StatelessWidget {
                 ],
               ),
             )
+           
 
           }
         ],

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/widgets/balance_indicator.dart';
 
-class CatalogueNavbar extends StatelessWidget {
-  const CatalogueNavbar({super.key, this.onSearch});
+class MainNavbar extends StatelessWidget {
+  const MainNavbar({super.key, this.onSearch});
 
   final Function(String)? onSearch;
 
