@@ -10,6 +10,8 @@ class BalanceIndicator extends StatelessWidget {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
+        Image.asset('assets/images/dracoin.png',width: 16,height: 16,),
+        const SizedBox(width: 4,),
         Text(
           balance>1000000?'1M+':balance.toString(),
           style: CupertinoTheme.of(context)
@@ -17,8 +19,6 @@ class BalanceIndicator extends StatelessWidget {
               .textStyle
               .copyWith(fontWeight: FontWeight.w700, color: Colors.purple600),
         ),
-        const SizedBox(width: 4,),
-        Image.asset('assets/images/dracoin.png',width: 16,height: 16,)
       ],
     );
   }
