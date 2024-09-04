@@ -40,13 +40,13 @@ class CustomTextField extends StatefulWidget {
 
   factory CustomTextField.password(
       {String? label,
-      String? helpText,
-      bool required = false,
-      String? Function(String?)? validator,
-      bool enabled = true,
-      String? placeholder,
-      TextEditingController? controller,
-      List<TextInputFormatter>? formatters}) {
+        String? helpText,
+        bool required = false,
+        String? Function(String?)? validator,
+        bool enabled = true,
+        String? placeholder,
+        TextEditingController? controller,
+        List<TextInputFormatter>? formatters}) {
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -275,13 +275,13 @@ class CustomTextFieldState extends State<CustomTextField> {
           children: [
             widget.label != null
                 ? Text(
-                    widget.label!,
-                    style: CupertinoTheme.of(context)
-                        .textTheme
-                        .textStyle
-                        .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
-                    textAlign: TextAlign.left,
-                  )
+              widget.label!,
+              style: CupertinoTheme.of(context)
+                  .textTheme
+                  .textStyle
+                  .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
+              textAlign: TextAlign.left,
+            )
                 : Container(),
             if (widget.required)
               Text(
@@ -297,12 +297,11 @@ class CustomTextFieldState extends State<CustomTextField> {
         CupertinoTextField(
           focusNode: _focusNode,
           decoration: BoxDecoration(
-            color: const Color(0xFFFFFFFF),
+            color: widget.enabled ? const Color(0xFFFFFFFF) : Colors.grey100,
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: getBorderColor()),
           ),
-          padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 8),
-          onChanged: _handleTextChanged,
+          onChanged: widget.enabled ? _handleTextChanged : null,
           obscureText: obscure,
           placeholder: widget.placeholder,
           placeholderStyle: TextStyle(
@@ -310,28 +309,29 @@ class CustomTextFieldState extends State<CustomTextField> {
           ),
           prefix: widget.prefixBuilder != null
               ? Padding(
-                  padding: const EdgeInsets.only(left: 8),
-                  child: widget.prefixBuilder!(context, this, _error),
-                )
+            padding: const EdgeInsets.only(left: 8),
+            child: widget.prefixBuilder!(context, this, _error),
+          )
               : null,
           suffix: widget.suffixBuilder != null
               ? Padding(
-                  padding: const EdgeInsets.only(right: 8),
-                  child: widget.suffixBuilder!(context, this, _error),
-                )
+            padding: const EdgeInsets.only(right: 8),
+            child: widget.suffixBuilder!(context, this, _error),
+          )
               : null,
           controller: widget.controller,
           maxLines: widget.maxLines,
           keyboardType: widget.keyboardType,
-          inputFormatters: widget.formatters,
-          readOnly: widget.readOnly,
+          inputFormatters: widget.enabled ? widget.formatters : null,
+          readOnly: !widget.enabled || widget.readOnly,
+          textAlignVertical: TextAlignVertical.top,
         ),
         Text(
           _error ? _errorText : widget.helpText ?? '',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                fontSize: 13,
-                color: _error ? const Color(0xFFFF0000) : Colors.grey300,
-              ),
+            fontSize: 13,
+            color: _error ? const Color(0xFFFF0000) : Colors.grey300,
+          ),
           textAlign: TextAlign.right,
         ),
       ],

@@ -2,65 +2,56 @@ import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
 
+import '../../../core/widgets/custom_text_field.dart';
+
 class AccountAppbar extends StatelessWidget {
   const AccountAppbar({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 44,
-      child: Row(
+    return Container(
+      decoration: BoxDecoration(color: CupertinoTheme.of(context).barBackgroundColor),
+      padding: const EdgeInsets.only(left: 16, right: 16, bottom: 0, top: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 11),
-                  child: Text(
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                'assets/images/logo_shadow_black.png',
+                width: 32,
+                height: 32,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  //TODO assert money string length <16
+                  Text(
                     '400\$',
-                    style: CupertinoTheme.of(context).textTheme.navActionTextStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.purple600
-                    ),
+                    style: CupertinoTheme.of(context)
+                        .textTheme
+                        .textStyle
+                        .copyWith(fontWeight: FontWeight.w700, color: Colors.purple600),
                   ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            width: 32,
-            height: 32,
-            child: logo_shadow_black,
-          ),
-          Expanded(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(right: 16),
-                  child: Row(
+                  Row(
                     children: [
-                      CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        child: Icon(
-                          CupertinoIcons.shopping_cart,
-                          color: Colors.purple600,
-                        ),
-                      ),
-                      CupertinoButton(
-                        padding: EdgeInsets.zero,
-                        onPressed: () {},
-                        child: Icon(
-                          CupertinoIcons.bell,
-                          color: Colors.purple600,
-                        ),
-                      ),
+                      GestureDetector(
+                          onTap: () {
+                            //TODO shopping cart onTap
+                          },
+                          child: Image.asset('assets/images/shopping_cart.png', width: 24, height: 24)),
+                      const SizedBox(width: 16),
+                      GestureDetector(
+                          onTap: () {
+                            //TODO notification onTap
+                          },
+                          child: Image.asset('assets/images/notification.png', width: 24, height: 24)),
                     ],
                   ),
-                ),
-              ],
-            ),
+                ],
+              )
+            ],
           ),
         ],
       ),

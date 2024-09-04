@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
+import 'package:kidbank/features/account/rating/components/rating_star.dart';
 import '../presentation/screens/account_info.dart';
 
 class AccountMain extends StatefulWidget {
@@ -14,6 +15,7 @@ class _AccountMainState extends State<AccountMain> {
   String name = 'Veronika';
   String surname = 'Shvets';
   String email = 'veronika.shvets@gmail.com';
+  double rating = 3.5;
 
   void _onTap(BuildContext context) async {
     final result = await Navigator.of(context).push(
@@ -39,71 +41,32 @@ class _AccountMainState extends State<AccountMain> {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoButton(
-      onPressed: () => _onTap(context),
-      padding: EdgeInsets.zero,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(10),
         child: Container(
-          height: 56,
-          padding: const EdgeInsets.only(right: 16),
-          decoration: BoxDecoration(
-            color: Colors.white100,
-            borderRadius: BorderRadius.circular(10.0),
-          ),
+          color: Colors.white100,
           child: Padding(
-            padding: const EdgeInsets.all(0),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 16),
-                  child: ClipOval(
-                    child: SizedBox(
-                      width: 44,
-                      height: 44,
-                      child: account_photo,
-                    ),
-                  ),
+            padding: const EdgeInsets.symmetric(horizontal: 6),
+            child: CupertinoListTile(
+              backgroundColorActivated: Colors.white100,
+              onTap: () => _onTap(context),
+              padding: EdgeInsets.zero,
+              leading: ClipOval(
+                child: account_photo,
+              ),
+              title: Text(
+                '$name $surname',
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  color: Colors.grey500,
                 ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        '$name $surname',
-                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                          color: Colors.grey500,
-                        ),
-                      ),
-                      const SizedBox(height: 2,),
-                      Row(
-                        children: [
-                          Text(
-                            'Rating: ',
-                            style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                              fontSize: 15,
-                              color: Colors.grey300,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          SizedBox(width: 16, height: 16, child: full_star),
-                          SizedBox(width: 16, height: 16, child: full_star),
-                          SizedBox(width: 16, height: 16, child: full_star),
-                          SizedBox(width: 16, height: 16, child: full_star),
-                          SizedBox(width: 16, height: 16, child: star),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  width: 24,
-                  height: 24,
-                  child: right_icon,
-                ),
-              ],
+              ),
+              trailing: SizedBox(
+                width: 24,
+                height: 24,
+                child: right_icon,
+              ),
             ),
           ),
         ),

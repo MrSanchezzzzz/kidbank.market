@@ -4,7 +4,6 @@ import 'package:kidbank/core/images.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/dropdown.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-
 import '../../../../core/utils/countries.dart';
 import '../../../../core/widgets/main_back_button.dart';
 
@@ -34,7 +33,6 @@ class _AccountInfoState extends State<AccountInfo> {
   }
 
   void _confirmChanges() {
-    //TODO create riverpod for user
     Navigator.pop(context, {
       'name': widget.nameController.text,
       'surname': widget.surnameController.text,
@@ -100,34 +98,34 @@ class _AccountInfoState extends State<AccountInfo> {
                 ),
               ],
             ),
-          ),
-          const Spacer(),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-            child: _isEditing
-                ? Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MainButton(
-                  text: 'Cancel',
-                  onTap: _cancelChanges,
-                  color: Colors.orange100,
-                ),
-                const SizedBox(height: 16,),
-                MainButton(
-                  text: 'Confirm',
-                  onTap: _confirmChanges,
-                  color: Colors.orange300,
-                )
-              ],
-            )
-                : MainButton(
-              color: Colors.orange300,
-              text: 'Edit',
-              onTap: _toggleEditMode,
+            const Spacer(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              child: _isEditing
+                  ? Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  MainButton(
+                    text: 'Cancel',
+                    onTap: _cancelChanges,
+                    color: Colors.orange100,
+                  ),
+                  const SizedBox(height: 16,),
+                  MainButton(
+                    text: 'Confirm',
+                    onTap: _confirmChanges,
+                    color: Colors.orange300,
+                  )
+                ],
+              )
+                  : MainButton(
+                color: Colors.orange300,
+                text: 'Edit',
+                onTap: _toggleEditMode,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -25,6 +25,7 @@ import '../features/sign_up/presentation/screens/id_checker_for_page.dart';
 import '../features/sign_up/presentation/screens/id_checker_third_page.dart';
 import '../features/sign_up/presentation/screens/id_cheker_first_page.dart';
 import '../features/sign_up/presentation/screens/id_cheker_second_page.dart';
+import '../features/sign_up/presentation/screens/improve_page.dart';
 import '../features/sign_up/presentation/screens/notification_page.dart';
 import '../features/sign_up/presentation/screens/sign_up.dart';
 
