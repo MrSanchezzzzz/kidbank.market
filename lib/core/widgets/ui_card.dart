@@ -4,17 +4,18 @@ import 'package:kidbank/core/widgets/custom_check_box.dart';
 import '../colors.dart';
 
 class UiCard extends StatefulWidget {
-  const UiCard({super.key,this.image,this.label,this.onChanged,this.checked=false,this.width=171,this.height=108});
+  const UiCard({super.key,this.image,this.label,this.onChanged,this.checked=false,this.width=171,this.height=108,this.selectable=true});
   final Image? image;
   final String? label;
   final bool checked;
   final Function()? onChanged;
   final double width;
   final double height;
+  final bool selectable;
   @override
   State<UiCard> createState() => _UiCardState();
 
-  factory UiCard.large({Image? image,String? label, Function()? onChanged,bool checked=false}){
+  factory UiCard.large({Image? image,String? label, Function()? onChanged,bool checked=false,}){
     return UiCard(image: image,label: label,onChanged: onChanged,checked: checked,height: 180,);
   }
 
@@ -36,6 +37,9 @@ class UiCard extends StatefulWidget {
     );
   }
 
+  factory UiCard.notSelectable({Image? image,String? label,Function()? onTap}){
+    return UiCard(image: image,label: label,selectable: false,onChanged: onTap,);
+  }
 
 }
 
@@ -68,10 +72,13 @@ class _UiCardState extends State<UiCard> {
                   height: 44,
                 ),
                 const SizedBox(height: 8,),
-                widget.label!=null?Text(widget.label!,style: CupertinoTheme.of(context).textTheme.textStyle,)
+                widget.label!=null?Text(widget.label!,style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                  fontWeight: FontWeight.w700
+                ),)
                     :Container()
               ],
             ),
+            if(widget.selectable)
             Positioned(
                 left: 0,
                 top: 0,

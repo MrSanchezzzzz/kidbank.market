@@ -13,7 +13,7 @@ class MainApp extends StatelessWidget {
       routerConfig: router,
       theme: defaultTheme,
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
+      localizationsDelegates: const [
         DefaultCupertinoLocalizations.delegate,
         DefaultMaterialLocalizations.delegate
       ],

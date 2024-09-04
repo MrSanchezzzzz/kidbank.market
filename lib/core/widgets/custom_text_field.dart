@@ -18,23 +18,24 @@ class CustomTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final List<TextInputFormatter>? formatters;
   final bool readOnly;
-
+  final FocusNode? focusNode;
   const CustomTextField(
       {super.key,
-        this.label,
-        this.helpText,
-        this.required = false,
-        this.validator,
-        this.enabled = true,
-        this.placeholder,
-        this.prefixBuilder,
-        this.suffixBuilder,
-        this.obscureText = false,
-        this.controller,
-        this.maxLines = 1,
-        this.keyboardType = TextInputType.text,
-        this.formatters,
-        this.readOnly=false
+      this.label,
+      this.helpText,
+      this.required = false,
+      this.validator,
+      this.enabled = true,
+      this.placeholder,
+      this.prefixBuilder,
+      this.suffixBuilder,
+      this.obscureText = false,
+      this.controller,
+      this.maxLines = 1,
+      this.keyboardType = TextInputType.text,
+      this.formatters,
+      this.readOnly=false,
+        this.focusNode
       });
 
   factory CustomTextField.password(
@@ -73,14 +74,16 @@ class CustomTextField extends StatefulWidget {
 
   factory CustomTextField.search(
       {String placeholder = 'Search',
-        String? label,
-        String? helpText,
-        bool required = false,
-        String? Function(String?)? validator,
-        bool enabled = true,
-        Function(String)? onSearch,
-        Function()? onCameraTap,
-        List<TextInputFormatter>? formatters}) {
+      String? label,
+      String? helpText,
+      bool required = false,
+      String? Function(String?)? validator,
+      bool enabled = true,
+      Function(String)? onSearch,
+      Function()? onCameraTap,
+      List<TextInputFormatter>? formatters,
+      bool showCamera=false
+      }) {
     TextEditingController controller = TextEditingController();
     if (onSearch != null) {
       controller.addListener(() {
@@ -101,7 +104,7 @@ class CustomTextField extends StatefulWidget {
           height: 24,
         );
       },
-      suffixBuilder: (context, state, isError) {
+      suffixBuilder: showCamera?(context, state, isError) {
         return GestureDetector(
           onTap: onCameraTap,
           child: Image.asset(
@@ -110,7 +113,7 @@ class CustomTextField extends StatefulWidget {
             height: 24,
           ),
         );
-      },
+      }:null,
       controller: controller,
       formatters: formatters,
     );
@@ -125,7 +128,6 @@ class CustomTextField extends StatefulWidget {
     String? placeholder,
     TextEditingController? controller,
   }) {
-    TextEditingController controller = TextEditingController();
     return CustomTextField(
       label: label,
       helpText: helpText,
@@ -168,7 +170,9 @@ class CustomTextField extends StatefulWidget {
           children: [
             GestureDetector(
               onTap: () {
-                controller!.text = (int.parse(controller.text) + 1).toString();
+                if(controller!=null&&controller.text.isNotEmpty) {
+                  controller.text = (int.parse(controller.text) + 1).toString();
+                }
               },
               child: Icon(
                 CupertinoIcons.plus,
@@ -181,7 +185,12 @@ class CustomTextField extends StatefulWidget {
             ),
             GestureDetector(
               onTap: () {
-                controller!.text = (int.parse(controller.text) - 1).toString();
+                if(controller!=null&&controller.text.isNotEmpty) {
+                  int num=int.parse(controller.text);
+                  if(num>1) {
+                    controller.text = (--num).toString();
+                  }
+                }
               },
               child: Icon(
                 CupertinoIcons.minus,
@@ -209,7 +218,7 @@ class CustomTextFieldState extends State<CustomTextField> {
 
   @override
   void initState() {
-    _focusNode = FocusNode();
+    _focusNode = widget.focusNode??FocusNode();
     _focusNode.addListener(() {
       setState(() {});
     });
@@ -260,6 +269,7 @@ class CustomTextFieldState extends State<CustomTextField> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
+      mainAxisSize: MainAxisSize.min,
       children: [
         Row(
           children: [

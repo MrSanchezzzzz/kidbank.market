@@ -17,7 +17,7 @@
                 padding: const EdgeInsets.only(left: 8),
                 height: 26,
                 child: Text(
-                  'STATISTICS',
+                  'Statistics',
                   style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                     color: Colors.grey300,
                     fontSize: 13,

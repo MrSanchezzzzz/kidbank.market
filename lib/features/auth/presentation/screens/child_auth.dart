@@ -10,11 +10,23 @@ class ChildAuthScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar(
+      navigationBar: CupertinoNavigationBar(
         leading: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            MainBackButton(label: 'Back',)
+            const MainBackButton(label: 'Back',),
+            GestureDetector(
+              onTap: ()=>context.go('/'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('Skip',style: CupertinoTheme.of(context).textTheme.navActionTextStyle,),
+                  const SizedBox(width: 8,),
+                  Image.asset('assets/images/forward.png',height: 16,width: 8,),
+                  const SizedBox(width: 16,)
+                ],
+              ),
+            )
           ],
         ),
       ),

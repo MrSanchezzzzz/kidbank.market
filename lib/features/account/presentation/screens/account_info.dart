@@ -2,9 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/images.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
+import 'package:kidbank/core/widgets/dropdown.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-
-import '../../components/info_appbar.dart';
+import '../../../../core/utils/countries.dart';
+import '../../../../core/widgets/main_back_button.dart';
 
 class AccountInfo extends StatefulWidget {
   final TextEditingController nameController;
@@ -51,38 +52,51 @@ class _AccountInfoState extends State<AccountInfo> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      backgroundColor: CupertinoTheme.of(context).scaffoldBackgroundColor,
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const InfoAppbar(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-              child: Column(
-                children: [
-                  CustomTextField(
-                    label: 'Name',
-                    controller: widget.nameController,
-                    enabled: _isEditing,
+      navigationBar: CupertinoNavigationBar(
+        leading: const MainBackButton(label: 'Back',),
+        middle: Text(
+          'Profile',
+          style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,
+        ),
+        border: const Border(bottom: BorderSide.none),
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              children: [
+                CustomTextField(
+                  label: 'Name',
+                  controller: widget.nameController,
+                  readOnly: !_isEditing,
+                  required: true,
+                ),
+                CustomTextField(
+                  label: 'Surname',
+                  controller: widget.surnameController,
+                  readOnly: !_isEditing,
+                ),
+                CustomTextField(
+                  label: 'Email',
+                  controller: widget.emailController,
+                  readOnly: !_isEditing,
+                  required: true,
+                  suffixBuilder: (context,state,isError)=>smsEdit,
+                ),
+                Dropdown(
+                    label: 'Country',
+                    placeholder: 'Choose country',
                     required: true,
-                  ),
-                  CustomTextField(
-                    label: 'Surname',
-                    controller: widget.surnameController,
-                    enabled: _isEditing,
-                    required: true,
-                  ),
-                  CustomTextField(
-                    label: 'Email',
-                    controller: widget.emailController,
-                    enabled: _isEditing,
-                    suffixBuilder:  (context, state, isError) {
-                      return input_label;
+                    itemBuilder: (BuildContext context, String value) {
+                      return Text(value);
                     },
-                  ),
-                ],
-              ),
+                    onSelected: (String value) {  },
+                    suggestionsCallback: (String search) {
+                      return countries.where((e)=>e.toLowerCase().contains(search.toLowerCase())).toList();
+                    }
+                ),
+              ],
             ),
             const Spacer(),
             Padding(

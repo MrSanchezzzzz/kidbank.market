@@ -25,3 +25,6 @@ Image like_active = Image.asset('assets/images/like_active.png');
 Image report = Image.asset('assets/images/report.png');
 Image check_mark=Image.asset('assets/images/account_checkmark.png',width: 24,height: 24,);
 Image back_cross=Image.asset('assets/images/back_cross.png',width: 24,height: 24,);
+Image closeCircle=Image.asset('assets/images/close_circle.png',width: 32,height: 32,);
+Image imagePurple=Image.asset('assets/images/image.png',width: 36,height: 36,);
+Image cameraPurple=Image.asset('assets/images/camera_purple.png',width: 37.12,height: 33,);

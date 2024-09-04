@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/features/account/rating/presentation/no_rating.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import '../../../core/colors.dart';
 import '../../../core/images.dart';
@@ -11,25 +9,68 @@ import '../settings/presentation/setings.dart';
 
 class Details extends ConsumerWidget {
   @override
-  Widget build(BuildContext context, WidgetRef ref ) {
-    final orangeRating = ref.watch(orangeStarsProvider);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const SizedBox(height: 16,),
-        Padding(
-          padding: const EdgeInsets.only(left: 16, top: 16, right: 8, bottom: 0),
-          child: Container(
-            padding: const EdgeInsets.only(left: 8),
-            child: Text(
-              'DETAILS',
-              style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(height: 16,),
+          Padding(
+            padding: const EdgeInsets.only(left: 0, top: 16, right: 8, bottom: 0),
+            child: Container(
+              height: 26,
+              padding: const EdgeInsets.only(left: 8),
+              child: Text(
+                'Details',
+                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
                   color: Colors.grey300,
                   fontSize: 13,
                   fontWeight: FontWeight.w600
               ),
             ),
+          ),
+          Container(
+            decoration: BoxDecoration(
+              color: Colors.white100,
+              borderRadius: BorderRadius.circular(10)
+            ),
+            child: Column(
+              children: [
+                _buildDetailsItem(context, 'My children', true, false),
+                _buildDivider(context),
+                _buildDetailsItem(context, 'My wallet', false, false),
+                _buildDivider(context),
+                _buildDetailsItem(context, 'My deals', false, false),
+                _buildDivider(context),
+                _buildDetailsItem(context, 'Settings', false, true),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDetailsItem(BuildContext context, String title, bool isFirst, bool isLast) {
+    return CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        if(title=='My wallet'){
+          Navigator.of(context).push(CupertinoPageRoute(builder: (context)=>AccountWalletScreen()));
+          return;
+        }
+        print('$title pressed');
+      },
+      child: Container(
+        height: 44,
+        decoration: BoxDecoration(
+          color: Colors.white100,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(isFirst ? 10 : 0),
+            topRight: Radius.circular(isFirst ? 10 : 0),
+            bottomLeft: Radius.circular(isLast ? 10 : 0),
+            bottomRight: Radius.circular(isLast ? 10 : 0),
           ),
         ),
         Container(
