@@ -67,8 +67,7 @@ class MainMenu extends StatelessWidget {
           case 3:
             return CupertinoTabView(
               builder: (context){
-                //return const ChatListScreen();
-                return RatingInfo();
+                return const ChatListScreen();
               },
             );
           case 4:
