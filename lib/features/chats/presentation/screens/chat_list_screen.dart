@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/core/widgets/tab_selector.dart';
 import 'package:kidbank/features/chats/data/chat_mode_riverpod.dart';
 import 'package:kidbank/features/chats/data/unread_count_riverpod.dart';
 import 'package:kidbank/features/chats/presentation/widgets/chat_list.dart';
@@ -9,6 +8,7 @@ import 'package:kidbank/features/chats/presentation/widgets/unread_counter.dart'
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../core/colors.dart';
+import '../../../../core/widgets/tab_selector/tab_selector.dart';
 
 class ChatListScreen extends ConsumerWidget {
   const ChatListScreen({super.key});

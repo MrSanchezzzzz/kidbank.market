@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/widgets/filter_button.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
 
 import '../../features/catalogue/presentation/widgets/filter_modal_sheet.dart';
 import 'custom_text_field.dart';
+import 'filter/filter_button.dart';
 
 class MainPageHeader extends StatelessWidget {
   const MainPageHeader({super.key,this.title='',this.onSearch,this.onPhotoSearch,this.onFilter});

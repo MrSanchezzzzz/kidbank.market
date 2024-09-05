@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../colors.dart';
+import '../../colors.dart';
 
 class SortButton extends StatelessWidget {
   const SortButton({super.key,required this.sortBy,this.onTap});

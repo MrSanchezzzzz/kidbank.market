@@ -4,7 +4,7 @@ import 'package:kidbank/core/colors.dart' as AppColors;
 import 'package:kidbank/core/widgets/main_button.dart';
 import '../../../../core/images.dart';
 import '../../../../core/widgets/custom_radio_button.dart';
-import '../../../../core/widgets/sort_button.dart';
+import '../../../../core/widgets/filter/sort_button.dart';
 
 class RatingSort extends StatefulWidget {
   const RatingSort({super.key});

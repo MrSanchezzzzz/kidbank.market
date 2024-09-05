@@ -4,6 +4,8 @@ import 'package:kidbank/features/account/components/account_main.dart';
 import 'package:kidbank/features/account/components/details.dart';
 import 'package:kidbank/features/account/components/statistics.dart';
 
+import '../../../../core/widgets/main_navbar.dart';
+
 class MyAccount extends StatefulWidget {
   const MyAccount({super.key});
 
@@ -20,7 +22,7 @@ class _MyAccountState extends State<MyAccount> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const AccountAppbar(),
+              const MainNavbar(),
               const AccountMain(),
               const Statistics(),
               Details()

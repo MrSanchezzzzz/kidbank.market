@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-import '../colors.dart';
+import '../../colors.dart';
 
 class TabSelector extends StatefulWidget {
   const TabSelector({super.key,required this.labels,this.callbacks,this.startIndex});

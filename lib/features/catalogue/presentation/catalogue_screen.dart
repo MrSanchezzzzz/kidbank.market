@@ -12,7 +12,6 @@ import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button
 
 import '../../../core/colors.dart' as project_colors;
 import '../../../core/widgets/custom_text_field.dart';
-import '../../../core/widgets/filter_button.dart';
 
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
