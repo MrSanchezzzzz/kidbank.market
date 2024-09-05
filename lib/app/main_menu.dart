@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:kidbank/features/account/presentation/screens/my_account.dart';
+import 'package:kidbank/features/account/rating/presentation/rating_info.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
 import 'package:kidbank/features/catalogue/presentation/catalogue_screen.dart';
@@ -66,7 +67,8 @@ class MainMenu extends StatelessWidget {
           case 3:
             return CupertinoTabView(
               builder: (context){
-                return const ChatListScreen();
+                //return const ChatListScreen();
+                return RatingInfo();
               },
             );
           case 4:

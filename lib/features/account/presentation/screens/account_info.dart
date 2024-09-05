@@ -98,6 +98,7 @@ class _AccountInfoState extends State<AccountInfo> {
                 ),
               ],
             ),
+          ),
             const Spacer(),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -126,7 +127,6 @@ class _AccountInfoState extends State<AccountInfo> {
             ),
           ],
         ),
-      ),
     );
   }
 }
