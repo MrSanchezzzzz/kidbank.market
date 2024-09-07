@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import 'package:kidbank/core/widgets/filter/sort_button.dart';
 import 'package:kidbank/core/widgets/main_navbar.dart';
 import 'package:kidbank/core/widgets/main_page_title.dart';
-import 'package:kidbank/core/widgets/progress_indicator.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/catalogue_items_view.dart';
-import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button.dart';
+import 'package:kidbank/core/widgets/toys/toys_view.dart';
+import 'package:kidbank/core/widgets/toys/view_type_button.dart';
 import 'package:kidbank/features/favorites/data/favorites_riverpod.dart';
 
 import '../../../../core/colors.dart';
-import '../../../../core/utils/requests.dart';
 
 class FavoritesScreen extends StatelessWidget {
   const FavoritesScreen({super.key});
@@ -46,7 +43,7 @@ class FavoritesScreen extends StatelessWidget {
               const SizedBox(height: 16,),
               Expanded(child: Padding(
                 padding: const EdgeInsets.only(left: 16,right: 16),
-                child: CatalogueItemsView(provider: favoritesProvider,),
+                child: ToysView(provider: favoritesProvider,),
               ))
             ],
           ),

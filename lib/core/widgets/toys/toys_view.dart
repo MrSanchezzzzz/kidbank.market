@@ -5,11 +5,11 @@ import 'package:kidbank/core/widgets/toy/grid_item.dart';
 import 'package:kidbank/core/widgets/toy/list_item.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../../../core/colors.dart';
+import '../../colors.dart';
 
 
-class CatalogueItemsView extends ConsumerWidget {
-  const CatalogueItemsView({super.key,required this.provider});
+class ToysView extends ConsumerWidget {
+  const ToysView({super.key,required this.provider});
   final FutureProvider<int> provider;
   //TODO toys array here
   Widget _displayItems(bool isGrid){
