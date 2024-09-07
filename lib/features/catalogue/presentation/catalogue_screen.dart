@@ -10,8 +10,8 @@ import 'package:kidbank/features/catalogue/presentation/widgets/filter_modal_she
 import 'package:kidbank/features/catalogue/presentation/widgets/photo_search_modal_sheet.dart';
 import 'package:kidbank/features/catalogue/presentation/widgets/view_type_button.dart';
 
-import '../../../core/colors.dart' as project_colors;
-import '../../../core/widgets/custom_text_field.dart';
+import '../../../core/colors.dart';
+import '../../../core/widgets/filter/filter_button.dart';
 
 class CatalogueScreen extends StatelessWidget {
   const CatalogueScreen({super.key});
@@ -19,47 +19,49 @@ class CatalogueScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-        backgroundColor: CupertinoTheme.of(context).barBackgroundColor,
+        backgroundColor: Colors.white100,
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const MainNavbar(),
-              MainPageHeader(title: 'Catalogue',),
+              MainPageHeader(
+                title: 'Catalogue',
+                trailing: FilterButton(
+                  onTap: (){
+                    FilterModalSheet.show(context,title: 'Toy\'s filter');
+                    },
+                ),
+              ),
+              const SizedBox(height: 16,),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Consumer(
+                    builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                      int filtersCount=ref.watch(filterProvider).count;
+                      return Text(filtersCount==0?'No filters were applied':'$filtersCount filters applied',
+                        style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                            fontSize: 15,color: Colors.grey300
+                        ),
+                      );
+                    },
+                  ),
+                  const ViewTypeButton(),
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 16,
+            ),
               Expanded(
-                child: Container(
-                  color: project_colors.Colors.white100,
-                  padding: const EdgeInsets.only(left: 16, top: 16, right: 16),
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Consumer(
-                            builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                              int filtersCount=ref.watch(filterProvider).count;
-                              return Text(filtersCount==0?'No filters were applied':'$filtersCount filters applied',
-                                style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                                  fontSize: 15,color: project_colors.Colors.grey300
-                                ),
-                              );
-                            },
-                          ),
-                          ViewTypeButton(
-                            onTap: (isGrid) {
-                              //TODO change display type
-                            },
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Expanded(child: CatalogueItemsView(provider: catalogueProvider,))
-                    ],
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: Container(
+                    color: Colors.white100,
+                    child: CatalogueItemsView(provider: catalogueProvider,)
                   ),
                 ),
               ),

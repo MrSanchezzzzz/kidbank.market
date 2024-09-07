@@ -18,12 +18,12 @@ class _ViewTypeButtonState extends ConsumerState<ViewTypeButton> {
         setState(() {
           isGrid=!isGrid;
         });
-        if(widget.onTap!=null){
           ref.read(displayModeProvider.notifier).toggleDisplayMode();
+        if(widget.onTap!=null){
           widget.onTap!(isGrid);
         }
       },
-      child:Image.asset(isGrid?'assets/images/list.png':'assets/images/grid.png',width: 16,height: 16,),
+      child:Image.asset(ref.read(displayModeProvider)?'assets/images/list.png':'assets/images/grid.png',width: 16,height: 16,),
     );
   }
 }

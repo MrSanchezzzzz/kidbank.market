@@ -6,11 +6,12 @@ import 'custom_text_field.dart';
 import 'filter/filter_button.dart';
 
 class MainPageHeader extends StatelessWidget {
-  const MainPageHeader({super.key,this.title='',this.onSearch,this.onPhotoSearch,this.onFilter});
+  const MainPageHeader({super.key,this.title='',this.showPhotoSearch=false, this.trailing,this.onSearch,this.onPhotoSearch});
   final String title;
+  final bool showPhotoSearch;
+  final Widget? trailing;
   final Function()? onPhotoSearch;
   final Function()? onSearch;
-  final Function()? onFilter;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -37,11 +38,12 @@ class MainPageHeader extends StatelessWidget {
                     onCameraTap: (){
                       PhotoSearchModalSheet.showPhotoSearchModal(context, title: 'Photo search');
                     },
+                    showCamera: showPhotoSearch,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 18,top: 12),
-                  child: FilterButton(onTap: (){FilterModalSheet.show(context,title: 'Toy\'s filter');},),
+                  padding: trailing!=null?const EdgeInsets.only(left: 18,top: 12):const EdgeInsets.all(0),
+                  child: trailing
                 )
               ],
             ),
