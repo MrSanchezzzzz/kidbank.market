@@ -4,8 +4,8 @@ import 'package:kidbank/core/models/categories.dart';
 import 'package:kidbank/features/add_toy/data/selected_category_riverpod.dart';
 import 'package:kidbank/features/add_toy/presentation/widgets/category_card.dart';
 
-class CategoriesGridView extends ConsumerWidget {
-  const CategoriesGridView({super.key});
+class CategoriesGrid extends ConsumerWidget {
+  const CategoriesGrid({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

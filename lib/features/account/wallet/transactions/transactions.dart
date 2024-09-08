@@ -32,6 +32,7 @@ class WalletTransactions extends StatelessWidget {
             TransactionsListTile(title: 'The "Bear" toy sale', date: 'Tuesday', money: 10.99,isIncome: false,),
           ],
         ):
+        // ignore: dead_code
         const WalletNoTransactions()
       ],
     );

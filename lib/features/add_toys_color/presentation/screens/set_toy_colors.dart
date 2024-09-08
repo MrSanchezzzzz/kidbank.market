@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:kidbank/core/colors.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/features/add_color/data/color_picker_riverpod.dart';
-import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
+import 'package:kidbank/features/add_toys_color/data/color_picker_riverpod.dart';
+import 'package:kidbank/features/add_toys_color/presentation/widgets/row.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SetToyColors extends ConsumerWidget {

@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/features/add_material/data/toy_materil_model.dart';
+import 'package:kidbank/features/add_toys_material/data/toy_materil_model.dart';
 
 class ToyMaterialPickerNotifier extends StateNotifier<ToyMaterialPickerModel> {
   ToyMaterialPickerNotifier() : super(ToyMaterialPickerModel());

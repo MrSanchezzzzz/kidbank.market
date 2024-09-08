@@ -5,9 +5,10 @@ import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_code.dart';
 import 'package:kidbank/features/add_child/presentation/add_child_nickname.dart';
-import 'package:kidbank/features/add_color/presentation/screens/set_toy_colors.dart';
-import 'package:kidbank/features/add_condition/presentation/screens/add_conditions.dart';
-import 'package:kidbank/features/add_material/presentation/screens/set_toy_material.dart';
+import 'package:kidbank/features/add_toy_category/data/add_toy_category_riverpod.dart';
+import 'package:kidbank/features/add_toys_color/presentation/screens/set_toy_colors.dart';
+import 'package:kidbank/features/add_toys_condition/presentation/screens/add_conditions.dart';
+import 'package:kidbank/features/add_toys_material/presentation/screens/set_toy_material.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_age.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_category.dart';
 import 'package:kidbank/features/add_toy/presentation/screens/add_toy_fill_details.dart';
@@ -34,7 +35,7 @@ final GoRouter router = GoRouter(
   routes: [
     GoRoute(
       path: '/',
-      builder: (context, state) =>  const SetToyMaterial(),
+      builder: (context, state) =>  const SelectToyCategory(),
       routes: <RouteBase>[
         GoRoute(
             path: 'role',

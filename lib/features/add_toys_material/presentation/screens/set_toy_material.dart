@@ -4,27 +4,34 @@ import 'package:kidbank/core/images.dart';
 import 'package:kidbank/core/widgets/custom_check_box.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/features/add_color/presentation/widgets/row.dart';
+import 'package:kidbank/features/add_toys_color/presentation/widgets/row.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:kidbank/features/add_condition/data/condition_model.dart';
-import 'package:kidbank/features/add_condition/data/condition_provider.dart';
+import 'package:kidbank/features/add_toys_material/data/material_picker.dart';
+import 'package:kidbank/features/add_toys_material/data/toy_materil_model.dart';
 
-class AddConditions extends ConsumerWidget {
-  const AddConditions({super.key});
+class SetToyMaterial extends ConsumerWidget {
+  const SetToyMaterial({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final selectedCondition = ref.watch(selectedConditionProvider);
+    final selectedMaterials = ref.watch(selectedMaterialsProvider);
 
     final List<Map<String, dynamic>> materials = [
-      {'icon': conditionPrize, 'label': 'New'},
-      {'icon': conditionLikeNew, 'label': 'Like new'},
-      {'icon': conditionRefresh, 'label': 'Used'},
-      {'icon': conditionRenewed, 'label': 'Renewed'},
-     
+      {'icon': toyTree, 'label': 'Wooden'},
+      {'icon': toyBear, 'label': 'Textiles'},
+      {'icon': toyPlastic, 'label': 'Plastic'},
+      {'icon': toyMetal, 'label': 'Metal'},
+      {'icon': toyNotShure, 'label': "I'm not sure"},
     ];
 
-    int chosenCondition = selectedCondition.selectedCount;
+    int chosenToyMaterial = selectedMaterials.selectedCount;
+
+    List<String> selectedMaterialLabels = [
+      if (selectedMaterials.firstMaterial != null)
+        selectedMaterials.firstMaterial!.label,
+      if (selectedMaterials.secondMaterial != null)
+        selectedMaterials.secondMaterial!.label,
+    ];
 
     return CupertinoPageScaffold(
       navigationBar: const CupertinoNavigationBar(
@@ -37,7 +44,7 @@ class AddConditions extends ConsumerWidget {
         border: Border(bottom: BorderSide.none),
         backgroundColor: Color(0xfff3edff),
         middle: Text(
-          'Add conditon',
+          'Add Material',
         ),
       ),
       backgroundColor: Colors.white100,
@@ -45,21 +52,21 @@ class AddConditions extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           CustomRow(
-            title: "Item condition?",
+            title: "What's your toy made from?",
             fSize: 24,
             clr: Colors.grey500,
             fontWeight: FontWeight.w700,
           ),
           const SizedBox(height: 20),
           CustomRow(
-            title: chosenCondition <= 0
-                ? "You've selected a New condition of the toy"
-                : "Pick 1 category or select 'I'm not sure' if you're \n uncertain",
+            title: chosenToyMaterial > 0
+                ? 'You have chosen "${selectedMaterialLabels.join(' and ')}."'
+                : "Pick up to 2 variants or choose 'I'm not sure' if\nyou don't know.",
             fSize: 17,
-            clr: Colors.grey500,
+            clr: chosenToyMaterial > 0 ? Colors.purple700 : Colors.grey500,
             fontWeight: FontWeight.w400,
           ),
-          const SizedBox(height: 20),
+          const SizedBox(height: 10),
 
           // Line
           Container(
@@ -84,15 +91,15 @@ class AddConditions extends ConsumerWidget {
                   final material = materials[index];
                   final String label = material['label'] as String;
                   final icon = material['icon'] as Image;
-                  final isSelected = selectedCondition.isSelected(label);
+                  final isSelected = selectedMaterials.isSelected(label);
                   final checked = isSelected;
 
                   return GestureDetector(
                     onTap: () {
-                      final condition = Condition(label: label);
+                      final toyMaterial = ToyMaterial(label: label);
                       ref
-                          .read(selectedConditionProvider.notifier)
-                          .toggleCondition(condition);
+                          .read(selectedMaterialsProvider.notifier)
+                          .toggleMaterial(toyMaterial);
                     },
                     child: Stack(
                       children: [
@@ -122,15 +129,15 @@ class AddConditions extends ConsumerWidget {
                           child: CustomCheckBox(
                             value: checked,
                             onChanged: (bool? value) {
-                              final condition = Condition(label: label);
+                              final toyMaterial = ToyMaterial(label: label);
                               if (value == true) {
                                 ref
-                                    .read(selectedConditionProvider.notifier)
-                                    .selectMaterial(condition);
+                                    .read(selectedMaterialsProvider.notifier)
+                                    .selectMaterial(toyMaterial);
                               } else {
                                 ref
-                                    .read(selectedConditionProvider.notifier)
-                                    .deselectMaterial(condition);
+                                    .read(selectedMaterialsProvider.notifier)
+                                    .deselectMaterial(toyMaterial);
                               }
                             },
                           ),
@@ -144,8 +151,8 @@ class AddConditions extends ConsumerWidget {
           ),
           MainButton(
             text: 'Confirm',
-            color: chosenCondition >= 1 ? Colors.orange300 : Colors.grey100,
-            onTap: chosenCondition >= 1 ? () {} : null,
+            color: chosenToyMaterial == 2 ? Colors.orange300 : Colors.grey100,
+            onTap: chosenToyMaterial == 2 ? () {} : null,
           ),
           const SizedBox(height: 100)
         ],

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../../../../core/colors.dart';
 
 class ListingListItem extends StatelessWidget {
   const ListingListItem({super.key,required this.title,this.onTap,this.trailingTitle,this.delete=false});

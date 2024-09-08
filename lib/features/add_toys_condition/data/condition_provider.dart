@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/features/add_condition/data/condition_model.dart';
+import 'package:kidbank/features/add_toys_condition/data/condition_model.dart';
 
 class ConditionPickerNotifier extends StateNotifier<ConditionPickerModel> {
   ConditionPickerNotifier() : super(ConditionPickerModel());
