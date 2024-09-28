@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kidbank/app/main_menu.dart';
+import 'package:kidbank/core/utils/token_manager.dart';
 import 'package:kidbank/features/account/presentation/screens/my_account.dart';
 import 'package:kidbank/features/account/wallet/presentation/screens/wallet.dart';
 import 'package:kidbank/features/account/wallet/top_up/top_up.dart';
@@ -30,11 +31,25 @@ import '../features/sign_up/presentation/screens/notification_page.dart';
 import '../features/sign_up/presentation/screens/sign_up.dart';
 
 final GoRouter router = GoRouter(
+  initialLocation: '/catalogue',
   routes: [
     GoRoute(
       path: '/',
       builder: (context, state) =>  const MainMenu(),
       routes: <RouteBase>[
+        GoRoute(
+            path: 'catalogue',
+            name: 'catalogue',
+            redirect: (context,state) async{
+              try{
+                await TokenManager.getRefreshToken();
+              }catch(e){
+                return '/auth';
+              }
+                return '/';
+            },
+            builder: (context,state)=>const MainMenu()
+        ),
         GoRoute(
             path: 'role',
             name: 'role',

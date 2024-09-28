@@ -1,11 +1,16 @@
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kidbank/core/utils/auth_manager.dart';
 import 'package:kidbank/core/utils/countries.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/dropdown.dart';
-import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
+import 'package:kidbank/features/sign_up/data/survey_riverpod.dart';
 import '../../../../core/colors.dart';
+import '../../../../core/utils/requests.dart';
+import '../../../../core/utils/token_manager.dart';
+import '../../../../core/utils/validators.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -15,208 +20,153 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  bool emailValid = false, passwordValid = false, passwordConfirm = false;
-
-  final _formKey = GlobalKey<FormState>();
+  bool isNameValid=false,isEmailValid = false, isCountryValid=false, isPasswordValid = false, doPasswordsMatch = false;
+  final _nameController= TextEditingController();
+  final _surnameController= TextEditingController();
   final _emailController = TextEditingController();
+  final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _confirmPasswordController = TextEditingController();
 
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _confirmPasswordController.dispose();
-    super.dispose();
+  void _onNext() {
+    AuthManager.register(
+        name:_nameController.text,
+        surname: _surnameController.text,
+        email: _emailController.text,
+        phone: _phoneController.text,
+        password: _passwordController.text,
+        onSuccess: ()=>context.go('/'),
+        onError: (){
+      showOkAlertDialog(context: context,title: 'Something went wrong',message: 'Error while registering');
+    }
+    );
   }
 
-  void _submitForm() {
-    if (_formKey.currentState!.validate()) {
-      // Handle form submission
-      const Text('Passwords match!');
-    }
-  }
-
-  bool _passwordsMatch() {
-    return _passwordController.text == _confirmPasswordController.text;
-  }
-
-  void next() {
-    context.push('/auth/improve');
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null) {
-      setState(() {
-        emailValid = false;
-      });
-      return null;
-    }
-    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        emailValid = true;
-      });
-      return null;
-    }
-    setState(() {
-      emailValid = false;
-    });
-    return 'Enter valid email';
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null) {
-      setState(() {
-        passwordValid = false;
-      });
-      return null;
-    }
-
-    String pattern = r'^.{8,}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        passwordValid = true;
-      });
-      return null;
-    }
-    setState(() {
-      passwordValid = false;
-    });
-    return 'The password must contain at least 8 characters.';
-  }
-
-  String? validateConfirmPassword(String? value) {
-    if (value == null) {
-      setState(() {
-        passwordValid = false;
-      });
-      return null;
-    }
-
-    if (!_passwordsMatch()) {
-      setState(() {
-        passwordConfirm = false;
-      });
-      return 'Password  do not mach';
-    }
-    setState(() {
-      passwordConfirm = true;
-    });
-    return null;
-  }
-
-  CupertinoNavigationBar navBar= const CupertinoNavigationBar(
-    leading: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        MainBackButton(label: 'Back'),
-      ],
-    ),
-    border: Border(bottom: BorderSide.none),
-    backgroundColor: Color(0xfff3edff),
-    middle: Text('Finish sing up'),
-  );
-  
   @override
   Widget build(BuildContext context) {
-    final double pageSize = MediaQuery.of(context).size.height;
-    final double notifySize = MediaQuery.of(context).padding.top;
-    final double appBarSize = navBar.preferredSize.height;
     return CupertinoPageScaffold(
-      navigationBar: navBar,
       backgroundColor: const Color(0xfff3edff),
-      child: SingleChildScrollView(
-        child: Container(
-          height: pageSize - (appBarSize + notifySize),
-          padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 16),
-          child: Column(
-            key: _formKey,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              ///Name Field
-              const CustomTextField(
-                label: 'Name',
-                placeholder: 'Kataryna',
-                required: true,
-              ),
-
-              ///Surname Field
-              const CustomTextField(
-                label: 'Surname',
-                placeholder: 'Kowalska',
-                required: false,
-              ),
-              CustomTextField(
-                controller: _emailController,
-                label: 'Email',
-                placeholder: 'user.mail@gmail.com',
-                required: true,
-                validator: validateEmail,
-              ),
-              //TODO replace String to Country
-              Dropdown(
-                  label: 'Country',
-                  placeholder: 'Choose country',
-                  required: true,
-                  itemBuilder: (BuildContext context, String value) {
-                    return Text(value);
-                  },
-                  onSelected: (String value) {  },
-                  suggestionsCallback: (String search) {
-                    return countries.where((e)=>e.toLowerCase().contains(search.toLowerCase())).toList();
-                  }
-              ),
-              const CustomTextField(
-                label: 'Phone number',
-                placeholder: '+380 00 000 00 00',
-                required: false,
-                //TODO phone validation
-                keyboardType: TextInputType.phone,
-              ),
-
-              CustomTextField.password(
-                controller: _passwordController,
-                label: 'Password',
-                placeholder: 'Enter password',
-                required: true,
-                validator: validatePassword,
-              ),
-
-              CustomTextField.password(
-                controller: _confirmPasswordController,
-                label: 'Confirm password',
-                placeholder: 'Enter password again',
-                required: true,
-                validator: validateConfirmPassword,
-              ),
-
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 16,
-                  bottom: 24,
-                ),
-                child: Text(
-                  'By registering, you are agreeing to our terms of service.',
-                  style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
-                    fontSize: 15,
-                    color: Colors.grey500
+      child: SafeArea(
+        child: GestureDetector(
+          onTap: (){
+            FocusScope.of(context).unfocus();
+          },
+          child: SingleChildScrollView(
+            child: Container(
+              height: MediaQuery.of(context).size.height-MediaQuery.of(context).viewPadding.top,
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text('Finish signing up',style: CupertinoTheme.of(context).textTheme.navTitleTextStyle,textAlign: TextAlign.center,),
+                  const Spacer(),
+                  CustomTextField(
+                    label: 'Name',
+                    placeholder: 'Kataryna',
+                    required: true,
+                    validator: (value){
+                      final result=Validators.validateText(value);
+                      setState(() => isNameValid = result == null);
+                      return result;
+                    },
                   ),
-                ),
+                  const SizedBox(height: 16,),
+                  CustomTextField(
+                    label: 'Surname',
+                    placeholder: 'Kowalska',
+                    required: false,
+                    controller: _surnameController,
+                  ),
+                  const SizedBox(height: 16,),
+                  CustomTextField(
+                    controller: _emailController,
+                    label: 'Email',
+                    placeholder: 'user.mail@gmail.com',
+                    required: true,
+                    validator: (value) {
+                      final result = Validators.validateEmail(value);
+                      setState(() => isEmailValid = result == null);
+                      return result;
+                    },
+                  ),
+                  const SizedBox(height: 16,),
+                  Dropdown<String>(
+                    label: 'Country',
+                    placeholder: 'Choose country',
+                    required: true,
+                    itemBuilder: (BuildContext context, String value) {
+                      return Text(value);
+                    },
+                    onSelected: (String value) {
+                      setState(() {isCountryValid=true;});
+                    },
+                    suggestionsCallback: (String search) {
+                      return countries
+                          .where((e) => e.toLowerCase().contains(search.toLowerCase()))
+                          .toList();
+                    },
+                  ),
+                  const SizedBox(height: 16,),
+                  CustomTextField(
+                    label: 'Phone number',
+                    placeholder: '+380 00 000 00 00',
+                    required: false,
+                    keyboardType: TextInputType.phone,
+                    controller: _phoneController,
+                    // TODO: Add phone validation logic
+                  ),
+                  const SizedBox(height: 16,),
+                  CustomTextField.password(
+                    controller: _passwordController,
+                    label: 'Password',
+                    placeholder: 'Enter password',
+                    required: true,
+                    validator: (value) {
+                      final result = Validators.validatePassword(value);
+                      setState(() => isPasswordValid = result == null);
+                      return result;
+                    },
+                  ),
+                  const SizedBox(height: 16,),
+                  CustomTextField.password(
+                    label: 'Confirm password',
+                    placeholder: 'Enter password again',
+                    required: true,
+                    validator: (value) {
+                      final result = Validators.validateConfirmPassword(
+                          _passwordController.text, value);
+                      setState(() => doPasswordsMatch = result == null);
+                      return result;
+                    },
+                  ),
+                  const SizedBox(height: 16,),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8, bottom: 24),
+                    child: Text(
+                      'By registering, you are agreeing to our terms of service.',
+                      style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
+                          fontSize: 15, color: Colors.grey500),
+                    ),
+                  ),
+                  MainButton(
+                    onTap: isNameValid&&isEmailValid &&isCountryValid&& isPasswordValid && doPasswordsMatch
+                        ? _onNext
+                        : null,
+                    text: 'Continue',
+                  ),
+                ],
               ),
-              MainButton(
-                onTap: emailValid && passwordValid && passwordConfirm
-                    ? next
-                    : null,
-                text: 'Continue',
-              ),
-            ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
   }
 }

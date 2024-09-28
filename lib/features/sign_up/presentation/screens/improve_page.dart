@@ -1,72 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/core/colors.dart';
-import 'package:kidbank/core/widgets/custom_radio_button.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/main_back_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
+import 'package:kidbank/features/sign_up/presentation/widgets/survey_options.dart';
 
 class ImprovePage extends StatefulWidget {
   const ImprovePage({super.key});
 
   @override
-  State<ImprovePage> createState() => _SignUpState();
+  State<ImprovePage> createState() => _ImprovePageState();
 }
 
-class _SignUpState extends State<ImprovePage> {
+class _ImprovePageState extends State<ImprovePage> {
   bool emailValid = false, passwordValid = false;
-  final inputController = TextEditingController();
-
-  @override
-  void dispose() {
-    inputController.dispose();
-    super.dispose();
-  }
 
   void next() {
+    //TODO post options to server
     context.push('/auth/id_check_select_document_page');
-  }
-
-  String? validateEmail(String? value) {
-    if (value == null) {
-      setState(() {
-        emailValid = false;
-      });
-      return null;
-    }
-    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        emailValid = true;
-      });
-      return null;
-    }
-    setState(() {
-      emailValid = false;
-    });
-    return 'Enter valid email';
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null) {
-      setState(() {
-        passwordValid = false;
-      });
-      return null;
-    }
-    String pattern = r'^.{8,}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        passwordValid = true;
-      });
-      return null;
-    }
-    setState(() {
-      passwordValid = false;
-    });
-    return 'The password must contain at least 8 characters.';
   }
 
   @override
@@ -90,90 +41,26 @@ class _SignUpState extends State<ImprovePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const Text('What features of the app are most interesting to you?'),
+            Text('What features of the app are most interesting to you?',style: CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,),
+            const SizedBox(height: 8,),
             const Text('Choose 1 or 2 options'),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  enabled: false,
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Sell child's toys")
-              ],
+            const SizedBox(height: 16,),
+            const SurveyOptions(),
+            const Spacer(),
+            MainButton(
+              color: const Color(0xfff3edff),
+              text: 'Skip',
+              onTap: () {
+                context.go('/');
+              },
             ),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  enabled: false,
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Buy toys for the child"),
-              ],
+            const SizedBox(height: 16,),
+            MainButton(
+              onTap: () {
+                next();
+              },
+              text: 'Next',
             ),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  enabled: false,
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Supervise the sale of toys by the child"),
-              ],
-            ),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  enabled: false,
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Supervise the child's purchase of toys"),
-              ],
-            ),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Teaching children financial literacy"),
-              ],
-            ),
-            const Row(
-              children: [
-                CustomRadioButton(
-                  enabled: false,
-                  value: null,
-                  groupValue: null,
-                ),
-                Text("Other"),
-              ],
-            ),
-            CustomTextField(
-              controller: inputController,
-              label: '',
-              placeholder: 'Place for other ideas',
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                MainButton(
-                  color: Colors.orange100,
-                  text: 'Skip',
-                  onTap: () {
-                    ///Skip
-                  },
-                ),
-                MainButton(
-                  onTap: () {
-                    next();
-                  },
-                  text: 'Next',
-                ),
-              ],
-            )
           ],
         ),
       ),

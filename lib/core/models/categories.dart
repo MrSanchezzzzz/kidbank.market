@@ -1,9 +1,6 @@
 import 'package:kidbank/core/models/toy_property.dart';
-
-
-sealed class Categories {
-  static final ToyProperty softFriends = ToyProperty(
-      name: 'Soft Friends', image: ToyProperty.assetImage('assets/images/teddybear.png'));
+class Categories {
+  static final ToyProperty softFriends = ToyProperty(name: 'Soft Friends', image: ToyProperty.assetImage('assets/images/teddybear.png'));
   static final ToyProperty blocksPuzzles = ToyProperty(name: 'Blocks & Puzzles', image: ToyProperty.assetImage('assets/images/puzzle.png'));
   static final ToyProperty toyCars = ToyProperty(name: 'Toy Cars', image: ToyProperty.assetImage('assets/images/car.png'));
   static final ToyProperty boardGames = ToyProperty(name: 'Board Games', image: ToyProperty.assetImage('assets/images/board_game.png'));

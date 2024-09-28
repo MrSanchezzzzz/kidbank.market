@@ -1,10 +1,19 @@
+import 'dart:async';
+
+import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
+import 'package:kidbank/core/utils/auth_manager.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/link_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
+import 'package:kidbank/core/widgets/progress_indicator.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/auth_integration_container.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/or_line.dart';
+
+import '../../../../core/utils/requests.dart';
+import '../../../../core/utils/token_manager.dart';
+import '../../../../core/utils/validators.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -14,62 +23,50 @@ class AuthScreen extends StatefulWidget {
 }
 
 class _AuthScreenState extends State<AuthScreen> {
-  bool emailValid = false, passwordValid = false;
-  bool showPassword=false;
-  void login() {}
+  bool isEmailValid = false,
+      isPasswordValid = false;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool loading = false;
 
-  String? validateEmail(String? value) {
-    if (value == null) {
-      setState(() {
-        emailValid = false;
-      });
-      return null;
-    }
-    String pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        emailValid = true;
-      });
-      return null;
-    }
+  void login() {
+    FocusScope.of(context).unfocus();
     setState(() {
-      emailValid = false;
+      loading = true;
     });
-    return 'Enter valid email';
-  }
-
-  String? validatePassword(String? value) {
-    if (value == null) {
-      setState(() {
-        passwordValid = false;
-      });
-      return null;
-    }
-    String pattern = r'^.{8,}$';
-    RegExp regex = RegExp(pattern);
-    if (regex.hasMatch(value)) {
-      setState(() {
-        passwordValid = true;
-      });
-      return null;
-    }
+    String email = emailController.text;
+    String password = passwordController.text;
+    AuthManager.login(
+        email: email,
+        password: password,
+        onSuccess: () => context.go('/'),
+        onError: () {
+          showOkAlertDialog(context: context,
+              title: 'Something went wrong',
+              message: 'It\'s looks like your email or password were invalid');
+        }
+    );
     setState(() {
-      passwordValid = false;
+      loading = false;
     });
-    return 'Enter valid password';
   }
 
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      resizeToAvoidBottomInset: false,
       child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: const EdgeInsets.all(16),
+            height: MediaQuery
+                .of(context)
+                .size
+                .height - MediaQuery
+                .of(context)
+                .viewPadding
+                .top,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 16),
                 Image.asset(
@@ -80,60 +77,69 @@ class _AuthScreenState extends State<AuthScreen> {
                 const SizedBox(height: 24),
                 Text(
                   'Log in or sign up',
-                  style: CupertinoTheme.of(context)
+                  style: CupertinoTheme
+                      .of(context)
                       .textTheme
-                      .navLargeTitleTextStyle
-                      .copyWith(fontWeight: FontWeight.normal),
+                      .navLargeTitleTextStyle,
+                  textAlign: TextAlign.center,
+                ),
+                const Spacer(),
+                CustomTextField(
+                    label: 'Email',
+                    placeholder: 'user.mail@gmail.com',
+                    required: true,
+                    controller: emailController,
+                    validator: (value) {
+                      final result = Validators.validateEmail(value);
+                      setState(() => isEmailValid = result == null);
+                      return result;
+                    },
+                ),
+                const SizedBox(height: 16,),
+                CustomTextField.password(
+                  label: 'Password',
+                  placeholder: 'Enter password',
+                  required: true,
+                  controller: passwordController,
+                  validator: (value) {
+                    final result = Validators.validatePassword(value);
+                    setState(() => isPasswordValid = result == null);
+                    return result;
+                  },
+                ),
+                Align(
+                  alignment: Alignment.centerRight,
+                  child: LinkButton(text: 'Forgot password?', onPressed: () {
+                    //TODO forgot password
+                  },),
+                ),
+                SizedBox(
+                  height: 44,
+                  child: MainButton(
+                    text: 'Log in',
+                    onTap: isEmailValid && isPasswordValid ? login : null,
+                    child: loading ? const AspectRatio(aspectRatio: 1, child: ProgressIndicator()) : null,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                const OrLine(),
+                const SizedBox(height: 16),
+                AuthIntegrationContainer.google(),
+                const SizedBox(height: 16),
+                AuthIntegrationContainer.apple(),
+                const SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Don’t have an account?'),
+                    LinkButton(text: 'Sign up', onPressed: () {
+                      context.push('/auth/sign_up');
+                    },),
+                  ],
                 ),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  CustomTextField(
-                    label: 'Email',
-                    validator: validateEmail,
-                    placeholder: 'user.mail@gmail.com',
-                    required: true,
-                  ),
-                  CustomTextField.password(
-                    label: 'Password',
-                    validator: validatePassword,
-                    placeholder: 'Enter password',
-                    required: true,
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: LinkButton(text: 'Forgot password?',onPressed: (){
-                      //TODO forgot password
-                    },),
-                  ),
-                  MainButton(
-                    text: 'Log in',
-                    onTap: emailValid && passwordValid ? login : null,
-                  ),
-                  const SizedBox(height: 16),
-                  const OrLine(),
-                  const SizedBox(height: 16),
-                  AuthIntegrationContainer.google(),
-                  const SizedBox(height: 16),
-                  AuthIntegrationContainer.apple(),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text('Don’t have an account?'),
-                      LinkButton(text: 'Sign up',onPressed: (){
-                        context.push('/auth/sign_up');
-                      },),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );
