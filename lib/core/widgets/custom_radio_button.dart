@@ -37,6 +37,7 @@ class CustomRadioButton<T> extends StatelessWidget {
           toggleable: toggleable,
         ),
         const SizedBox(width: 20),
+        if(label!=null)
         Expanded(
           child: Text(
             label!,
