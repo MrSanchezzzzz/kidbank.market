@@ -63,7 +63,7 @@ class _DropdownState<T> extends State<Dropdown<T>> {
         });
         FocusScope.of(context).unfocus();
         selected=true;
-        widget.onSelected;
+        widget.onSelected(value);
 
       },
       suggestionsCallback: widget.suggestionsCallback,
