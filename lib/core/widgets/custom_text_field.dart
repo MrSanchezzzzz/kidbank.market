@@ -273,16 +273,15 @@ class CustomTextFieldState extends State<CustomTextField> {
       children: [
         Row(
           children: [
-            widget.label != null
-                ? Text(
+            if(widget.label != null)
+                Text(
               widget.label!,
               style: CupertinoTheme.of(context)
                   .textTheme
                   .textStyle
                   .copyWith(fontSize: 13, color: Colors.grey300, fontWeight: FontWeight.w700),
               textAlign: TextAlign.left,
-            )
-                : Container(),
+            ),
             if (widget.required)
               Text(
                 ' *',
@@ -293,6 +292,7 @@ class CustomTextFieldState extends State<CustomTextField> {
               ),
           ],
         ),
+        if(widget.label!=null||widget.required)
         const SizedBox(height: 6),
         CupertinoTextField(
           focusNode: _focusNode,
@@ -326,6 +326,7 @@ class CustomTextFieldState extends State<CustomTextField> {
           readOnly: !widget.enabled || widget.readOnly,
           textAlignVertical: TextAlignVertical.top,
         ),
+        if(_errorText.isNotEmpty&&widget.helpText!=null)
         Text(
           _error ? _errorText : widget.helpText ?? '',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
