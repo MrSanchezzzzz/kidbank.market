@@ -49,11 +49,12 @@ class Requests{
         return response;
       }
       else{
-        throw Exception('Failed http call. status: ${response.statusCode}');
+
+        throw HttpException('${response.statusCode}',);
       }
     }catch(error,_){
       print('Error making POST request: $error');
-      return Response('Error', 404);
+      rethrow;
 
     }
   }
