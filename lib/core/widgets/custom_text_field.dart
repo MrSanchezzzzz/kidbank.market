@@ -326,7 +326,7 @@ class CustomTextFieldState extends State<CustomTextField> {
           readOnly: !widget.enabled || widget.readOnly,
           textAlignVertical: TextAlignVertical.top,
         ),
-        if(_errorText.isNotEmpty&&widget.helpText!=null)
+        if(_errorText.isNotEmpty||widget.helpText!=null)
         Text(
           _error ? _errorText : widget.helpText ?? '',
           style: CupertinoTheme.of(context).textTheme.textStyle.copyWith(
