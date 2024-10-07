@@ -1,55 +1,37 @@
 import 'dart:async';
 
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
-import 'package:kidbank/core/utils/auth_manager.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/link_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
+import 'package:kidbank/core/widgets/notification.dart';
 import 'package:kidbank/core/widgets/progress_indicator.dart';
+import 'package:kidbank/features/auth/presentation/screens/auth_controller.dart';
+import 'package:kidbank/features/auth/presentation/widgets/error_message.dart';
+import 'package:kidbank/features/auth/providers/button_active_provider.dart';
+import 'package:kidbank/features/auth/providers/error_text_provider.dart';
+import 'package:kidbank/features/auth/providers/loading_riverpod.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/auth_integration_container.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/or_line.dart';
+import 'package:overlay_support/overlay_support.dart';
 
-import '../../../../core/utils/requests.dart';
-import '../../../../core/utils/token_manager.dart';
-import '../../../../core/utils/validators.dart';
-
-class AuthScreen extends StatefulWidget {
+class AuthScreen extends ConsumerStatefulWidget {
   const AuthScreen({super.key});
-
   @override
-  State<AuthScreen> createState() => _AuthScreenState();
+  ConsumerState<AuthScreen> createState() => AuthScreenState();
 }
 
-class _AuthScreenState extends State<AuthScreen> {
-  bool isEmailValid = false,
-      isPasswordValid = false;
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  bool loading = false;
-
-  void login() {
-    FocusScope.of(context).unfocus();
-    setState(() {
-      loading = true;
-    });
-    String email = emailController.text;
-    String password = passwordController.text;
-    AuthManager.login(
-        email: email,
-        password: password,
-        onSuccess: () => context.go('/'),
-        onError: () {
-          showOkAlertDialog(context: context,
-              title: 'Something went wrong',
-              message: 'It\'s looks like your email or password were invalid');
-        }
-    );
-    setState(() {
-      loading = false;
-    });
+class AuthScreenState extends ConsumerState<AuthScreen> {
+  late final AuthController authController;
+  final GlobalKey globalKey=GlobalKey();
+  @override
+  void initState() {
+    authController=AuthController(context,ref);
+    super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,24 +70,16 @@ class _AuthScreenState extends State<AuthScreen> {
                     label: 'Email',
                     placeholder: 'user.mail@gmail.com',
                     required: true,
-                    controller: emailController,
-                    validator: (value) {
-                      final result = Validators.validateEmail(value);
-                      setState(() => isEmailValid = result == null);
-                      return result;
-                    },
+                    controller: authController.emailController,
+                    validator: authController.validateEmail,
                 ),
                 const SizedBox(height: 16,),
                 CustomTextField.password(
                   label: 'Password',
                   placeholder: 'Enter password',
                   required: true,
-                  controller: passwordController,
-                  validator: (value) {
-                    final result = Validators.validatePassword(value);
-                    setState(() => isPasswordValid = result == null);
-                    return result;
-                  },
+                  controller: authController.passwordController,
+                  validator: authController.validatePassword
                 ),
                 Align(
                   alignment: Alignment.centerRight,
@@ -113,12 +87,19 @@ class _AuthScreenState extends State<AuthScreen> {
                     //TODO forgot password
                   },),
                 ),
+                AuthErrorMessage(errorTextProvider: authErrorTextProvider,errorShowTimerProvider: authErrorShowTimerProvider,),
                 SizedBox(
                   height: 44,
-                  child: MainButton(
-                    text: 'Log in',
-                    onTap: isEmailValid && isPasswordValid ? login : null,
-                    child: loading ? const AspectRatio(aspectRatio: 1, child: ProgressIndicator()) : null,
+                  child: Consumer(
+                    builder: (BuildContext context, WidgetRef ref, Widget? child) {
+                      bool loading=ref.watch(loadingProvider);
+                      bool isActive=ref.watch(authButtonActiveProvider);
+                      return MainButton(
+                        text: 'Log in',
+                        onTap: isActive?authController.login:null,
+                        child: loading ? const AspectRatio(aspectRatio: 1, child: ProgressIndicator()) : null,
+                      );
+                    },
                   ),
                 ),
                 const SizedBox(height: 16),

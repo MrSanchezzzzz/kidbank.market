@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:kidbank/core/utils/requests.dart';
 import 'package:kidbank/core/utils/token_manager.dart';
 
@@ -7,7 +9,7 @@ class AuthManager {
     required String email,
     required String password,
     Function()? onSuccess,
-    Function()? onError,
+    Function(int)? onError,
   }) {
     Requests.login(login: email, password: password)
         .then((val) {
@@ -17,7 +19,8 @@ class AuthManager {
 
       onSuccess?.call();
     }).catchError((err) {
-      onError?.call();
+      HttpException ex=err as HttpException;
+      onError?.call(int.parse(ex.message));
     });
   }
 
@@ -29,7 +32,7 @@ class AuthManager {
     String? phone,
     String role = 'parent',
     Function()? onSuccess,
-    Function()? onError,
+    Function(int)? onError,
   }) {
     Requests.register(
       name: name,
@@ -46,8 +49,8 @@ class AuthManager {
       // Call the onSuccess callback if provided
       onSuccess?.call();
     }).catchError((err) {
-      // Call the onError callback if provided
-      onError?.call();
+      HttpException ex=err as HttpException;
+      onError?.call(int.parse(ex.message));
     });
   }
 }

@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_radio_button.dart';
 import 'package:kidbank/core/widgets/progress_indicator.dart';
-import 'package:kidbank/features/sign_up/data/selected_option_riverpod.dart';
-import 'package:kidbank/features/sign_up/data/survey_riverpod.dart';
 
 import '../../../../core/widgets/custom_text_field.dart';
+import '../../providers/selected_option_riverpod.dart';
+import '../../providers/survey_riverpod.dart';
 
 class SurveyOptions extends ConsumerWidget {
   const SurveyOptions({super.key});
