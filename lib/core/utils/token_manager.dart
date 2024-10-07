@@ -57,4 +57,8 @@ class TokenManager {
       rethrow;
     }
   }
+
+  static Future deleteAll() async{
+    await _storage.deleteAll();
+  }
 }
