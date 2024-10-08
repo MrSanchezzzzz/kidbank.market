@@ -69,7 +69,7 @@ class AuthScreen extends ConsumerWidget {
                 ),
                 Align(
                   alignment: Alignment.centerRight,
-                  child: LinkButton(text: 'Forgot password?', onPressed: () {
+                  child: LinkButton(text: 'Forgot password?', onTap: () {
                     //TODO forgot password
                   },),
                 ),
@@ -96,7 +96,7 @@ class AuthScreen extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text('Don’t have an account?'),
-                    LinkButton(text: 'Sign up', onPressed: () {
+                    LinkButton(text: 'Sign up', onTap: () {
                       context.push('/auth/sign_up');
                     },),
                   ],
