@@ -1,32 +1,26 @@
-import 'package:adaptive_dialog/adaptive_dialog.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:kidbank/features/auth/providers/button_active_provider.dart';
-import 'package:kidbank/features/auth/providers/loading_riverpod.dart';
+import 'package:kidbank/features/auth/models/auth_state.dart';
 
 import '../../../../core/utils/auth_manager.dart';
 import '../../../../core/utils/validators.dart';
 import '../../providers/error_text_provider.dart';
 
-class AuthController{
-  AuthController(this.context,this.ref);
+class AuthController extends StateNotifier<AuthState>{
+  AuthController() : super(const AuthState());
 
-  final BuildContext context;
-  final WidgetRef ref;
+
   final TextEditingController emailController=TextEditingController();
   final TextEditingController passwordController=TextEditingController();
 
-  bool loading=false;
-  bool isEmailValid=false,isPasswordValid=false;
-  void login() {
-    FocusScope.of(context).unfocus();
-    if(!isEmailValid||!isPasswordValid){
+
+  void login(BuildContext context,WidgetRef ref) {
+    AuthState authState=state;
+    if(!authState.isAllValid){
       return;
     }
-
-
-    ref.read(loadingProvider.notifier).state=true;
+    state=state.copyWith(loading: true);
     String email = emailController.text;
     String password = passwordController.text;
     AuthManager.login(
@@ -34,7 +28,6 @@ class AuthController{
         password: password,
         onSuccess: () => context.go('/'),
         onError: (code) {
-          print(code);
           if(code==463){
             ref.read(authErrorTextProvider.notifier).state='Invalid username or password.';
           }
@@ -43,23 +36,20 @@ class AuthController{
           }
         }
     );
-    ref.read(loadingProvider.notifier).state=false;
-
+    state=state.copyWith(loading: true);
   }
 
 
 
   String? validateEmail(String? value){
     final result = Validators.validateEmail(value);
-    isEmailValid=result==null;
-    ref.watch(authButtonActiveProvider.notifier).state=isEmailValid&&isPasswordValid;
+    state=state.copyWith(isEmailValid:result==null);
     return result;
   }
 
   String? validatePassword(String? value){
     final result = Validators.validatePassword(value);
-    isPasswordValid=result==null;
-    ref.watch(authButtonActiveProvider.notifier).state=isEmailValid&&isPasswordValid;
+    state=state.copyWith(isPasswordValid:result==null);
     return result;
   }
 }

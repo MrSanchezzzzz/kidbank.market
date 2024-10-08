@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:go_router/go_router.dart';
@@ -6,35 +5,22 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:kidbank/core/widgets/custom_text_field.dart';
 import 'package:kidbank/core/widgets/link_button.dart';
 import 'package:kidbank/core/widgets/main_button.dart';
-import 'package:kidbank/core/widgets/notification.dart';
 import 'package:kidbank/core/widgets/progress_indicator.dart';
-import 'package:kidbank/features/auth/presentation/screens/auth_controller.dart';
 import 'package:kidbank/features/auth/presentation/widgets/error_message.dart';
-import 'package:kidbank/features/auth/providers/button_active_provider.dart';
 import 'package:kidbank/features/auth/providers/error_text_provider.dart';
-import 'package:kidbank/features/auth/providers/loading_riverpod.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/auth_integration_container.dart';
 import 'package:kidbank/features/sign_up/presentation/widgets/or_line.dart';
-import 'package:overlay_support/overlay_support.dart';
 
-class AuthScreen extends ConsumerStatefulWidget {
+import '../../providers/auth_controller_provider.dart';
+
+class AuthScreen extends ConsumerWidget {
   const AuthScreen({super.key});
-  @override
-  ConsumerState<AuthScreen> createState() => AuthScreenState();
-}
-
-class AuthScreenState extends ConsumerState<AuthScreen> {
-  late final AuthController authController;
-  final GlobalKey globalKey=GlobalKey();
-  @override
-  void initState() {
-    authController=AuthController(context,ref);
-    super.initState();
-  }
-
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final authState=ref.watch(authControllerProvider);
+    final authController=ref.read(authControllerProvider.notifier);
+
     return CupertinoPageScaffold(
       child: SafeArea(
         child: SingleChildScrollView(
@@ -67,11 +53,11 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
                 ),
                 const Spacer(),
                 CustomTextField(
-                    label: 'Email',
-                    placeholder: 'user.mail@gmail.com',
-                    required: true,
-                    controller: authController.emailController,
-                    validator: authController.validateEmail,
+                  label: 'Email',
+                  placeholder: 'user.mail@gmail.com',
+                  required: true,
+                  controller: authController.emailController,
+                  validator: authController.validateEmail,
                 ),
                 const SizedBox(height: 16,),
                 CustomTextField.password(
@@ -90,18 +76,15 @@ class AuthScreenState extends ConsumerState<AuthScreen> {
                 AuthErrorMessage(errorTextProvider: authErrorTextProvider,errorShowTimerProvider: authErrorShowTimerProvider,),
                 SizedBox(
                   height: 44,
-                  child: Consumer(
-                    builder: (BuildContext context, WidgetRef ref, Widget? child) {
-                      bool loading=ref.watch(loadingProvider);
-                      bool isActive=ref.watch(authButtonActiveProvider);
-                      return MainButton(
+                  child:  MainButton(
                         text: 'Log in',
-                        onTap: isActive?authController.login:null,
-                        child: loading ? const AspectRatio(aspectRatio: 1, child: ProgressIndicator()) : null,
-                      );
-                    },
+                        onTap: authState.isAllValid?(){
+                          FocusScope.of(context).unfocus();
+                          authController.login(context,ref);
+                        }:null,
+                        child: authState.isLoading ? const AspectRatio(aspectRatio: 1, child: ProgressIndicator()) : null,
+                      )
                   ),
-                ),
                 const SizedBox(height: 16),
                 const OrLine(),
                 const SizedBox(height: 16),
