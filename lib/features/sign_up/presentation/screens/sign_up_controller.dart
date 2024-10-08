@@ -70,7 +70,9 @@ class SignUpController extends StateNotifier<SignUpState> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   MainButton(text: 'Reset password',onTap: (){},),
-                  MainButton(text: 'Login with email',onTap: (){},),
+                  MainButton(text: 'Login with email',onTap: (){
+                    context.go('/');
+                  },),
                 ],
               )
             );
